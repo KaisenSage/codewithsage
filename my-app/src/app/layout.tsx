@@ -1,7 +1,7 @@
 "use client";
 import { ClerkProvider } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { Mail } from "lucide-react";
+import { FiMail } from "react-icons/fi";
 import "./globals.css";
 
 // Instagram icon styled after the provided image
@@ -105,7 +105,7 @@ function Footer() {
               aria-label="Email"
               className="rounded-xl p-1.5 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
             >
-              <Mail className="w-6 h-6 text-white" />
+              <FiMail className="w-6 h-6 text-white" />
             </a>
           </div>
         </div>
