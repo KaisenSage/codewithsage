@@ -2,7 +2,7 @@
 import { useUser } from "@clerk/nextjs";
 import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { FiUser, FiLayers, FiCode, FiCheckCircle } from "react-icons/fi";
+import { User, Palette, Code, CheckCircle2 } from "lucide-react";
 
 // Cloudflare R2 public image URLs
 const CLOUD_IMAGE_BASE = "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/";
@@ -74,7 +74,7 @@ export default function GetStartedPage() {
               1
             </span>
             <div className="mb-3 flex items-center justify-center">
-              <FiUser className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
+              <User className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
             </div>
             <div className="font-bold text-lg mb-1 text-black text-center">
               Create Your Account
@@ -95,7 +95,7 @@ export default function GetStartedPage() {
               2
             </span>
             <div className="mb-3 flex items-center justify-center">
-              <FiLayers className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
+              <Palette className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
             </div>
             <div className="font-bold text-lg mb-1 text-black text-center">
               Choose Your Design
@@ -116,7 +116,7 @@ export default function GetStartedPage() {
               3
             </span>
             <div className="mb-3 flex items-center justify-center">
-              <FiCode className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
+              <Code className="w-9 h-9 text-[#7557fa] bg-[#F4F2FF] rounded-full p-1.5" />
             </div>
             <div className="font-bold text-lg mb-1 text-black text-center">
               Customize &amp; Build
@@ -155,7 +155,7 @@ export default function GetStartedPage() {
               "Regular Updates",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2 group transition-all">
-                <FiCheckCircle className="text-[#4CAF50] w-6 h-6 group-hover:scale-110 group-hover:text-green-600 transition-all" strokeWidth={2.4} fill="none" />
+                <CheckCircle2 className="text-[#4CAF50] w-6 h-6 group-hover:scale-110 group-hover:text-green-600 transition-all" strokeWidth={2.4} fill="none" />
                 {item}
               </div>
             ))}
