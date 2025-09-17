@@ -77,8 +77,13 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
         {/* Brand + Description */}
         <div className="flex-1 mb-8 md:mb-0">
-          <div className="text-2xl font-extrabold text-blue-900 mb-2 tracking-tight">
-            codewithsage
+          <div className="flex items-center gap-3 mb-2">
+            {/* Logo added here */}
+            <img
+              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+              alt="Sagecorp Logo"
+              className="w-88 h-88 md:w-32 md:h-20 object-contain"
+            />
           </div>
           <p className="text-gray-600 max-w-sm">
             Building smart, beautiful digital products for tomorrow’s businesses. Let’s connect and create something amazing together.
@@ -138,7 +143,7 @@ export default function Footer() {
       </div>
       {/* Bottom bar */}
       <div className="mt-10 pt-6 border-t border-blue-100 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Sagecorp. Crafted with <span className="text-pink-500">❤️</span> in Nigeria.
+        &copy; {new Date().getFullYear()} Sagecorp. All rights reserved.
       </div>
     </footer>
   );

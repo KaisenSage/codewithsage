@@ -86,18 +86,19 @@ export default function Portfolio() {
           <FaArrowLeft className="text-lg text-[#295be7]" />
           <span className="leading-tight text-sm">Back to Home</span>
         </Link>
-        <h1 className="font-bold text-2xl md:text-3xl text-center flex-1 pr-12 select-none bg-gradient-to-r from-[#3963ff] to-[#7a36ff] bg-clip-text text-transparent">
-          Our Portfolio
-        </h1>
+        {/* Portfolio Bubble */}
+        <div className="flex-1 flex justify-center">
+          <span className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow text-xl select-none">
+            Our Portfolio
+          </span>
+        </div>
         <div className="w-32" /> {/* spacer for symmetry */}
       </nav>
 
       {/* Hero Section */}
       <section className="flex flex-col items-center py-10 md:py-20 px-4">
-        <button className="mb-5 px-8 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow hover:shadow-lg text-xl transition duration-300">
-           Our Work
-        </button>
-        <h2 className="text-4xl md:text-7xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#161a2e] via-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-all duration-700 ease-in-out">
+       
+        <h2 className="text-3xl md:text-6xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#161a2e] via-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-all duration-700 ease-in-out">
           Crafted with{" "}
           <span className="bg-gradient-to-br from-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-colors duration-700 ease-in-out">
             Precision &amp; Passion
@@ -124,9 +125,8 @@ export default function Portfolio() {
 
       {/* Projects Grid */}
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <h3 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-transparent bg-gradient-to-r from-[#6a5af9] via-[#7557fa] to-[#2d3bcf] bg-clip-text">
-          Our Portfolio
-        </h3>
+        <div className="flex flex-col items-center mb-12">
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, idx) => (
             <div
@@ -197,7 +197,7 @@ export default function Portfolio() {
         </p>
         <div className="flex flex-wrap gap-6 justify-center">
           <Link
-            href="/pricing"
+            href="/#pricing"
             className="bg-white text-[#7557fa] px-8 py-3 rounded-xl font-bold shadow hover:bg-gray-100 text-base transition"
           >
             View Pricing Plans

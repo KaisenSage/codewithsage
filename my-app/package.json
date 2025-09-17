@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.32.0",
     "@clerk/nextjs": "^6.22.0",
+    "@formspree/react": "^3.0.0",
     "lucide-react": "^0.331.0",
     "next": "15.3.4",
     "next-auth": "^4.24.6",

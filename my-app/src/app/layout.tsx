@@ -1,7 +1,7 @@
 "use client";
 import { ClerkProvider } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { FiMail } from "react-icons/fi";
+import { Mail } from "lucide-react";
 import "./globals.css";
 
 // Instagram icon styled after the provided image
@@ -72,22 +72,28 @@ const WhatsappIcon = () => (
 
 function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-t from-blue-50 to-white border-t border-blue-100 pt-8 pb-4 px-2">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div className="flex-1 mb-4 md:mb-0">
-          <div className="text-xl font-extrabold text-blue-900 mb-2 tracking-tight">
-            codewithsage
+    <footer className="bg-gradient-to-t from-blue-50 to-white border-t border-blue-100 pt-12 pb-6 px-4">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        {/* Brand + Description */}
+        <div className="flex-1 mb-8 md:mb-0">
+          <div className="flex items-center gap-3 mb-2">
+            {/* Logo added here */}
+            <img
+              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+              alt="Sagecorp Logo"
+              className="w-88 h-88 md:w-32 md:h-20 object-contain"
+            />
           </div>
-          <p className="text-gray-600 max-w-xs text-sm">
+          <p className="text-gray-600 max-w-sm">
             Building smart, beautiful digital products for tomorrow’s businesses. Let’s connect and create something amazing together.
           </p>
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-4 mt-6">
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="rounded-xl p-1.5 bg-gradient-to-br from-pink-500 via-purple-500 to-yellow-400 shadow hover:scale-105 transition"
+              className="rounded-xl p-2 bg-gradient-to-br from-pink-500 via-purple-500 to-yellow-400 shadow hover:scale-105 transition"
             >
               <InstagramIcon />
             </a>
@@ -96,57 +102,47 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="rounded-xl p-1.5 bg-gradient-to-br from-green-400 to-teal-400 shadow hover:scale-105 transition"
+              className="rounded-xl p-2 bg-gradient-to-br from-green-400 to-teal-400 shadow hover:scale-105 transition"
             >
               <WhatsappIcon />
             </a>
             <a
               href="mailto:hello@codewithsage.com"
               aria-label="Email"
-              className="rounded-xl p-1.5 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
+              className="rounded-xl p-2 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
             >
-              <FiMail className="w-6 h-6 text-white" />
+              <Mail className="w-6 h-6 text-white" />
             </a>
           </div>
         </div>
-        <div className="flex-1 flex flex-col md:items-end gap-2 text-sm">
-          <div className="flex flex-col md:flex-row gap-6">
+        {/* Quick links */}
+        <div className="flex-1 flex flex-col md:items-end gap-3">
+          <div className="flex flex-col md:flex-row gap-8">
             <div>
               <div className="font-semibold text-blue-900 mb-2">Quick Links</div>
               <ul className="space-y-1 text-gray-700">
                 <li>
-                  <a href="#services" className="hover:text-blue-700 transition">Services</a>
+                  <a href="services" className="hover:text-blue-700 transition">Services</a>
                 </li>
                 <li>
-                  <a href="#pricing" className="hover:text-blue-700 transition">Pricing</a>
+                  <a href="pricing" className="hover:text-blue-700 transition">Pricing</a>
                 </li>
                 <li>
-                  <a href="#testimonials" className="hover:text-blue-700 transition">Testimonials</a>
+                  <a href="testimonials" className="hover:text-blue-700 transition">Testimonials</a>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
+                  <a href="contact" className="hover:text-blue-700 transition">Contact</a>
                 </li>
               </ul>
             </div>
             <div>
-              <div className="font-semibold text-blue-900 mb-2">Legal</div>
-              <ul className="space-y-1 text-gray-700">
-                <li>
-                  <a href="#" className="hover:text-blue-700 transition">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-700 transition">Terms of Service</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-700 transition">Cookie Policy</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-6 pt-4 border-t border-blue-100 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} Sagecorp. Crafted with <span className="text-pink-500">❤️</span> in Nigeria.
+      {/* Bottom bar */}
+      <div className="mt-10 pt-6 border-t border-blue-100 text-center text-sm text-gray-500">
+        &copy; {new Date().getFullYear()} Sagecorp. All rights reserved.
       </div>
     </footer>
   );

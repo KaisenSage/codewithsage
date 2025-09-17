@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { UserButton, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
@@ -7,15 +8,24 @@ export default function Navbar() {
 
   return (
     <nav className="w-full px-8 py-4 flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
-      <div className="flex items-center gap-2">
-        <Link href="/" className="font-bold text-lg text-blue-600">codewithsage</Link>
+      <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3 font-bold text-lg text-blue-600">
+          {/* External logo from Cloudflare R2 */}
+          <img
+            src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+            alt="CodeWithSage Logo"
+            width={88}
+            height={88}
+            className="inline-block scale-150"
+            style={{ objectFit: "contain" }}
+          />
+        </Link>
       </div>
       <div className="hidden md:flex gap-8 text-base font-medium text-gray-700">
         <a href="#services" className="hover:text-blue-600">Services</a>
         <a href="#pricing" className="hover:text-blue-600">Pricing</a>
         <a href="#audience" className="hover:text-blue-600">Who We Help</a>
         <a href="#testimonials" className="hover:text-blue-600">Testimonials</a>
-        {/* Update Contact to link to the /contact page */}
         <Link href="/contact" className="hover:text-blue-600 transition-colors">Contact</Link>
       </div>
       <div className="flex gap-3 items-center">

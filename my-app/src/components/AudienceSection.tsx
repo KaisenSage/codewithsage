@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, UserCog, Globe } from "lucide-react";
+import { Briefcase, UserCog, Globe } from "lucide-react";
 
 export default function AudienceSection() {
   return (
@@ -6,7 +6,7 @@ export default function AudienceSection() {
       <h2 className="text-3xl font-bold mb-8 text-center text-blue-700">Who We Help</h2>
       <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
         <div className="bg-blue-50 rounded-lg p-6 shadow flex flex-col items-center transition-transform hover:scale-105 group">
-          <BriefcaseBusiness className="w-12 h-12 mb-4 text-blue-600 group-hover:animate-bounce" />
+          <Briefcase className="w-12 h-12 mb-4 text-blue-600 group-hover:animate-bounce" />
           <h3 className="font-semibold text-xl mb-2 text-black">Small Businesses</h3>
           <p className="text-gray-600 text-center">
             From startups to established companies, we help you build an online presence that stands out.

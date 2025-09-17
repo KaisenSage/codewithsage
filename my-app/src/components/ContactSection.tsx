@@ -1,53 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaArrowLeft } from "react-icons/fa";
+import { useForm, ValidationError } from "@formspree/react";
+import { useState } from "react";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaArrowLeft, FaCheckCircle } from "react-icons/fa";
 
 export default function ContactSection() {
-  const formRef = useRef<HTMLFormElement>(null);
+  // Formspree hook with your form ID
+  const [state, handleSubmit] = useForm("xpwjgygv");
+  // Local state for loading, for better UX
   const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // Custom onSubmit that sets loading for button UX, then calls handleSubmit
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
-    setError(null);
-
-    if (!formRef.current) return;
-
-    // Collect form data
-    const formData = new FormData(formRef.current);
-    const data: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        setError(
-          errorData?.error ||
-            "Failed to send message. Please check your details and try again."
-        );
-        setSent(false);
-      } else {
-        setSent(true);
-        setError(null);
-        formRef.current.reset();
-      }
-    } catch (err) {
-      setError("Failed to send message. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+    await handleSubmit(e);
+    setLoading(false);
   };
 
   return (
@@ -58,8 +26,8 @@ export default function ContactSection() {
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-900 shadow-sm transition mb-4 w-fit"
         >
-          <FaArrowLeft className="text-blue-600" />
-          Back to Home
+          <FaArrowLeft className="text-lg text-[#295be7]" />
+          <span className="leading-tight text-sm">Back to Home</span>
         </Link>
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Contact Us
@@ -102,84 +70,104 @@ export default function ContactSection() {
           {/* Contact Form */}
           <div className="md:w-2/3 p-8">
             <h2 className="text-2xl text-gray-700 font-bold mb-6">Send us a Message</h2>
-            {sent && (
-              <div className="mb-4 text-green-600 font-semibold">
-                Your message has been sent!
+            {state.succeeded && (
+              <div className="mb-4 flex flex-col items-center justify-center">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-3 rounded-lg shadow-lg animate-in fade-in">
+                  <FaCheckCircle className="text-2xl" />
+                  <span className="font-semibold text-lg">
+                    Your message has been sent!
+                  </span>
+                </div>
+                <div className="mt-2 text-blue-700 text-base text-center">
+                  Thank you for contacting us. We’ll get back to you as soon as possible.
+                </div>
               </div>
             )}
-            {error && (
+            {state.errors && state.errors.length > 0 && (
               <div className="mb-4 text-red-600 font-semibold">
-                {error}
+                {state.errors.map((err, i) => (
+                  <div key={i}>{err.message}</div>
+                ))}
               </div>
             )}
-            <form ref={formRef} onSubmit={sendEmail} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex flex-col mb-2">
-                <label htmlFor="name" className="font-medium mb-1 text-gray-700">Full Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  required
-                  placeholder="John Doe"
-                  className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-                />
-              </div>
-              <div className="flex flex-col mb-2">
-                <label htmlFor="email" className="font-medium mb-1 text-gray-700">Email Address *</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  placeholder="john@example.com"
-                  className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-                />
-              </div>
-              <div className="flex flex-col mb-2">
-                <label htmlFor="phone" className="font-medium mb-1 text-gray-700">Phone Number</label>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  placeholder="+234 123 456 7890"
-                  className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-                />
-              </div>
-              <div className="flex flex-col mb-2">
-                <label htmlFor="subject" className="font-medium mb-1 text-gray-700">Subject *</label>
-                <input
-                  type="text"
-                  name="subject"
-                  id="subject"
-                  required
-                  placeholder="Project Inquiry"
-                  className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-                />
-              </div>
-              <div className="flex flex-col md:col-span-2 mb-4">
-                <label htmlFor="message" className="font-medium mb-1 text-gray-700">Message *</label>
-                <textarea
-                  name="message"
-                  id="message"
-                  required
-                  rows={4}
-                  placeholder="Tell us about your project..."
-                  className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
-                ></textarea>
-              </div>
-              <div className="md:col-span-2">
-                <button
-                  type="submit"
-                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow hover:from-blue-700 hover:to-purple-700 transition"
-                  disabled={loading}
-                >
-                  <FaPaperPlane /> {loading ? "Sending..." : "Send Message"}
-                </button>
-              </div>
-            </form>
+            {!state.succeeded && (
+              <form
+                onSubmit={onSubmit}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                <div className="flex flex-col mb-2">
+                  <label htmlFor="name" className="font-medium mb-1 text-gray-700">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    required
+                    placeholder="John Doe"
+                    className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  />
+                  <ValidationError prefix="Name" field="name" errors={state.errors} />
+                </div>
+                <div className="flex flex-col mb-2">
+                  <label htmlFor="email" className="font-medium mb-1 text-gray-700">Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    required
+                    placeholder="john@example.com"
+                    className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
+                </div>
+                <div className="flex flex-col mb-2">
+                  <label htmlFor="phone" className="font-medium mb-1 text-gray-700">Phone Number</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    placeholder="+234 123 456 7890"
+                    className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  />
+                  <ValidationError prefix="Phone" field="phone" errors={state.errors} />
+                </div>
+                <div className="flex flex-col mb-2">
+                  <label htmlFor="subject" className="font-medium mb-1 text-gray-700">Subject *</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    id="subject"
+                    required
+                    placeholder="Project Inquiry"
+                    className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  />
+                  <ValidationError prefix="Subject" field="subject" errors={state.errors} />
+                </div>
+                <div className="flex flex-col md:col-span-2 mb-4">
+                  <label htmlFor="message" className="font-medium mb-1 text-gray-700">Message *</label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    required
+                    rows={4}
+                    placeholder="Tell us about your project..."
+                    className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  ></textarea>
+                  <ValidationError prefix="Message" field="message" errors={state.errors} />
+                </div>
+                <div className="md:col-span-2">
+                  <button
+                    type="submit"
+                    className={`flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow hover:from-blue-700 hover:to-purple-700 transition ${loading || state.submitting ? "opacity-60 cursor-not-allowed" : ""}`}
+                    disabled={loading || state.submitting}
+                  >
+                    <FaPaperPlane /> {loading || state.submitting ? "Sending..." : "Send Message"}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
-        {/* FAQ Section - Improved Responsive Sizing and Layout */}
+        {/* FAQ Section */}
         <section className="w-full bg-[#f7fafd] py-12 px-2 mt-16 rounded-2xl">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">
