@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FaArrowLeft, FaExternalLinkAlt } from "react-icons/fa";
+import Image from "next/image"; // Added import
 
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
@@ -97,7 +98,6 @@ export default function Portfolio() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center py-10 md:py-20 px-4">
-       
         <h2 className="text-3xl md:text-6xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#161a2e] via-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-all duration-700 ease-in-out">
           Crafted with{" "}
           <span className="bg-gradient-to-br from-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-colors duration-700 ease-in-out">
@@ -133,9 +133,11 @@ export default function Portfolio() {
               key={idx}
               className="bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
+                width={600}
+                height={224}
                 className="w-full h-56 object-cover"
               />
               <div className="p-6 flex-1 flex flex-col">
@@ -193,7 +195,7 @@ export default function Portfolio() {
           Ready to Start Your Project?
         </h2>
         <p className="text-lg md:text-xl text-center text-white/90 mb-8 max-w-2xl">
-          Let's transform your vision into a stunning digital reality that exceeds expectations
+          Let&apos;s transform your vision into a stunning digital reality that exceeds expectations
         </p>
         <div className="flex flex-wrap gap-6 justify-center">
           <Link

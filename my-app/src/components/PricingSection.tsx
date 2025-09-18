@@ -58,7 +58,7 @@ export default function PricingSection() {
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Performance Optimization</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Third-party Integrations</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />6 Months Support</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Training & Documentation</li>
+            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Training &amp; Documentation</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Priority Support</li>
           </ul>
           <a href="contact" className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
@@ -73,7 +73,7 @@ export default function PricingSection() {
           <Rocket className="w-16 h-16 mb-4 text-yellow-300 animate-bounce" />
           <h3 className="text-3xl font-extrabold mb-2">Need Something Custom?</h3>
           <p className="text-lg mb-6 max-w-2xl">
-            Every business is unique. Let's discuss your specific requirements and create a tailored solution that perfectly fits your needs and budget.
+            Every business is unique. Let&apos;s discuss your specific requirements and create a tailored solution that perfectly fits your needs and budget.
           </p>
           <a
             href="contact"

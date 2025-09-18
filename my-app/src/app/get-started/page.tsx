@@ -3,6 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { User, Palette, Code, CheckCircle2 } from "lucide-react";
+import Image from "next/image"; // Added import
 
 // Cloudflare R2 public image URLs
 const CLOUD_IMAGE_BASE = "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/";
@@ -53,10 +54,12 @@ export default function GetStartedPage() {
                 title="View on Cloudflare"
                 className="block transition-transform hover:scale-105"
               >
-                <img
+                <Image
                   src={`${CLOUD_IMAGE_BASE}samantha-borges-gXsJ9Ywb5as-unsplash.jpg`}
                   alt="Web development expert"
-                  className="rounded-xl w-40 h-48 object-cover object-top transition-shadow hover:shadow-2xl"
+                  width={160} // equivalent to w-40
+                  height={192} // equivalent to h-48
+                  className="rounded-xl object-cover object-top transition-shadow hover:shadow-2xl"
                   style={{ background: "#eaeaea" }}
                 />
               </a>
@@ -184,10 +187,12 @@ export default function GetStartedPage() {
             title="View on Cloudflare"
             className="block transition-transform hover:scale-105"
           >
-            <img
+            <Image
               src={`${CLOUD_IMAGE_BASE}andras-vas-Bd7gNnWJBkU-unsplash.jpg`}
               alt="Laptop and hands coding"
-              className="rounded-2xl shadow-lg max-w-md w-full object-cover transition-shadow hover:shadow-2xl"
+              width={448} // equivalent to max-w-md w-full
+              height={300} // Approximate aspect ratio, adjust as needed
+              className="rounded-2xl shadow-lg object-cover transition-shadow hover:shadow-2xl"
             />
           </a>
         </div>

@@ -1,7 +1,7 @@
 "use client";
-import Image from "next/image";
 import { UserButton, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import Image from "next/image"; // Only import if using <Image />
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="flex items-center gap-3">
         <Link href="/" className="flex items-center gap-3 font-bold text-lg text-blue-600">
           {/* External logo from Cloudflare R2 */}
-          <img
+          <Image
             src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
             alt="CodeWithSage Logo"
             width={88}
