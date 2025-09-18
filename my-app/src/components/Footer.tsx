@@ -81,7 +81,7 @@ export default function Footer() {
           <div className="flex items-center gap-3 mb-2">
             {/* Logo added here */}
             <Image
-              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2018%2C%202025%20at%2004_35_06%20PM.png"
               alt="Sagecorp Logo"
               width={100}
               height={100}
