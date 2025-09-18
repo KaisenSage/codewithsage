@@ -57,8 +57,8 @@ export default function GetStartedPage() {
                 <Image
                   src={`${CLOUD_IMAGE_BASE}samantha-borges-gXsJ9Ywb5as-unsplash.jpg`}
                   alt="Web development expert"
-                  width={160} // equivalent to w-40
-                  height={192} // equivalent to h-48
+                  width={160}
+                  height={192}
                   className="rounded-xl object-cover object-top transition-shadow hover:shadow-2xl"
                   style={{ background: "#eaeaea" }}
                 />
@@ -190,8 +190,8 @@ export default function GetStartedPage() {
             <Image
               src={`${CLOUD_IMAGE_BASE}andras-vas-Bd7gNnWJBkU-unsplash.jpg`}
               alt="Laptop and hands coding"
-              width={448} // equivalent to max-w-md w-full
-              height={300} // Approximate aspect ratio, adjust as needed
+              width={448}
+              height={300}
               className="rounded-2xl shadow-lg object-cover transition-shadow hover:shadow-2xl"
             />
           </a>
