@@ -32,7 +32,7 @@ export default function GetStartedPage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-900 shadow-sm transition mb-4 w-fit"
         >
           <FaArrowLeft className="text-lg text-[#295be7]" />
-          <span className="leading-tight text-sm"></span>
+          <span className="leading-tight text-sm">Back to Home</span>
         </Link>
       </div>
       {/* Ready to Get Started section */}
@@ -169,7 +169,7 @@ export default function GetStartedPage() {
               "Modern Technologies",
               "24/7 Support",
               "Regular Updates",
-            ].map((item, i) => (
+            ].map((item) => (
               <div
                 key={item}
                 className="flex items-center gap-3 p-3 rounded-xl bg-white/80 hover:bg-[#f4f2ff] shadow-sm transition-all"
