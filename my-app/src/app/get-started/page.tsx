@@ -140,10 +140,10 @@ export default function GetStartedPage() {
       <div className="w-full max-w-6xl mt-16 flex flex-col md:flex-row items-center justify-center gap-12 px-4">
         <div className="flex-1">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            What You&apos;ll Get
+            What You will Get
           </h2>
           <p className="text-lg text-gray-700 mb-6">
-            When you choose Pandaweb, you&apos;re not just getting a website – you&apos;re getting a complete digital solution designed to help your business thrive online.
+            When you choose codewithsage, you are not just getting a website – you are getting a complete digital solution designed to help your business thrive online.
           </p>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 text-black text-base">
             {[
@@ -157,11 +157,7 @@ export default function GetStartedPage() {
               "Regular Updates",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2 group transition-all">
-                <CheckCircle2
-                  className="text-[#4CAF50] w-6 h-6 group-hover:scale-110 group-hover:text-green-600 transition-all"
-                  strokeWidth={2.4}
-                  fill="none"
-                />
+                <CheckCircle2 className="text-[#4CAF50] w-6 h-6 group-hover:scale-110 group-hover:text-green-600 transition-all" strokeWidth={2.4} fill="none" />
                 {item}
               </div>
             ))}
@@ -175,7 +171,7 @@ export default function GetStartedPage() {
             <Link href="/portfolio">
               <button className="bg-white border border-[#7557fa] text-[#7557fa] px-6 py-3 rounded-lg font-semibold hover:bg-[#f7fafd] hover:scale-105 hover:shadow-lg transition-all flex items-center gap-1">
                 <svg width={16} height={16} fill="none" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7L8 5z" fill="#7557fa" />
+                  <path d="M8 5v14l11-7L8 5z" fill="#7557fa"/>
                 </svg>
                 See Examples
               </button>
