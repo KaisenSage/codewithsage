@@ -24,12 +24,11 @@ export default function Navbar() {
         <Image
           src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
           alt="CodeWithSage Logo"
-          width={52}
-          height={52}
+          width={88}
+          height={88}
           className="inline-block"
           style={{ objectFit: "contain" }}
         />
-        <span className="hidden sm:block text-blue-600 font-semibold text-base">codewithsage</span>
       </Link>
 
       {/* Desktop Navigation */}
