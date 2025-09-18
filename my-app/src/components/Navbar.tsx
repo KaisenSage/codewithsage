@@ -1,59 +1,173 @@
 "use client";
+import { useState } from "react";
 import { UserButton, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import Image from "next/image"; // Only import if using <Image />
+import Image from "next/image";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#services", label: "Services" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#audience", label: "Who We Help" },
+    { href: "#testimonials", label: "Testimonials" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <nav className="w-full px-8 py-4 flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
-      <div className="flex items-center gap-3">
-        <Link href="/" className="flex items-center gap-3 font-bold text-lg text-blue-600">
-          {/* External logo from Cloudflare R2 */}
-          <Image
-            src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
-            alt="CodeWithSage Logo"
-            width={88}
-            height={88}
-            className="inline-block scale-150"
-            style={{ objectFit: "contain" }}
-          />
-        </Link>
-      </div>
+    <nav className="w-full px-4 sm:px-8 py-4 flex items-center justify-between bg-white shadow-sm sticky top-0 z-30">
+      {/* Logo */}
+      <Link href="/" className="flex items-center gap-2 font-bold text-lg text-blue-600">
+        <Image
+          src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+          alt="CodeWithSage Logo"
+          width={52}
+          height={52}
+          className="inline-block"
+          style={{ objectFit: "contain" }}
+        />
+        <span className="hidden sm:block text-blue-600 font-semibold text-base">codewithsage</span>
+      </Link>
+
+      {/* Desktop Navigation */}
       <div className="hidden md:flex gap-8 text-base font-medium text-gray-700">
-        <a href="#services" className="hover:text-blue-600">Services</a>
-        <a href="#pricing" className="hover:text-blue-600">Pricing</a>
-        <a href="#audience" className="hover:text-blue-600">Who We Help</a>
-        <a href="#testimonials" className="hover:text-blue-600">Testimonials</a>
-        <Link href="/contact" className="hover:text-blue-600 transition-colors">Contact</Link>
+        {navLinks.map((link) =>
+          link.href.startsWith("/") ? (
+            <Link key={link.href} href={link.href} className="hover:text-blue-600 transition">
+              {link.label}
+            </Link>
+          ) : (
+            <a key={link.href} href={link.href} className="hover:text-blue-600 transition">
+              {link.label}
+            </a>
+          )
+        )}
       </div>
-      <div className="flex gap-3 items-center">
-        {!isSignedIn && (
+
+      {/* Auth + CTAs Desktop */}
+      <div className="hidden md:flex gap-3 items-center">
+        {!isSignedIn ? (
           <>
             <SignInButton>
-              <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white font-semibold transition">
+              <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition">
                 Sign in
               </button>
             </SignInButton>
-            <Link
-              href="/get-started"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition font-semibold"
-            >
-              Get Started
+            <Link href="/get-started">
+              <button className="px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">
+                Get Started
+              </button>
             </Link>
           </>
-        )}
-        {isSignedIn && (
+        ) : (
           <>
             <SignOutButton>
-              <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white font-semibold transition">
+              <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition">
                 Sign Out
               </button>
             </SignOutButton>
             <UserButton />
           </>
         )}
+      </div>
+
+      {/* Hamburger for mobile */}
+      <button
+        className="md:hidden flex items-center p-2 text-blue-600 focus:outline-none"
+        aria-label="Open Menu"
+        onClick={() => setMobileMenuOpen(true)}
+      >
+        <FaBars size={24} />
+      </button>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 md:hidden ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden={!mobileMenuOpen}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 right-0 z-50 w-3/4 max-w-xs h-full bg-white shadow-lg transform transition-transform duration-300 md:hidden ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="flex items-center justify-between px-6 py-4 border-b">
+          <Link href="/" className="flex items-center gap-2 font-bold text-lg text-blue-600">
+            <Image
+              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+              alt="Logo"
+              width={38}
+              height={38}
+              style={{ objectFit: "contain" }}
+            />
+            <span className="text-blue-600 font-semibold text-base">codewithsage</span>
+          </Link>
+          <button
+            className="p-2 text-blue-600 focus:outline-none"
+            aria-label="Close Menu"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <FaTimes size={22} />
+          </button>
+        </div>
+        <nav className="flex flex-col gap-2 px-6 py-6 font-medium text-gray-700">
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="py-2 px-2 rounded hover:bg-blue-50 hover:text-blue-700 transition"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="py-2 px-2 rounded hover:bg-blue-50 hover:text-blue-700 transition"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
+        </nav>
+        <div className="px-6 pb-6 flex flex-col gap-2">
+          {!isSignedIn ? (
+            <>
+              <SignInButton>
+                <button className="w-full px-6 py-2 border border-blue-600 text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition">
+                  Sign in
+                </button>
+              </SignInButton>
+              <Link href="/get-started">
+                <button className="w-full px-6 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">
+                  Get Started
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <SignOutButton>
+                <button className="w-full px-6 py-2 border border-blue-600 text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition">
+                  Sign Out
+                </button>
+              </SignOutButton>
+              <div className="flex justify-center mt-2">
+                <UserButton />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
