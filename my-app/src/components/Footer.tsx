@@ -83,9 +83,10 @@ export default function Footer() {
             <Image
               src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
               alt="Sagecorp Logo"
-              width={80} // Adjust as needed for your logo size
-              height={80}
-              className="w-88 h-88 md:w-32 md:h-20 object-contain"
+              width={100}
+              height={100}
+              className="inline-block"
+              style={{ objectFit: "contain" }}
             />
           </div>
           <p className="text-gray-600 max-w-sm">
