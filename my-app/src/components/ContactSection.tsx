@@ -27,7 +27,7 @@ export default function ContactSection() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-900 shadow-sm transition mb-4 w-fit"
         >
           <FaArrowLeft className="text-lg text-[#295be7]" />
-          <span className="leading-tight text-sm">Back to Home</span>
+          <span className="leading-tight text-sm"></span>
         </Link>
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Contact Us
