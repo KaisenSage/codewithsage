@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="flex gap-3 items-center">
         {!isSignedIn && (
           <>
-            <SignInButton aftersigninurl="/">
+            <SignInButton>
               <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white font-semibold transition">
                 Sign in
               </button>
@@ -46,7 +46,7 @@ export default function Navbar() {
         )}
         {isSignedIn && (
           <>
-            <SignOutButton aftersignouturl="/">
+            <SignOutButton>
               <button className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white font-semibold transition">
                 Sign Out
               </button>
