@@ -84,7 +84,8 @@ export default function GetStartedPage() {
             <div className="text-gray-500 text-center mb-4 text-sm">
               Start by creating your free account to unlock access to tailored digital solutions for your brand.
             </div>
-            <SignUpButton redirectUrl="/">
+            {/* Use url prop instead of redirectUrl */}
+            <SignUpButton url="/sign-up">
               <button className="bg-gradient-to-r from-[#7557fa] to-[#5a6ffb] text-white px-5 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 w-full hover:scale-105 hover:shadow-lg transition-all">
                 Sign Up Now
                 <span className="ml-2">&rarr;</span>
@@ -136,7 +137,7 @@ export default function GetStartedPage() {
         </div>
       </div>
 
-      {/* What You&apos;ll Get */}
+      {/* What You'll Get */}
       <div className="w-full max-w-6xl mt-16 flex flex-col md:flex-row items-center justify-center gap-12 px-4">
         <div className="flex-1">
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 text-black text-base">
