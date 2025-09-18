@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { User, Palette, Code, CheckCircle2 } from "lucide-react";
-import Image from "next/image"; // Added import
+import Image from "next/image";
 
 // Cloudflare R2 public image URLs
 const CLOUD_IMAGE_BASE = "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/";
@@ -24,7 +24,6 @@ export default function GetStartedPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-
       {/* Ready to Get Started section */}
       <div className="w-full flex flex-col items-center pt-16 pb-6 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">
