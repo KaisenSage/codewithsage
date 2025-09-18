@@ -5,14 +5,18 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="flex flex-col items-center justify-center text-center py-24 bg-gradient-to-br from-blue-50 to-purple-100"
+      className="flex flex-col items-center justify-center text-center py-24 px-6 sm:px-8 bg-gradient-to-br from-blue-50 to-purple-100"
     >
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-blue-800">
-        Build Your <span className="text-purple-600">Dream Website</span> with Codewithsage
-      </h1>
-      <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-700 mb-8">
-        We create stunning, fast, and secure websites that help you grow your business online. From design to deployment, we have got you covered.
-      </p>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-6 text-blue-800 leading-snug">
+          Build Your <span className="text-purple-600">Dream Website</span> with Codewithsage
+        </h1>
+
+        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-700 mb-8">
+          We create stunning, fast, and secure websites that help you grow your business online.
+          From design to deployment, we have got you covered.
+        </p>
+      </div>
 
       <div className="flex flex-col items-center w-full">
         {/* Stats */}
