@@ -83,7 +83,7 @@ export default function ContactSection() {
                 </div>
               </div>
             )}
-            {state.errors && state.errors.length > 0 && (
+            {Array.isArray(state.errors) && state.errors.length > 0 && (
               <div className="mb-4 text-red-600 font-semibold">
                 {state.errors.map((err, i) => (
                   <div key={i}>{err.message}</div>
