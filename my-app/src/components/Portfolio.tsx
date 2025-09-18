@@ -85,7 +85,7 @@ export default function Portfolio() {
           style={{ fontWeight: 500 }}
         >
           <FaArrowLeft className="text-lg text-[#295be7]" />
-          <span className="leading-tight text-sm">Back to Home</span>
+          <span className="leading-tight text-sm"></span>
         </Link>
         {/* Portfolio Bubble */}
         <div className="flex-1 flex justify-center">

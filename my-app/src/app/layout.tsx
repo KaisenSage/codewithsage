@@ -80,11 +80,12 @@ function Footer() {
           <div className="flex items-center gap-3 mb-2">
             {/* Logo added here */}
             <Image
-              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2018%2C%202025%20at%2004_35_06%20PM.png"
               alt="Sagecorp Logo"
-              width={128} // adjust as needed for your logo
-              height={80}
-              className="w-88 h-88 md:w-32 md:h-20 object-contain"
+              width={100}
+              height={100}
+              className="inline-block"
+              style={{ objectFit: "contain" }}
             />
           </div>
           <p className="text-gray-600 max-w-sm">
