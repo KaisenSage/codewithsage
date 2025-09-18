@@ -10,7 +10,7 @@ export default function HeroSection() {
       <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-blue-800">
         Build Your <span className="text-purple-600">Dream Website</span> with Codewithsage
       </h1>
-      <p className="max-w-xl text-lg md:text-xl text-gray-700 mb-8">
+      <p className="max-w-xl text-lg md:text-l text-gray-700 mb-8">
         We create stunning, fast, and secure websites that help you grow your business online. From design to deployment, we have got you covered.
       </p>
 
