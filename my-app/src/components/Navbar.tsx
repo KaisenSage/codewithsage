@@ -24,8 +24,8 @@ export default function Navbar() {
         <Image
           src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
           alt="CodeWithSage Logo"
-          width={88}
-          height={88}
+          width={100}
+          height={100}
           className="inline-block"
           style={{ objectFit: "contain" }}
         />
@@ -103,8 +103,8 @@ export default function Navbar() {
             <Image
               src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
               alt="Logo"
-              width={38}
-              height={38}
+              width={88}
+              height={88}
               style={{ objectFit: "contain" }}
             />
           </Link>
