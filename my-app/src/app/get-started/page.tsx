@@ -137,14 +137,14 @@ export default function GetStartedPage() {
         </div>
       </div>
 
-      {/* What You'll Get */}
+      {/* What You&apos;ll Get */}
       <div className="w-full max-w-6xl mt-16 flex flex-col md:flex-row items-center justify-center gap-12 px-4">
         <div className="flex-1">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            What You'll Get
+            What You&apos;ll Get
           </h2>
           <p className="text-lg text-gray-700 mb-6">
-            When you choose Pandaweb, you're not just getting a website – you're getting a complete digital solution designed to help your business thrive online.
+            When you choose Pandaweb, you&apos;re not just getting a website – you&apos;re getting a complete digital solution designed to help your business thrive online.
           </p>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 mb-8 text-black text-base">
             {[
