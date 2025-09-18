@@ -154,7 +154,7 @@ export default function Portfolio() {
                   ))}
                 </div>
                 {/* Only show the button for the AI MealPlan App */}
-                {idx === 0 && (
+                {idx === 0 && project.link && (
                   <Link
                     href={project.link.url}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
