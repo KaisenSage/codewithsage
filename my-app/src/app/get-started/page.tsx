@@ -84,7 +84,7 @@ export default function GetStartedPage() {
             <div className="text-gray-500 text-center mb-4 text-sm">
               Start by creating your free account to unlock access to tailored digital solutions for your brand.
             </div>
-            <SignUpButton aftersignupurl="/" aftersigninurl="/">
+            <SignUpButton redirectUrl="/">
               <button className="bg-gradient-to-r from-[#7557fa] to-[#5a6ffb] text-white px-5 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 w-full hover:scale-105 hover:shadow-lg transition-all">
                 Sign Up Now
                 <span className="ml-2">&rarr;</span>
