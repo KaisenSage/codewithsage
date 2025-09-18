@@ -108,7 +108,6 @@ export default function Navbar() {
               height={38}
               style={{ objectFit: "contain" }}
             />
-            <span className="text-blue-600 font-semibold text-base">codewithsage</span>
           </Link>
           <button
             className="p-2 text-blue-600 focus:outline-none"
