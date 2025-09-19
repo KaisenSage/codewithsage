@@ -41,7 +41,7 @@ export default function ContactSection() {
               </span>
               <div>
                 <div className="text-lg text-gray-700 font-semibold">Email</div>
-                <div className="text-gray-700">codewithsage.com<br />mailto:contact.codewithsage@gmail.com</div>
+                <div className="text-gray-700">codewithsage.com<br />contact.codewithsage@gmail.com</div>
               </div>
             </div>
             <div className="flex items-start gap-4">

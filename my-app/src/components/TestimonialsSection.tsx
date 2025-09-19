@@ -16,7 +16,7 @@ const testimonials = [
     initials: "KA",
     color: "bg-gradient-to-br from-purple-400 to-pink-400",
     name: "Kelechi Adeyemi",
-    role: "Operations Lead, AgroMarket",
+    role: "Operations Lead, KelMarket",
     border: "border-t-4 border-purple-300",
     quote:
       '“The attention to detail and communication throughout the project was excellent. We finally have a platform that reflects our brand and supports our rapid growth.”',
