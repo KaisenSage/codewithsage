@@ -90,7 +90,7 @@ export default function Portfolio() {
         {/* Portfolio Bubble */}
         <div className="flex-1 flex justify-center">
           <span className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow text-xl select-none">
-            Our Portfoli
+            Our Portfolio
           </span>
         </div>
         <div className="w-8" /> {/* spacer for symmetry */}
