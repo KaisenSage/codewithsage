@@ -93,7 +93,7 @@ function Footer() {
           </p>
           <div className="flex gap-4 mt-6">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/codewithsage/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -102,7 +102,7 @@ function Footer() {
               <InstagramIcon />
             </a>
             <a
-              href="https://wa.me/2349000000000"
+              href="https://wa.me/2348182006156"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -111,7 +111,7 @@ function Footer() {
               <WhatsappIcon />
             </a>
             <a
-              href="mailto:hello@codewithsage.com"
+              href="mailto:contact.codewithsage@gmail.com"
               aria-label="Email"
               className="rounded-xl p-2 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
             >
@@ -126,16 +126,16 @@ function Footer() {
               <div className="font-semibold text-blue-900 mb-2">Quick Links</div>
               <ul className="space-y-1 text-gray-700">
                 <li>
-                  <a href="services" className="hover:text-blue-700 transition">Services</a>
+                  <a href="#services" className="hover:text-blue-700 transition">Services</a>
                 </li>
                 <li>
-                  <a href="pricing" className="hover:text-blue-700 transition">Pricing</a>
+                  <a href="#pricing" className="hover:text-blue-700 transition">Pricing</a>
                 </li>
                 <li>
-                  <a href="testimonials" className="hover:text-blue-700 transition">Testimonials</a>
+                  <a href="#testimonials" className="hover:text-blue-700 transition">Testimonials</a>
                 </li>
                 <li>
-                  <a href="contact" className="hover:text-blue-700 transition">Contact</a>
+                  <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
                 </li>
               </ul>
             </div>

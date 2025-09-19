@@ -94,7 +94,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-4 mt-6">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/codewithsage/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -103,7 +103,7 @@ export default function Footer() {
               <InstagramIcon />
             </a>
             <a
-              href="https://wa.me/2349000000000"
+              href="https://wa.me/2348182006156"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -112,7 +112,7 @@ export default function Footer() {
               <WhatsappIcon />
             </a>
             <a
-              href="mailto:hello@codewithsage.com"
+              href="mailto:contact.codewithsage@gmail.com"
               aria-label="Email"
               className="rounded-xl p-2 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
             >

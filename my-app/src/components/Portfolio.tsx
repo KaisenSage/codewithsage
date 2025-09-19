@@ -21,7 +21,7 @@ const projects = [
     ],
     image:
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Screenshot%202025-07-07%20at%2020.07.18.png",
-    link: { url: "/projects/mealplan", label: "View Project" },
+    link: { url: "https://mealplan-zeta.vercel.app/", label: "View Project" },
   },
   {
     title: "VirtualR - VR App Development Tools",
@@ -93,7 +93,7 @@ export default function Portfolio() {
             Our Portfolio
           </span>
         </div>
-        <div className="w-32" /> {/* spacer for symmetry */}
+        <div className="w-8" /> {/* spacer for symmetry */}
       </nav>
 
       {/* Hero Section */}
