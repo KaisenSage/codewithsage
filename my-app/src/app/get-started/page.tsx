@@ -20,7 +20,7 @@ export default function GetStartedPage() {
         <div className="bg-white shadow-lg rounded-3xl p-10 max-w-2xl w-full flex flex-col items-center text-center hover:shadow-2xl transition">
           {/* Illustration */}
           <Image
-            src={`${CLOUD_IMAGE_BASE}signin-illustration.png`}
+            src={`https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Welcome%20Back%2C%20User!.png`}
             alt="Welcome Illustration"
             width={260}
             height={200}
@@ -29,7 +29,7 @@ export default function GetStartedPage() {
 
           {/* Welcome Text */}
           <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-[#7557fa] to-[#3871e0] bg-clip-text text-transparent animate-fadeIn">
-            Welcome back, {user?.firstName || "User"}! 🎉
+            Welcome back, {user?.firstName || "User"}! 
           </h1>
           <p className="text-lg text-gray-600 mb-8">
             You are already signed in. Let’s continue building something amazing.
