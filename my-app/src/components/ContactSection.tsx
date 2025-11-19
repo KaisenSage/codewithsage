@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaArrowLeft, FaCheckCircle } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaArrowLeft, FaCheckCircle, FaCalendarAlt } from "react-icons/fa";
+import { PopupModal } from "react-calendly";
 
 export default function ContactSection() {
   // Formspree hook with your form ID
   const [state, handleSubmit] = useForm("xpwjgygv");
   // Local state for loading, for better UX
   const [loading, setLoading] = useState(false);
+  // State for Calendly modal
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
 
   // Custom onSubmit that sets loading for button UX, then calls handleSubmit
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -209,7 +212,36 @@ export default function ContactSection() {
             </div>
           </div>
         </section>
+
+        {/* Book a Consultation CTA */}
+        <section className="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-12 px-4 mt-16 rounded-2xl text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-lg md:text-xl text-white/90 mb-8">
+              Schedule a free consultation to discuss your project and see how we can help bring your vision to life.
+            </p>
+            <button
+              onClick={() => setIsCalendlyOpen(true)}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 font-semibold text-lg rounded-lg shadow-lg hover:bg-gray-50 hover:shadow-xl transition-all transform hover:scale-105"
+            >
+              <FaCalendarAlt className="text-xl" />
+              Book a Free Consultation
+            </button>
+          </div>
+        </section>
       </div>
+
+      {/* Calendly Modal */}
+      {typeof document !== 'undefined' && (
+        <PopupModal
+          url="https://calendly.com/codewithsage"
+          onModalClose={() => setIsCalendlyOpen(false)}
+          open={isCalendlyOpen}
+          rootElement={document.getElementById('__next') || document.body}
+        />
+      )}
     </div>
   );
 }
