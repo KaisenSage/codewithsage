@@ -6,6 +6,9 @@ import { useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaArrowLeft, FaCheckCircle } from "react-icons/fa";
 
 export default function ContactSection() {
+  // Booking URL from environment variable or fallback
+  const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || "https://calendly.com/codewithsage";
+  
   // Formspree hook with your form ID
   const [state, handleSubmit] = useForm("xpwjgygv");
   // Local state for loading, for better UX
@@ -167,6 +170,29 @@ export default function ContactSection() {
             )}
           </div>
         </div>
+        
+        {/* Booking CTA Section */}
+        <section className="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-12 px-6 mt-12 rounded-2xl shadow-xl">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-lg md:text-xl text-white/90 mb-8">
+              Schedule a free 15-minute consultation to discuss your project and see how we can help bring your vision to life.
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Book a free 15-min consult"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-blue-700 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-all duration-200 hover:scale-105"
+            >
+              Book a free 15-min consult
+              <span className="ml-2 text-xl">→</span>
+            </a>
+          </div>
+        </section>
+        
         {/* FAQ Section */}
         <section className="w-full bg-[#f7fafd] py-12 px-2 mt-16 rounded-2xl">
           <div className="max-w-4xl mx-auto">
