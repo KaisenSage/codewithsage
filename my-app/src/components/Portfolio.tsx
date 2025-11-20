@@ -6,6 +6,27 @@ import Image from "next/image"; // Added import
 
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
+  // Cinematography portfolio project (client)
+  {
+    title: "Cinematography — Client Portfolio",
+    description:
+      "A dedicated cinematography & showreel portfolio website showcasing high-resolution stills and motion previews for a professional cinematographer. Clean, immersive layout optimized for visuals and storytelling.",
+    stack: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Lightbox / Gallery",
+      "Vimeo / YouTube embeds",
+      "Accessibility-first components",
+    ],
+    image:
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Screenshot%202025-11-20%20at%2012.55.32.png",
+    link: {
+      url: "https://ay-faisal.vercel.app/",
+      label: "View Site",
+    },
+  },
   {
     title: "AI Powered MealPlan App",
     description:
@@ -100,7 +121,7 @@ export default function Portfolio() {
       <section className="flex flex-col items-center py-10 md:py-20 px-4">
         <h2 className="text-3xl md:text-6xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#161a2e] via-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-all duration-700 ease-in-out">
           Crafted with{" "}
-          <span className="bg-gradient-to-br from-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-colors duration-700 ease-in-out">
+          <span className="bg-gradient-to-br from-[#7557fa] to-[#2d3cf] bg-clip-text text-transparent transition-colors duration-700 ease-in-out">
             Precision &amp; Passion
           </span>
         </h2>
@@ -125,8 +146,7 @@ export default function Portfolio() {
 
       {/* Projects Grid */}
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <div className="flex flex-col items-center mb-12">
-        </div>
+        <div className="flex flex-col items-center mb-12"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, idx) => (
             <div
@@ -153,13 +173,15 @@ export default function Portfolio() {
                     </span>
                   ))}
                 </div>
-                {/* Only show the button for the AI MealPlan App */}
-                {idx === 0 && project.link && (
+                {/* Show link button if available */}
+                {project.link && (
                   <Link
                     href={project.link.url}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
                       bg-blue-600 text-white shadow hover:bg-blue-700 transition-all
                       focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaExternalLinkAlt className="text-xs" />
                     {project.link.label}

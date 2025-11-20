@@ -1,10 +1,13 @@
 "use client";
 import { ClerkProvider } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import Script from "next/script"; // <-- Import Next.js Script
+import Script from "next/script";
 import "./globals.css";
 import Image from "next/image";
 import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { useCallback, useEffect, useState } from "react";
+import CookieConsent from "@/components/CookieConsent";
+import Cookies from "js-cookie";
 
 function Footer() {
   return (
@@ -89,28 +92,47 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [consent, setConsent] = useState<"accepted" | "declined" | null>(null);
+
+  useEffect(() => {
+    const c = Cookies.get("site_cookie_consent");
+    if (c === "accepted" || c === "declined") {
+      setConsent(c as "accepted" | "declined");
+    }
+  }, []);
+
+  const handleAccept = useCallback(() => {
+    setConsent("accepted");
+  }, []);
 
   return (
     <ClerkProvider>
       <html lang="en">
         <body className="min-h-screen flex flex-col">
-          {/* Tawk.to Widget Script */}
-          <Script id="tawk-to" strategy="afterInteractive">
-            {`
-              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-              (function(){
-              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-              s1.async=true;
-              s1.src='https://embed.tawk.to/68d056215510221925d1554a/1j5mt0to4';
-              s1.charset='UTF-8';
-              s1.setAttribute('crossorigin','*');
-              s0.parentNode.insertBefore(s1,s0);
-              })();
-            `}
-          </Script>
+          {/* Load Tawk only AFTER consent */}
+          {consent === "accepted" && (
+            <Script id="tawk-to" strategy="afterInteractive">
+              {`
+                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+                (function(){
+                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='https://embed.tawk.to/68d056215510221925d1554a/1j5mt0to4';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+                })();
+              `}
+            </Script>
+          )}
+
           <main className="flex-1 flex flex-col">{children}</main>
+
           {/* Show footer on all pages except homepage */}
           {pathname !== "/" && <Footer />}
+
+          {/* Cookie consent banner (shown if no consent yet) */}
+          <CookieConsent onAccept={handleAccept} />
         </body>
       </html>
     </ClerkProvider>

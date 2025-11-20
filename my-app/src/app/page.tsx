@@ -5,7 +5,7 @@ import PricingSection from "@/components/PricingSection";
 import AudienceSection from "@/components/AudienceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
-
+import CookieConsent from "@/components/CookieConsent";
 
 export default function Home() {
   return (
@@ -17,6 +17,7 @@ export default function Home() {
       <AudienceSection />
       <TestimonialsSection />
       <Footer />
+      <CookieConsent />
     </div>
   );
 }
