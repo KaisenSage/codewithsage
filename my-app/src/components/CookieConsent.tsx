@@ -39,7 +39,7 @@ export default function CookieConsent({ onAccept, cookieName = "site_cookie_cons
     <div className="fixed bottom-4 left-4 right-4 z-50 max-w-3xl mx-auto bg-white border rounded-lg shadow-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
       <div className="text-sm text-gray-700">
         We use cookies to improve your experience. By clicking Accept you consent to non‑essential cookies
-        (analytics, chat widgets). See our <a href="/cookie-policy" className="text-blue-600 underline">Cookie Policy</a>.
+        (analytics, chat widgets).
       </div>
       <div className="flex gap-2">
         <button
