@@ -38,7 +38,7 @@ export default function TechMarqueeFM({
     eyebrow: "OUR STACKS",
     heading: (
       <>
-       Reliable tools for <span className={styles.headingEm}>Scalable Growth</span>
+        Reliable tools for <span className={styles.headingEm}>Scalable Growth</span>
       </>
     ),
     subheading: "",
@@ -106,6 +106,13 @@ export default function TechMarqueeFM({
   const medium = Math.max(48, Math.round(height * 0.8));
   const large = height;
 
+  // build CSS variables object without using `any` (fixes eslint no-explicit-any errors)
+  const cssVars: Record<string, string> = {
+    "--tile-size": `${height}px`,
+    "--tile-gap": `${gap}px`,
+    "--tile-padding": `${padding}px`,
+  };
+
   return (
     <section aria-label="Tech stacks" className={styles.section}>
       <div className={styles.inner}>
@@ -137,13 +144,7 @@ export default function TechMarqueeFM({
           <div
             className={styles.row}
             // pass CSS variables (tile size + gap) so CSS can adapt responsively
-            style={
-              {
-                ["--tile-size" as any]: `${height}px`,
-                ["--tile-gap" as any]: `${gap}px`,
-                ["--tile-padding" as any]: `${padding}px`,
-              } as React.CSSProperties
-            }
+            style={cssVars as React.CSSProperties}
           >
             {duplicated.map((logo, i) => {
               const isDecorative = !logo.alt || logo.alt.trim() === "";
@@ -176,7 +177,6 @@ export default function TechMarqueeFM({
                     style={{ objectFit: "contain" }}
                     onError={() => {
                       // dev debugging helper
-                      // eslint-disable-next-line no-console
                       console.warn("TechMarqueeFM: failed to load", logo.src);
                     }}
                   />
