@@ -78,6 +78,22 @@ const projects = [
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/oberon-copeland-veryinformed-com-zq0K6AVDtu8-unsplash.jpg",
     link: null,
   },
+  {
+    title: "Landing Pages",
+    description:
+     "High-converting, fast-loading landing pages built with Next.js and TypeScript. Optimized for SEO and Core Web Vitals, styled with Tailwind CSS, and enhanced with lightweight animations and serverless lead-capture endpoints.",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Framer Motion (or CSS animations)",
+      "SEO tooling (next-seo, sitemap generation)",
+      "Analytics (GA4, Plausible or Fathom)",
+    ],
+    image:
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/team-nocoloco-IMuwMQV92zA-unsplash.jpg",
+    link: null,
+  }
 ];
 
 const techs = [

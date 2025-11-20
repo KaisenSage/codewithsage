@@ -6,7 +6,7 @@ import AudienceSection from "@/components/AudienceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-
+import TechMarqueeFM from "@/components/TechMarqueeFM";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -16,8 +16,10 @@ export default function Home() {
       <PricingSection />
       <AudienceSection />
       <TestimonialsSection />
+      <TechMarqueeFM/>
       <Footer />
       <CookieConsent />
+      
     </div>
   );
 }

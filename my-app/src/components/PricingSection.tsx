@@ -11,7 +11,7 @@ export default function PricingSection() {
         <div className="bg-white rounded-2xl shadow p-8 flex flex-col items-center transition-transform hover:scale-105 group border">
           <Zap className="w-12 h-12 mb-4 text-yellow-400 group-hover:animate-bounce" />
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Starter</h3>
-          <div className="text-3xl mb-4 text-blue-600 font-bold">₦150,000</div>
+          <div className="text-3xl mb-4 text-blue-600 font-bold"></div>
           <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Responsive Website Design</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Up to 5 Pages</li>
@@ -30,7 +30,7 @@ export default function PricingSection() {
           <Leaf className="w-12 h-12 mb-4 text-green-600 group-hover:animate-bounce" />
           <span className="absolute top-4 right-4 bg-purple-200 text-purple-800 text-xs px-3 py-1 rounded-full font-bold">Most Popular</span>
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Professional</h3>
-          <div className="text-3xl mb-4 text-purple-600 font-bold">₦350,000</div>
+          <div className="text-3xl mb-4 text-purple-600 font-bold"></div>
           <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Everything in Starter</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Up to 15 Pages</li>
@@ -49,7 +49,7 @@ export default function PricingSection() {
         <div className="bg-white rounded-2xl shadow p-8 flex flex-col items-center transition-transform hover:scale-105 group border">
           <Crown className="w-12 h-12 mb-4 text-yellow-600 group-hover:animate-bounce" />
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Enterprise</h3>
-          <div className="text-3xl mb-4 text-blue-600 font-bold">₦750,000</div>
+          <div className="text-3xl mb-4 text-blue-600 font-bold"></div>
           <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Everything in Professional</li>
             <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Unlimited Pages</li>
