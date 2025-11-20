@@ -1,8 +1,5 @@
 /* TechMarqueeFM.module.css
-   Responsive, theme-friendly marquee tile styles.
-   Uses CSS variables passed from the component:
-   --tile-size, --tile-gap, --tile-padding
-   UPDATED: increased tile / eyebrow sizing and improved responsive scaling.
+   Updated: eyebrow rendered as a non-interactive, non-responsive pill/button.
 */
 
 .section {
@@ -20,14 +17,53 @@
 /* Header */
 .header {
   margin-bottom: 1.25rem;
+  /* center header content for all screen sizes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
 }
 
-/* EYEBROW: slightly larger and responsive so "OUR STACKS" reads well on all screens */
+/* Non-responsive, non-interactive eyebrow "button" (fixed sizing) */
+.eyebrowButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Oval/pill appearance */
+  padding: 8px 24px;
+  min-width: 120px;
+  height: 36px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff; /* white text on black pill */
+  background: #000; /* black pill background */
+  border: 1px solid #000; /* black border */
+  line-height: 1;
+  cursor: default; /* not clickable */
+  pointer-events: none; /* ensures it cannot be clicked/focused */
+  user-select: none; /* prevent text selection */
+}
+
+/* light visual adjustment so it looks like a pill on dark backgrounds too */
+@media (prefers-color-scheme: dark) {
+  .eyebrowButton {
+    /* dark mode: keep pill visible but maintain black text per request */
+    color: #000;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* small fallback eyebrow style (kept for backward compatibility) */
 .eyebrow {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 999px;
-  /* larger and responsive: ~14px on small, ~16px on desktop */
   font-size: clamp(0.85rem, 1.2vw, 1rem);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -36,28 +72,18 @@
   line-height: 1;
 }
 
-/* ensure eyebrow readable in dark mode */
-@media (prefers-color-scheme: dark) {
-  .eyebrow {
-    color: #100e0e;
-    background: rgba(255, 255, 255, 0.04);
-  }
-}
-
-/* Heading
-   Slightly tightened spacing so larger tiles don't overwhelm the heading
-*/
+/* Heading */
 .heading {
   margin-top: 0.5rem;
   font-size: clamp(1rem, 3.2vw, 1.8rem);
   line-height: 1.08;
   font-weight: 800;
-  /* Make the main heading text gray so the emphasized word stands out */
-  color: #6b7280; /* gray-500 */
+  color: #6b7280; /* gray */
   letter-spacing: -0.01em;
+  width: 100%;
+  max-width: 900px; /* keep long headings readable */
 }
 
-/* emphasized word */
 .headingEm {
   color: rgba(99, 102, 241, 0.85);
 }
@@ -76,20 +102,17 @@
   padding-top: 0.5rem;
 }
 
-/* Row: a long horizontal flex container (duplicated content is provided by the component) */
+/* Row */
 .row {
   display: flex;
   align-items: center;
-  gap: var(--tile-gap, 28px); /* slightly larger gap by default */
+  gap: var(--tile-gap, 28px);
   white-space: nowrap;
 }
 
-/* Tile
-   Increased default maximum size so logos appear bigger on larger screens,
-   but still clamp down on small screens for good responsiveness.
-*/
+/* Tile */
 .tile {
-  --size: var(--tile-size, clamp(64px, 9vw, 120px)); /* was clamp(56px, 8vw, 96px) */
+  --size: var(--tile-size, clamp(64px, 9vw, 120px));
   position: relative;
   overflow: hidden;
   border-radius: 12px;
@@ -101,21 +124,20 @@
   width: var(--size);
   height: var(--size);
   min-width: var(--size);
-  padding: var(--tile-padding, 14px); /* increase default padding a touch */
+  padding: var(--tile-padding, 14px);
   transition: transform 200ms ease, box-shadow 200ms ease;
   cursor: default;
 }
 
-/* Lift on hover/focus */
 .tile.group:hover,
 .tile:focus,
 .group:hover .tile,
 .group:focus .tile {
-  transform: translateY(-4px) scale(1.03); /* slightly stronger lift */
+  transform: translateY(-4px) scale(1.03);
   box-shadow: 0 24px 48px rgba(16, 24, 40, 0.12);
 }
 
-/* Logo image styling */
+/* Logo */
 .logo {
   filter: grayscale(1) contrast(0.95) opacity(0.95);
   transition: filter 160ms ease, transform 160ms ease, opacity 160ms ease;
@@ -130,7 +152,6 @@
   opacity: 1;
 }
 
-/* Label */
 .tileLabel {
   position: absolute;
   left: 50%;
@@ -148,7 +169,6 @@
   transform-origin: center;
 }
 
-/* show label on hover/focus */
 .group:hover .tileLabel,
 .group:focus-within .tileLabel,
 .group:focus .tileLabel {
@@ -156,59 +176,30 @@
   transform: translateX(-50%) translateY(-6px);
 }
 
-/* Focus ring for keyboard navigation */
 .group:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
 }
 
-/* Responsive adjustments:
-   - increase sizes on large screens
-   - progressively reduce on tablet & mobile so layout remains balanced
-*/
+/* Responsive adjustments */
 @media (min-width: 1600px) {
   .inner { max-width: 1500px; }
   .row { gap: calc(var(--tile-gap, 28px) * 1.15); }
   .tile { --size: calc(var(--tile-size, 120px) * 1.05); }
 }
-
 @media (max-width: 1024px) {
-  .inner {
-    padding: 2.5rem 1rem;
-  }
-  .row {
-    gap: calc(var(--tile-gap, 28px) * 0.9);
-  }
-  .tile {
-    --size: calc(var(--tile-size, 120px) * 0.85);
-    padding: calc(var(--tile-padding, 14px) * 0.95);
-  }
+  .inner { padding: 2.5rem 1rem; }
+  .row { gap: calc(var(--tile-gap, 28px) * 0.9); }
+  .tile { --size: calc(var(--tile-size, 120px) * 0.85); padding: calc(var(--tile-padding, 14px) * 0.95); }
 }
-
 @media (max-width: 640px) {
-  .inner {
-    padding: 2rem 0.75rem;
-  }
-  /* ensure heading remains readable even with larger tiles */
-  .heading {
-    font-size: clamp(0.95rem, 6.5vw, 1.4rem);
-  }
-  .row {
-    gap: calc(var(--tile-gap, 28px) * 0.6);
-  }
-  .tile {
-    --size: calc(var(--tile-size, 120px) * 0.55); /* mobile scales down strongly */
-    padding: calc(var(--tile-padding, 14px) * 0.7);
-  }
+  .inner { padding: 2rem 0.75rem; }
+  .heading { font-size: clamp(0.95rem, 6.5vw, 1.4rem); }
+  .row { gap: calc(var(--tile-gap, 28px) * 0.6); }
+  .tile { --size: calc(var(--tile-size, 120px) * 0.55); padding: calc(var(--tile-padding, 14px) * 0.7); }
 }
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .marqueeWrap,
-  .row,
-  .tile,
-  .logo {
-    transition: none !important;
-    animation: none !important;
-  }
+  .marqueeWrap, .row, .tile, .logo { transition: none !important; animation: none !important; }
 }

@@ -9,9 +9,9 @@ type Logo = { src: string; alt?: string };
 
 type Props = {
   logos?: Logo[];
-  height?: number; // preferred tile size (px) — used as a hint for responsive sizing
-  gap?: number; // preferred gap (px)
-  speed?: number; // base seconds for one full loop
+  height?: number;
+  gap?: number;
+  speed?: number;
   title?: {
     eyebrow?: string;
     heading?: React.ReactNode;
@@ -44,29 +44,24 @@ export default function TechMarqueeFM({
     subheading: "",
   },
 }: Props) {
-  // duplicate logos for seamless loop
   const duplicated = useMemo(() => [...logos, ...logos], [logos]);
   const controls = useAnimation();
   const mounted = useRef(false);
 
-  // responsive speed: adjust animation duration by viewport width so it feels consistent
   const [adjustedSpeed, setAdjustedSpeed] = useState<number>(speed);
   useEffect(() => {
     const calc = () => {
       if (typeof window === "undefined") return speed;
       const w = window.innerWidth;
-      // factor: smaller screens -> slightly faster (less empty space), large screens -> a bit slower
       const factor = Math.max(0.7, Math.min(1.4, w / 1200));
       return Math.round(speed * factor * 100) / 100;
     };
-
     const update = () => setAdjustedSpeed(calc());
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, [speed]);
 
-  // start/stop animation and respect reduced-motion preference
   useEffect(() => {
     const prefersReduced =
       typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -76,9 +71,7 @@ export default function TechMarqueeFM({
       return;
     }
 
-    // Start the animation using the adjusted speed
     const start = async () => {
-      // If this effect runs multiple times (resizes), we restart with new duration
       await controls.start({
         x: ["0%", "-50%"],
         transition: {
@@ -90,23 +83,17 @@ export default function TechMarqueeFM({
       });
     };
 
-    // guard against starting before mount to avoid server/client mismatch
-    if (!mounted.current) {
-      mounted.current = true;
-    }
+    if (!mounted.current) mounted.current = true;
     start();
 
     return () => controls.stop();
   }, [controls, adjustedSpeed]);
 
   const padding = Math.max(8, Math.round(height * 0.12));
-
-  // responsive sizes for next/image 'sizes' attr — helps Next generate appropriate srcsets
   const small = Math.max(32, Math.round(height * 0.6));
   const medium = Math.max(48, Math.round(height * 0.8));
   const large = height;
 
-  // build CSS variables object without using `any` (fixes eslint no-explicit-any errors)
   const cssVars: Record<string, string> = {
     "--tile-size": `${height}px`,
     "--tile-gap": `${gap}px`,
@@ -118,7 +105,12 @@ export default function TechMarqueeFM({
       <div className={styles.inner}>
         {/* Header */}
         <header className={styles.header}>
-          {title.eyebrow && <span className={styles.eyebrow}>{title.eyebrow}</span>}
+          {/* render eyebrow as a presentational button (disabled to prevent clicks) */}
+          {title.eyebrow && (
+            <button className={styles.eyebrowButton} type="button" disabled aria-disabled="true">
+              {title.eyebrow}
+            </button>
+          )}
           <h2 className={styles.heading}>{title.heading}</h2>
           {title.subheading && <p className={styles.subheading}>{title.subheading}</p>}
         </header>
@@ -139,13 +131,8 @@ export default function TechMarqueeFM({
               },
             })
           }
-          // allow user to pause with keyboard focus (handled on each tile)
         >
-          <div
-            className={styles.row}
-            // pass CSS variables (tile size + gap) so CSS can adapt responsively
-            style={cssVars as React.CSSProperties}
-          >
+          <div className={styles.row} style={cssVars as React.CSSProperties}>
             {duplicated.map((logo, i) => {
               const isDecorative = !logo.alt || logo.alt.trim() === "";
               return (
@@ -176,8 +163,10 @@ export default function TechMarqueeFM({
                     className={styles.logo}
                     style={{ objectFit: "contain" }}
                     onError={() => {
-                      // dev debugging helper
-                      console.warn("TechMarqueeFM: failed to load", logo.src);
+                      // development-only warning
+                      if (process.env.NODE_ENV !== "production") {
+                        console.warn("TechMarqueeFM: failed to load", logo.src);
+                      }
                     }}
                   />
 
