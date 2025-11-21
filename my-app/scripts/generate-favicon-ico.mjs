@@ -9,6 +9,15 @@ const outputIco = path.join(publicDir, 'favicon.ico');
 
 async function generateFaviconIco() {
   try {
+    // Check if source icon exists
+    try {
+      await fs.access(srcIcon);
+    } catch (error) {
+      console.error('Error: Source icon file not found:', srcIcon);
+      console.error('Please ensure _icon-source.svg exists in the public directory.');
+      process.exit(1);
+    }
+    
     console.log('Reading source icon:', srcIcon);
     const svgBuffer = await fs.readFile(srcIcon);
     
@@ -31,7 +40,7 @@ async function generateFaviconIco() {
     console.log('Writing favicon.ico to:', outputIco);
     await fs.writeFile(outputIco, icoBuffer);
     
-    console.log('✓ Successfully generated favicon.ico with sizes:', sizes.join('x, ') + 'x');
+    console.log('✓ Successfully generated favicon.ico with sizes:', sizes.map(s => s + 'x' + s).join(', '));
   } catch (error) {
     console.error('Error generating favicon.ico:', error);
     process.exit(1);
