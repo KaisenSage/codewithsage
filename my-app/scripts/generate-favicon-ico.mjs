@@ -1,0 +1,50 @@
+import fs from 'fs/promises';
+import path from 'path';
+import sharp from 'sharp';
+import toIco from 'to-ico';
+
+const publicDir = path.resolve(process.cwd(), 'public');
+const srcIcon = path.join(publicDir, '_icon-source.svg');
+const outputIco = path.join(publicDir, 'favicon.ico');
+
+async function generateFaviconIco() {
+  try {
+    // Check if source icon exists
+    try {
+      await fs.access(srcIcon);
+    } catch (error) {
+      console.error('Error: Source icon file not found:', srcIcon);
+      console.error('Please ensure _icon-source.svg exists in the public directory.');
+      process.exit(1);
+    }
+    
+    console.log('Reading source icon:', srcIcon);
+    const svgBuffer = await fs.readFile(srcIcon);
+    
+    // Generate PNG buffers at different sizes
+    // Standard favicon.ico should contain 16x16, 32x32, and 48x48
+    console.log('Generating PNG images at different sizes...');
+    const sizes = [16, 32, 48];
+    const pngBuffers = await Promise.all(
+      sizes.map(size =>
+        sharp(svgBuffer)
+          .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+          .png()
+          .toBuffer()
+      )
+    );
+    
+    console.log('Converting PNGs to ICO format...');
+    const icoBuffer = await toIco(pngBuffers);
+    
+    console.log('Writing favicon.ico to:', outputIco);
+    await fs.writeFile(outputIco, icoBuffer);
+    
+    console.log('✓ Successfully generated favicon.ico with sizes:', sizes.map(s => s + 'x' + s).join(', '));
+  } catch (error) {
+    console.error('Error generating favicon.ico:', error);
+    process.exit(1);
+  }
+}
+
+generateFaviconIco();
