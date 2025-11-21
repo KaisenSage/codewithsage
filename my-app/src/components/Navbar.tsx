@@ -22,7 +22,7 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 font-bold text-lg text-blue-600">
         <Image
-          src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2017%2C%202025%20at%2009_07_12%20AM.png"
+          src="https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20Nov%2021%2C%202025%2C%2005_45_10%20PM.png"
           alt="CodeWithSage Logo"
           width={100}
           height={100}

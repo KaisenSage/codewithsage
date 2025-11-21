@@ -18,7 +18,7 @@ function Footer() {
           <div className="flex items-center gap-3 mb-2">
             {/* Logo added here */}
             <Image
-              src="https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/ChatGPT%20Image%20Sep%2018%2C%202025%20at%2004_35_06%20PM.png"
+              src="https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20Nov%2021%2C%202025%2C%2005_45_10%20PM.png"
               alt="Sagecorp Logo"
               width={100}
               height={100}
