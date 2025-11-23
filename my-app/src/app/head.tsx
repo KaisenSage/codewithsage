@@ -3,25 +3,28 @@ export default function Head() {
     <>
       <title>Codewithsage — Build your dream website</title>
 
-      {/* Favicons (versioned filenames to force client refresh) */}
-      <link rel="icon" href="/favicon-v3.ico" />
-      <link rel="icon" type="image/svg+xml" href="/favicon-v3.svg" />
-      <link rel="icon" sizes="96x96" href="/favicon-96x96.png" />
-      <link rel="icon" sizes="32x32" href="/favicon-32x32-v3.png" />
-      <link rel="icon" sizes="16x16" href="/favicon-16x16-v3.png" />
+      {/* Favicons */}
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
       {/* Apple / iOS */}
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v3.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+      {/* Apple web app title (iOS home screen) */}
+      <meta name="apple-mobile-web-app-title" content="codewithsage" />
 
       {/* Web app manifest */}
-      <link rel="manifest" href="/site.webmanifest?v=3" />
+      <link rel="manifest" href="/site.webmanifest" />
 
-      {/* Android / PWA icons (explicit versioned files) */}
-      <link rel="icon" sizes="192x192" href="/web-app-manifest-192x192-v3.png" />
-      <link rel="icon" sizes="512x512" href="/web-app-manifest-512x512-v3.png" />
+      {/* Android / PWA icons */}
+      <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
 
       {/* Safari pinned tab (mask) */}
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6366f1" />
 
       {/* Theme color */}
       <meta name="theme-color" content="#ffffff" />
