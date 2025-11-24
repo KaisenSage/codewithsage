@@ -4,14 +4,14 @@ export default function Head() {
       <title>Codewithsage — Build your dream website</title>
 
       {/* Favicons */}
-      <link rel="shortcut icon" href="/favicon-v2.ico" />
+      <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
       {/* Apple / iOS */}
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v2.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
       {/* Apple web app title (iOS home screen) */}
       <meta name="apple-mobile-web-app-title" content="codewithsage" />
