@@ -24,4 +24,16 @@ module.exports = {
       },
     ],
   },
+
+  // Serve a deterministic static page at the canonical root so
+  // external checkers (which only parse the first HTML response)
+  // can discover favicon/manifest tags reliably.
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/check.html',
+      },
+    ];
+  },
 };
