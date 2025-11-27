@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
 import {
@@ -8,7 +8,6 @@ import {
   FaPhone,
   FaMapMarkerAlt,
   FaPaperPlane,
-  FaArrowLeft,
   FaCheckCircle,
   FaCalendarAlt,
 } from "react-icons/fa";
@@ -38,15 +37,7 @@ export default function ContactSection() {
   return (
     <div className="relative min-h-screen flex flex-col items-center">
       <section className="w-full">
-        <div className="fixed left-4 top-6 md:left-8 md:top-8 z-50">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm transition"
-          >
-            <FaArrowLeft className="text-lg text-[#295be7]" />
-            <span className="leading-tight text-sm"></span>
-          </Link>
-        </div>
+        
       </section>
 
       {/* Background image (fill) */}
