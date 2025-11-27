@@ -40,11 +40,7 @@ export default function AboutPage() {
                   Codewithsage is a modern digital development brand led by  Babalola Abdallah — a full-stack engineer specializing in clean interfaces, scalable backend systems, and AI-powered web applications.
                 </p>
 
-                <p className="mb-6 max-w-xl text-base text-white/80">
-                  Founded to help teams ship reliable web experiences, we combine
-                  modern tooling, pragmatic design, and engineering discipline to
-                  deliver results that scale.
-                </p>
+               
 
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact" className="group">
