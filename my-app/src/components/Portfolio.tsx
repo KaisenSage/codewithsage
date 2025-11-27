@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaArrowLeft, FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import Image from "next/image";
 
 // Cloudflare image links - UPDATED to R2 links as requested
