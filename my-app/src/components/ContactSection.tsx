@@ -68,8 +68,6 @@ export default function ContactSection() {
               <div>
                 <div className="text-lg text-gray-700 font-semibold">Email</div>
                 <div className="text-gray-700">
-                  codewithsage.com
-                  <br />
                   contact@codewithsage.com
                 </div>
               </div>
