@@ -86,15 +86,7 @@ export default function GetStartedPage() {
       className="min-h-screen flex flex-col items-center justify-center"
     >
       {/* Back to Home Button */}
-      <div className="absolute top-6 left-0 z-30 px-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-blue-50
-      hover:bg-blue-100 hover:text-blue-900 shadow-sm transition"
-        >
-          <FaArrowLeft className="text-lg text-[#295be7]" />
-        </Link>
-      </div>
+     
 
       {/* Ready to Get Started section */}
       <div className="w-full flex flex-col items-center pt-16 md:pt-24 lg:pt-28">
