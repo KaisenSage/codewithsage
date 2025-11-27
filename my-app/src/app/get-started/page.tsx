@@ -14,7 +14,7 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import Image from "next/image";
-import { FaArrowLeft } from "react-icons/fa";
+
 
 export default function GetStartedPage() {
   const { isSignedIn, user } = useUser();
