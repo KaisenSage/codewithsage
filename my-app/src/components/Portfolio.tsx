@@ -139,7 +139,7 @@ export default function Portfolio() {
         <div className="w-8" /> {/* spacer for symmetry */}
       </nav>
 
-      {/* Hero Section (background with bubble stat box overlay) */}
+      {/* HeroSection (background with bubble stat box overlay) */}
       <section
         className="relative flex flex-col items-center justify-center py-10 md:py-20 px-4 bg-cover bg-center"
         style={{
