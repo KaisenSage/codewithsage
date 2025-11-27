@@ -121,15 +121,13 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa]">
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 pt-8 pb-2 bg-transparent">
-        
-        {/* Portfolio Bubble */}
-        <div className="flex-1 flex justify-center">
-          <span className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow text-xl select-none">
+      <nav className="relative px-4 sm:px-6 pt-4 sm:pt-6 pb-2 bg-transparent">
+        {/* Centered Portfolio Bubble */}
+        <div className="flex justify-center">
+          <span className="inline-block px-4 sm:px-8 py-2 sm:py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow text-sm sm:text-xl select-none">
             Our Portfolio
           </span>
         </div>
-        <div className="w-8" /> {/* spacer for symmetry */}
       </nav>
 
       {/* HeroSection (background with bubble stat box overlay) */}
