@@ -38,13 +38,14 @@ export default function ContactSection() {
   return (
     <div className="relative min-h-screen flex flex-col items-center">
       <section className="w-full">
-        <div className="fixed left-4 top-6 md:left-8 md:top-8 z-50">
+        <div className="px-4 pt-6 md:px-8 md:pt-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-blue-700 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm transition"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-blue-700 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm transition"
+            aria-label="Back to home"
           >
             <FaArrowLeft className="text-lg text-[#295be7]" />
-            <span className="leading-tight text-sm"></span>
+            <span className="leading-tight text-sm">Back to Home</span>
           </Link>
         </div>
       </section>

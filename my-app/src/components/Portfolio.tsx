@@ -122,14 +122,7 @@ export default function Portfolio() {
     <div className="min-h-screen bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa]">
       {/* Navbar */}
       <nav className="flex items-center justify-between px-6 pt-8 pb-2 bg-transparent">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium bg-[#e3eeff] shadow text-[#295be7] text-base hover:shadow-md transition"
-          style={{ fontWeight: 500 }}
-        >
-          <FaArrowLeft className="text-lg text-[#295be7]" />
-          <span className="leading-tight text-sm"></span>
-        </Link>
+        
         {/* Portfolio Bubble */}
         <div className="flex-1 flex justify-center">
           <span className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold shadow text-xl select-none">
