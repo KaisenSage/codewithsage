@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "#pricing", label: "Pricing" },
     { href: "#audience", label: "Who We Help" },
     { href: "#testimonials", label: "Testimonials" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 

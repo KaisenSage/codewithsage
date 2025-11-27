@@ -2,18 +2,39 @@
 import { useUser } from "@clerk/nextjs";
 import { SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { User, Palette, Code, CheckCircle2 } from "lucide-react";
+import {
+  User,
+  Palette,
+  Code,
+  Server,
+  Smartphone,
+  Search,
+  Zap,
+  RefreshCw,
+  LifeBuoy,
+} from "lucide-react";
 import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa";
-
-// Cloudflare R2 public image URLs
-const CLOUD_IMAGE_BASE =
-  "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/";
 
 export default function GetStartedPage() {
   const { isSignedIn, user } = useUser();
 
-  // ✅ Signed-In Welcome Experience
+  const backgroundUrl =
+    "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/carriza-maiquez-iAzRt1TTL0k-unsplash.jpg";
+
+  // Feature list with dedicated icons (lucide-react)
+  const features = [
+    { label: "Custom Web Development", Icon: Code },
+    { label: "Responsive Design", Icon: Smartphone },
+    { label: "SEO Optimization", Icon: Search },
+    { label: "Fast Loading Times", Icon: Zap },
+    { label: "Mobile-First Approach", Icon: Smartphone },
+    { label: "Modern Technologies", Icon: Server },
+    { label: "24/7 Support", Icon: LifeBuoy },
+    { label: "Regular Updates", Icon: RefreshCw },
+  ];
+
+  // ✅ Signed-In Welcome Experience (no cloudflare background; original gradient)
   if (isSignedIn) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa] px-6">
@@ -29,7 +50,7 @@ export default function GetStartedPage() {
 
           {/* Welcome Text */}
           <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-[#7557fa] to-[#3871e0] bg-clip-text text-transparent animate-fadeIn">
-            Welcome back, {user?.firstName || "User"}! 
+            Welcome back, {user?.firstName || "User"}!
           </h1>
           <p className="text-lg text-gray-600 mb-8">
             You are already signed in. Let’s continue building something amazing.
@@ -53,9 +74,17 @@ export default function GetStartedPage() {
     );
   }
 
-  // ✅ Default Get Started Page
+  // ✅ Default Get Started Page (cloudflare background applied here only, no overlay)
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+    <div
+      style={{
+        backgroundImage: `url('${backgroundUrl}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="min-h-screen flex flex-col items-center justify-center"
+    >
       {/* Back to Home Button */}
       <div className="absolute top-6 left-0 z-30 px-6">
         <Link
@@ -70,39 +99,12 @@ export default function GetStartedPage() {
       {/* Ready to Get Started section */}
       <div className="w-full flex flex-col items-center pt-16 md:pt-24 lg:pt-28">
         <h1 className="text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">
-          <span className="text-[#7557fa]">Get Started?</span>
+          <span className="text-white">Get Started?</span>
         </h1>
-        <p className="text-lg md:text-xl text-center mb-10 text-gray-600 max-w-2xl">
+        <p className="text-lg md:text-xl text-center mb-10 text-gray-00 max-w-2xl">
           Take the first step toward a powerful online presence with our proven
           web development process.
         </p>
-        <div className="w-full flex justify-center">
-          <div className="relative rounded-2xl bg-[#f7fafd] flex flex-col md:flex-row items-center shadow p-6 max-w-2xl w-full hover:shadow-xl transition">
-            <div className="flex flex-col justify-center flex-1 mb-4 md:mb-0 md:mr-4">
-              <div className="text-2xl font-bold mb-2 text-gray-800">
-                Steps to Get Started?
-              </div>
-              <div className="text-gray-600 mb-4">
-                Contact us to discuss your project requirements.
-              </div>
-              <Link href="/contact">
-                <button className="bg-[#222d3b] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#3b4366] hover:scale-105 transition-transform transition duration-150">
-                  Get in Touch
-                </button>
-              </Link>
-            </div>
-            <div className="flex-shrink-0">
-              <Image
-                src={`${CLOUD_IMAGE_BASE}samantha-borges-gXsJ9Ywb5as-unsplash.jpg`}
-                alt="Web development expert"
-                width={160}
-                height={192}
-                className="rounded-xl object-cover object-top transition-shadow hover:shadow-2xl"
-                style={{ background: "#eaeaea" }}
-              />
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Step cards */}
@@ -126,7 +128,7 @@ export default function GetStartedPage() {
             <SignUpButton>
               <button className="bg-gradient-to-r from-[#7557fa] to-[#5a6ffb] text-white px-5 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 w-full hover:scale-105 hover:shadow-lg transition-all">
                 Sign Up Now
-                <span className="ml-2">&rarr;</span>
+                <span className="ml-2"></span>
               </button>
             </SignUpButton>
           </div>
@@ -148,7 +150,7 @@ export default function GetStartedPage() {
             <Link href="/portfolio">
               <button className="bg-gradient-to-r from-[#7557fa] to-[#5a6ffb] text-white px-5 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 w-full hover:scale-105 hover:shadow-lg transition-all">
                 View Our Work
-                <span className="ml-2">&rarr;</span>
+                <span className="ml-2"></span>
               </button>
             </Link>
           </div>
@@ -171,7 +173,7 @@ export default function GetStartedPage() {
             <Link href="/contact">
               <button className="bg-gradient-to-r from-[#7557fa] to-[#5a6ffb] text-white px-5 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 w-full hover:scale-105 hover:shadow-lg transition-all">
                 Contact Us
-                <span className="ml-2">&rarr;</span>
+                <span className="ml-2"></span>
               </button>
             </Link>
           </div>
@@ -192,29 +194,16 @@ export default function GetStartedPage() {
               stand out online.
             </p>
           </div>
-          {/* Features grid */}
+          {/* Features grid with lucide icons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-8 gap-y-4 mt-2 mb-4">
-            {[
-              "Custom Web Development",
-              "Responsive Design",
-              "SEO Optimization",
-              "Fast Loading Times",
-              "Mobile-First Approach",
-              "Modern Technologies",
-              "24/7 Support",
-              "Regular Updates",
-            ].map((item) => (
+            {features.map(({ label, Icon }) => (
               <div
-                key={item}
+                key={label}
                 className="flex items-center gap-3 p-3 rounded-xl bg-white/80 hover:bg-[#f4f2ff] shadow-sm transition-all"
               >
-                <CheckCircle2
-                  className="text-[#7557fa] w-7 h-7 shrink-0"
-                  strokeWidth={2.2}
-                  fill="none"
-                />
+                <Icon className="text-[#7557fa] w-7 h-7 shrink-0 p-1.5 bg-[#F4F2FF] rounded-full" />
                 <span className="font-semibold text-gray-800 text-base md:text-lg">
-                  {item}
+                  {label}
                 </span>
               </div>
             ))}
@@ -222,7 +211,7 @@ export default function GetStartedPage() {
           <div className="flex flex-wrap gap-4 justify-center mt-6">
             <Link href="/contact">
               <button className="bg-gradient-to-r from-[#7557fa] to-[#3871e0] text-white px-6 py-3 rounded-xl font-semibold hover:from-[#3871e0] hover:to-[#7557fa] hover:scale-105 hover:shadow-lg transition-all flex items-center gap-1">
-                Start Your Project <span className="ml-1">&rarr;</span>
+                Start Your Project <span className="ml-1"></span>
               </button>
             </Link>
             <Link href="/portfolio">
@@ -250,7 +239,7 @@ export default function GetStartedPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/get-started">
               <button className="bg-white text-[#7557fa] px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold shadow hover:bg-gray-100 text-base md:text-lg transition flex items-center gap-2 hover:scale-105">
-                Get Started Today <span className="ml-1">&rarr;</span>
+                Get Started Today <span className="ml-1"></span>
               </button>
             </Link>
             <Link href="/contact">

@@ -41,7 +41,7 @@ export default function Footer() {
               <FaWhatsapp className="w-6 h-6 text-white" />
             </a>
             <a
-              href="mailto:contact.codewithsage@gmail.com"
+              href="mailto:contact@codewithsage.com"
               aria-label="Email"
               className="rounded-xl p-2 bg-gradient-to-br from-pink-400 to-red-400 shadow hover:scale-105 transition"
             >
@@ -63,6 +63,9 @@ export default function Footer() {
                 </li>
                 <li>
                   <a href="#testimonials" className="hover:text-blue-700 transition">Testimonials</a>
+                </li>
+                <li>
+                  <a href="#about" className="hover:text-blue-700 transition">About</a>
                 </li>
                 <li>
                   <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
