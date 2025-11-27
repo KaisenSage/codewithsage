@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { FaArrowLeft, FaExternalLinkAlt } from "react-icons/fa";
-import Image from "next/image"; // Added import
+import Image from "next/image";
 
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
-  // Cinematography portfolio project (client)
   {
     title: "Cinematography — Client Portfolio",
     description:
@@ -24,7 +23,7 @@ const projects = [
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Screenshot%202025-11-20%20at%2012.55.32.png",
     link: {
       url: "https://ay-faisal.vercel.app/",
-      label: "View Site",
+      label: "View Project",
     },
   },
   {
@@ -51,7 +50,10 @@ const projects = [
     stack: ["React", "TypeScript", "Node.js", "Three.js"],
     image:
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/appshunter-io-gh3ZYeUZyYU-unsplash.jpg",
-    link: null,
+    link: {
+      url: "https://virtual-r-seven.vercel.app/",
+      label: "View Project",
+    },
   },
   {
     title: "E-Commerce Web App",
@@ -111,6 +113,10 @@ const techs = [
   "GraphQL",
 ];
 
+// Background for the top/hero section only (Image 1)
+const heroBgUrl =
+  "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/christopher-gower-m_HRfLhgABo-unsplash.jpg";
+
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa]">
@@ -133,29 +139,48 @@ export default function Portfolio() {
         <div className="w-8" /> {/* spacer for symmetry */}
       </nav>
 
-      {/* Hero Section */}
-      <section className="flex flex-col items-center py-10 md:py-20 px-4">
-        <h2 className="text-3xl md:text-6xl font-extrabold text-center mb-4 bg-gradient-to-r from-[#161a2e] via-[#7557fa] to-[#2d3bcf] bg-clip-text text-transparent transition-all duration-700 ease-in-out">
-          Crafted with{" "}
-          <span className="bg-gradient-to-br from-[#7557fa] to-[#2d3cf] bg-clip-text text-transparent transition-colors duration-700 ease-in-out">
-            Precision &amp; Passion
-          </span>
-        </h2>
-        <p className="max-w-2xl text-center text-lg md:text-xl text-gray-600 mb-10">
-          Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
-        </p>
-        <div className="flex flex-wrap justify-center gap-12">
-          <div className="flex flex-col items-center">
-            <span className="text-3xl md:text-4xl font-bold text-blue-600 transition-all duration-500">50+</span>
-            <span className="text-gray-500 text-lg md:text-base font-medium">Projects Completed</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl md:text-4xl font-bold text-purple-600 transition-all duration-500">30+</span>
-            <span className="text-gray-500 text-lg md:text-base font-medium">Happy Clients</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-3xl md:text-4xl font-bold text-blue-500 transition-all duration-500">100%</span>
-            <span className="text-gray-500 text-lg md:text-base font-medium">Client Satisfaction</span>
+      {/* Hero Section (background with bubble stat box overlay) */}
+      <section
+        className="relative flex flex-col items-center justify-center py-10 md:py-20 px-4 bg-cover bg-center"
+        style={{
+          backgroundImage: `url('${heroBgUrl}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay to dim the background image for better contrast */}
+        <div className="absolute inset-0 bg-black/45 pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <h2 className="text-3xl md:text-6xl font-extrabold text-white mb-4">
+            Crafted with{" "}
+            <span className="text-white">Precision &amp; Passion</span>
+          </h2>
+          <p className="max-w-2xl text-center text-white mb-10">
+            Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
+          </p>
+        </div>
+
+        {/* Bubble box group — centered and overlapping the bottom of the hero */}
+        <div className="relative z-20 w-full max-w-5xl mt-8 -mb-8">
+          <div className="mx-auto flex flex-col md:flex-row items-center justify-center gap-6 px-4">
+            {/* Card 1 */}
+            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
+              <div className="text-3xl md:text-4xl font-extrabold text-blue-600">50+</div>
+              <div className="mt-2 text-gray-700 font-medium">Projects Completed</div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
+              <div className="text-3xl md:text-4xl font-extrabold text-purple-600">30+</div>
+              <div className="mt-2 text-gray-700 font-medium">Happy Clients</div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
+              <div className="text-3xl md:text-4xl font-extrabold text-pink-600">100%</div>
+              <div className="mt-2 text-gray-700 font-medium">Client Satisfaction</div>
+            </div>
           </div>
         </div>
       </section>
