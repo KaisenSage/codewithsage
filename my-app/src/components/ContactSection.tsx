@@ -79,7 +79,7 @@ export default function ContactSection() {
               </span>
               <div>
                 <div className="text-lg text-gray-700 font-semibold">Phone</div>
-                <div className="text-gray-700">+234 8034248841</div>
+                <div className="text-gray-700">+234-803-4248-841</div>
               </div>
             </div>
 
