@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://codewithsage.com/sitemap.xml
-Host: https://codewithsage.com
+Sitemap: https://www.codewithsage.com/sitemap.xml
