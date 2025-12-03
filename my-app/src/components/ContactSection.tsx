@@ -23,7 +23,7 @@ export default function ContactSection() {
 
   // New background image (Cloudflare R2)
   const BG_IMAGE =
-    "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/balazs-ketyi-_x335IZXxfc-unsplash.jpg";
+    "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/domenico-loia-hGV2TfOh0ns-unsplash.jpg";
 
   // Custom onSubmit that sets loading for button UX, then calls handleSubmit
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
