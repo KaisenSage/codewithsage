@@ -56,6 +56,21 @@ const projects = [
     },
   },
   {
+    title: "Nexus Clothing Brand",
+    description:
+      "Modern e-commerce platform for Nexus clothing brand featuring sleek product showcases, seamless shopping experience, and responsive design optimized for fashion retail.",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "E-commerce Integration",
+    ],
+    image:
+      "https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/Screenshot%202026-01-01%20at%2019.10.06.png",
+    link: null,
+  },
+  {
     title: "E-Commerce Web App",
     description:
       "Full-stack e-commerce with modern UI, secure payment integration, and customizable product inventory.",
@@ -95,7 +110,8 @@ const projects = [
     image:
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/team-nocoloco-IMuwMQV92zA-unsplash.jpg",
     link: null,
-  }
+  },
+  
 ];
 
 const techs = [

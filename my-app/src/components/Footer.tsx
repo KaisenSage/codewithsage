@@ -79,7 +79,7 @@ export default function Footer() {
       </div>
       {/* Bottom bar */}
       <div className="mt-10 pt-6 border-t border-blue-100 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Sagecorp. All rights reserved.
+        &copy; 2026 Sagecorp. All rights reserved.
       </div>
     </footer>
   );
