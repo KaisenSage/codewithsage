@@ -58,7 +58,7 @@ const projects = [
   {
     title: "Nexus Clothing Brand",
     description:
-      "Modern e-commerce platform for Nexus clothing brand featuring sleek product showcases, seamless shopping experience, and responsive design optimized for fashion retail.",
+      "Modern E-commerce platform for Nexus clothing brand featuring sleek product showcases, seamless shopping experience, and responsive design optimized for fashion retail.",
     stack: [
       "Next.js",
       "React",
