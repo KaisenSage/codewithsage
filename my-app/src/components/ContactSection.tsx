@@ -9,7 +9,6 @@ import {
   FaCheckCircle,
   FaCalendarAlt,
 } from "react-icons/fa";
-import Image from "next/image";
 
 export default function ContactSection() {
   // Formspree hook with your form ID
@@ -21,10 +20,6 @@ export default function ContactSection() {
     process.env.NEXT_PUBLIC_BOOKING_URL ||
     "https://calendly.com/kvngbabstar/30min";
 
-  // New background image (Cloudflare R2)
-  const BG_IMAGE =
-    "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/domenico-loia-hGV2TfOh0ns-unsplash.jpg";
-
   // Custom onSubmit that sets loading for button UX, then calls handleSubmit
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -33,28 +28,16 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center">
+    <div className="relative min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100">
       <section className="w-full">
         
       </section>
-
-      {/* Background image (fill) */}
-      <Image
-        src={BG_IMAGE}
-        alt="Contact background"
-        fill
-        priority
-        className="object-cover object-center"
-        aria-hidden="true"
-      />
-      {/* Subtle overlay to improve contrast */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
       <div className="w-full max-w-6xl mx-auto px-4 pt-8 relative z-10">
         {/* Modern Back to Home Button */}
         
 
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
           Contact Us
         </h1>
 

@@ -13,14 +13,10 @@ import {
   RefreshCw,
   LifeBuoy,
 } from "lucide-react";
-import Image from "next/image";
 
 
 export default function GetStartedPage() {
   const { isSignedIn, user } = useUser();
-
-  const backgroundUrl =
-    "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/carriza-maiquez-iAzRt1TTL0k-unsplash.jpg";
 
   // Feature list with dedicated icons (lucide-react)
   const features = [
@@ -39,15 +35,6 @@ export default function GetStartedPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa] px-6">
         <div className="bg-white shadow-lg rounded-3xl p-10 max-w-2xl w-full flex flex-col items-center text-center hover:shadow-2xl transition">
-          {/* Illustration */}
-          <Image
-            src={`https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Welcome%20Back%2C%20User!.png`}
-            alt="Welcome Illustration"
-            width={260}
-            height={200}
-            className="mb-6"
-          />
-
           {/* Welcome Text */}
           <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-[#7557fa] to-[#3871e0] bg-clip-text text-transparent animate-fadeIn">
             Welcome back, {user?.firstName || "User"}!
@@ -74,16 +61,10 @@ export default function GetStartedPage() {
     );
   }
 
-  // ✅ Default Get Started Page (cloudflare background applied here only, no overlay)
+  // ✅ Default Get Started Page (no background image)
   return (
     <div
-      style={{
-        backgroundImage: `url('${backgroundUrl}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-      className="min-h-screen flex flex-col items-center justify-center"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa]"
     >
       {/* Back to Home Button */}
      
@@ -91,9 +72,9 @@ export default function GetStartedPage() {
       {/* Ready to Get Started section */}
       <div className="w-full flex flex-col items-center pt-16 md:pt-24 lg:pt-28">
         <h1 className="text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">
-          <span className="text-white">Get Started?</span>
+          <span className="text-gray-900">Get Started?</span>
         </h1>
-        <p className="text-lg md:text-xl text-center mb-10 text-gray-00 max-w-2xl">
+        <p className="text-lg md:text-xl text-center mb-10 text-gray-600 max-w-2xl">
           Take the first step toward a powerful online presence with our proven
           web development process.
         </p>
