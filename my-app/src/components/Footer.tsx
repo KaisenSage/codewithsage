@@ -1,5 +1,6 @@
 import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -56,19 +57,19 @@ export default function Footer() {
               <div className="font-semibold text-blue-900 mb-2">Quick Links</div>
               <ul className="space-y-1 text-gray-700">
                 <li>
-                  <a href="#services" className="hover:text-blue-700 transition">Services</a>
+                  <Link href="/#services" className="hover:text-blue-700 transition">Services</Link>
                 </li>
                 <li>
-                  <a href="#pricing" className="hover:text-blue-700 transition">Pricing</a>
+                  <Link href="/#pricing" className="hover:text-blue-700 transition">Pricing</Link>
                 </li>
                 <li>
-                  <a href="#testimonials" className="hover:text-blue-700 transition">Testimonials</a>
+                  <Link href="/#testimonials" className="hover:text-blue-700 transition">Testimonials</Link>
                 </li>
                 <li>
-                  <a href="/about" className="hover:text-blue-700 transition">About</a>
+                  <Link href="/about" className="hover:text-blue-700 transition">About</Link>
                 </li>
                 <li>
-                  <a href="/contact" className="hover:text-blue-700 transition">Contact</a>
+                  <Link href="/contact" className="hover:text-blue-700 transition">Contact</Link>
                 </li>
               </ul>
             </div>
