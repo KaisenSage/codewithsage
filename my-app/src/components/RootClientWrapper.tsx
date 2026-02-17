@@ -72,10 +72,10 @@ function Footer() {
                   <a href="#testimonials" className="hover:text-blue-700 transition">Testimonials</a>
                 </li>
                 <li>
-                  <a href="#about" className="hover:text-blue-700 transition">About</a>
+                  <a href="/about" className="hover:text-blue-700 transition">About</a>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-blue-700 transition">Contact</a>
+                  <a href="/contact" className="hover:text-blue-700 transition">Contact</a>
                 </li>
               </ul>
             </div>
