@@ -148,24 +148,19 @@ export default function Portfolio() {
 
       {/* HeroSection (background with bubble stat box overlay) */}
       <section
-        className="relative flex flex-col items-center justify-center py-10 md:py-20 px-4 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('${heroBgUrl}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        className="relative flex flex-col items-center justify-center py-10 md:py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100"
       >
-        {/* Overlay to dim the background image for better contrast */}
-        <div className="absolute inset-0 bg-black/45 pointer-events-none" />
-
         <div className="relative z-10 flex flex-col items-center text-center">
-          <h2 className="text-3xl md:text-6xl font-extrabold text-white mb-4">
-            Crafted with{" "}
-            <span className="text-white">Precision &amp; Passion</span>
-          </h2>
-          <p className="max-w-2xl text-center text-white mb-10">
-            Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
-          </p>
+          {/* Modern Bubble Container */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl border border-white/30 p-6 sm:p-8 md:p-12 shadow-2xl hover:shadow-3xl transition duration-300 hover:from-blue-700 hover:to-purple-700">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
+              Crafted with{" "}
+              <span className="text-white">Precision &amp; Passion</span>
+            </h2>
+            <p className="max-w-2xl text-center text-white/95 drop-shadow-md">
+              Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
+            </p>
+          </div>
         </div>
 
         {/* Bubble box group — centered and overlapping the bottom of the hero */}

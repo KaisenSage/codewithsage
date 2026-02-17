@@ -34,7 +34,7 @@ export default function HeroSection() {
 
           <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 drop-shadow-md">
             We create stunning, fast, and secure websites that help you grow your business online.
-            From design to deployment, we have got you covered.
+            
           </p>
         </div>
 
