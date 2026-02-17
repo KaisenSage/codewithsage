@@ -25,15 +25,18 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/30 to-transparent pointer-events-none" />
 
       {/* Content (z-10 to sit above image & overlay) */}
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-6 text-white leading-snug">
-          Build Your Dream Website with Codewithsage
-        </h1>
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Modern Bubble Container */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl border border-white/30 p-6 sm:p-8 md:p-12 mb-12 shadow-2xl hover:shadow-3xl transition duration-300 hover:from-blue-700 hover:to-purple-700">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4 text-white leading-snug drop-shadow-lg">
+            Build Your Dream Website with Codewithsage
+          </h1>
 
-        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/90 mb-8">
-          We create stunning, fast, and secure websites that help you grow your business online.
-          From design to deployment, we have got you covered.
-        </p>
+          <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 drop-shadow-md">
+            We create stunning, fast, and secure websites that help you grow your business online.
+            From design to deployment, we have got you covered.
+          </p>
+        </div>
 
         <div className="flex flex-col items-center w-full">
           {/* Stats */}
