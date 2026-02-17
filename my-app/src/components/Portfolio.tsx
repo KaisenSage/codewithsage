@@ -152,12 +152,12 @@ export default function Portfolio() {
       >
         <div className="relative z-10 flex flex-col items-center text-center">
           {/* Modern Bubble Container */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl border border-white/30 p-6 sm:p-8 md:p-12 shadow-2xl hover:shadow-3xl transition duration-300 hover:from-blue-700 hover:to-purple-700">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
+          <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 md:p-12 shadow-2xl hover:shadow-3xl transition duration-300">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">
               Crafted with{" "}
-              <span className="text-white">Precision &amp; Passion</span>
+              <span className="text-gray-800">Precision &amp; Passion</span>
             </h2>
-            <p className="max-w-2xl text-center text-white/95 drop-shadow-md">
+            <p className="max-w-2xl text-center text-gray-600 drop-shadow-md">
               Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
             </p>
           </div>
