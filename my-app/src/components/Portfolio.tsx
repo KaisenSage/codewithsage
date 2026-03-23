@@ -7,6 +7,26 @@ import Image from "next/image";
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
   {
+    title: "toréa ecommerce website",
+    description:
+      "A modern Nigeria-first fashion commerce platform built with Next.js, Clerk, Prisma, and Paystack. Seamless shopping, beautiful UI, and robust backend for a premium digital retail experience.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Clerk Auth",
+      "Prisma ORM",
+      "Paystack Integration",
+      "Tailwind CSS",
+      "PostgreSQL",
+    ],
+    image:
+      "https://pub-bd618a9723f54128a9dbd24698f83fba.r2.dev/Screenshot%202026-03-23%20at%2014.12.40.png",
+    link: {
+      url: "https://www.toréa.com",
+      label: "View Project",
+    },
+  },
+  {
     title: "Cinematography — Client Portfolio",
     description:
       "A dedicated cinematography & showreel portfolio website showcasing high-resolution stills and motion previews for a professional cinematographer. Clean, immersive layout optimized for visuals and storytelling.",

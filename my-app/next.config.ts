@@ -22,6 +22,11 @@ module.exports = {
         hostname: "pub-b672d044d71842aeb4efd6d46.r2.dev", // <--- add this exact host from your runtime error
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pub-bd618a9723f54128a9dbd24698f83fba.r2.dev",
+        pathname: "/**",
+      },
     ],
   },
 
