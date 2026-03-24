@@ -7,7 +7,7 @@ import Image from "next/image";
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
   {
-    title: "toréa ecommerce website",
+    title: "toréa Ecommerce Website",
     description:
       "A modern Nigeria-first fashion commerce platform built with Next.js, Clerk, Prisma, and Paystack. Seamless shopping, beautiful UI, and robust backend for a premium digital retail experience.",
     stack: [
