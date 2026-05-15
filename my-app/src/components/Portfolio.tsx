@@ -1,13 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import Image from "next/image";
+import { ArrowUpRight, Gem } from "lucide-react";
 
 // Cloudflare image links - UPDATED to R2 links as requested
 const projects = [
   {
-    title: "toréa Ecommerce Website",
+    title: "Triple A African Foods - Food Delivery App",
+    description:
+      "A modern food delivery app concept focused on authentic Nigerian cuisine, designed with a clean dark UI and intuitive user experience. The app streamlines meal discovery, ordering, and real-time tracking through a visually engaging mobile flow.",
+    stack: [
+      "Mobile App ",
+      "Android",
+      "iOS",
+      "React Native",
+      "Flutter",
+      "Order Tracking",
+      "Dark UI",
+    ],
+    image:
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20May%2012%2C%202026%20at%2007_21_42%20AM.png",
+    link: null,
+  },
+  {
+    title: "toréa Fashion Commerce Platform",
     description:
       "A modern Nigeria-first fashion commerce platform built with Next.js, Clerk, Prisma, and Paystack. Seamless shopping, beautiful UI, and robust backend for a premium digital retail experience.",
     stack: [
@@ -149,9 +166,15 @@ const techs = [
   "GraphQL",
 ];
 
-// Background for the top/hero section only (Image 1)
-const heroBgUrl =
-  "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/christopher-gower-m_HRfLhgABo-unsplash.jpg";
+const featuredProject = projects[1];
+
+const portfolioCategories = [
+  "E-commerce",
+  "Mobile Apps",
+  "Web Apps",
+  "Landing Pages",
+  "Brand Sites",
+];
 
 export default function Portfolio() {
   return (
@@ -166,49 +189,102 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* HeroSection (background with bubble stat box overlay) */}
-      <section
-        className="relative flex flex-col items-center justify-center py-10 md:py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100"
-      >
-        <div className="relative z-10 flex flex-col items-center text-center">
-          {/* Modern Bubble Container */}
-          <div className="bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 md:p-12 shadow-2xl hover:shadow-3xl transition duration-300">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">
-              Crafted with{" "}
-              <span className="text-gray-800">Precision &amp; Passion</span>
-            </h2>
-            <p className="max-w-2xl text-center text-gray-600 drop-shadow-md">
-              Explore our collection of successful projects that showcase our expertise in creating exceptional digital experiences across various industries and technologies.
-            </p>
-          </div>
-        </div>
+      {/* HeroSection */}
+      <section className="relative px-4 pb-8 pt-6 sm:px-6 sm:pb-10 lg:px-8">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/70 p-6 shadow-[0_24px_80px_rgba(117,87,250,0.12)] backdrop-blur-md sm:p-8 lg:p-10">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+                Selected Work
+              </span>
+              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight text-[#161a2e] sm:text-5xl lg:text-6xl">
+                Digital products designed to look sharp, move fast, and drive results.
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                From e-commerce platforms to mobile apps and conversion-focused websites, this work reflects a balance of product thinking, clean execution, and performance-first engineering.
+              </p>
 
-        {/* Bubble box group — centered and overlapping the bottom of the hero */}
-        <div className="relative z-20 w-full max-w-5xl mt-8 -mb-8">
-          <div className="mx-auto flex flex-col md:flex-row items-center justify-center gap-6 px-4">
-            {/* Card 1 */}
-            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
-              <div className="text-3xl md:text-4xl font-extrabold text-blue-600">50+</div>
-              <div className="mt-2 text-gray-700 font-medium">Projects Completed</div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {portfolioCategories.map((category) => (
+                  <span
+                    key={category}
+                    className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm"
+                  >
+                    {category}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                {featuredProject.link && (
+                  <Link
+                    href={featuredProject.link.url}
+                    className="inline-flex items-center justify-center rounded-full bg-[#2d3bcf] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Featured Project
+                  </Link>
+                )}
+                <a
+                  href="#portfolio-grid"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300"
+                >
+                  Browse All Projects
+                </a>
+              </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
-              <div className="text-3xl md:text-4xl font-extrabold text-purple-600">30+</div>
-              <div className="mt-2 text-gray-700 font-medium">Happy Clients</div>
-            </div>
+            <div className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 shadow-[0_18px_60px_rgba(15,23,42,0.08)] sm:p-5">
+              <div className="mb-5 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
+                    Featured Project
+                  </p>
+                  <h2 className="mt-2 text-2xl font-bold text-[#161a2e] sm:text-3xl">
+                    {featuredProject.title}
+                  </h2>
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-gradient-to-r from-white to-violet-50 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-700 shadow-[0_12px_34px_rgba(124,58,237,0.14)]">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full border border-violet-200 bg-white text-violet-600 shadow-sm">
+                    <Gem className="h-3.5 w-3.5" strokeWidth={2.2} />
+                  </span>
+                  Case Study
+                </span>
+              </div>
 
-            {/* Card 3 */}
-            <div className="bg-white/95 rounded-2xl shadow-md px-10 py-6 flex flex-col items-center min-w-[220px]">
-              <div className="text-3xl md:text-4xl font-extrabold text-pink-600">100%</div>
-              <div className="mt-2 text-gray-700 font-medium">Client Satisfaction</div>
+              <p className="text-sm leading-7 text-slate-600 sm:text-base">
+                {featuredProject.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {featuredProject.stack.slice(0, 5).map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="relative mt-6 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm">
+                <Image
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  width={1200}
+                  height={760}
+                  priority
+                  className="h-auto w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section className="max-w-6xl mx-auto px-4 py-10">
+      <section id="portfolio-grid" className="max-w-6xl mx-auto px-4 py-10">
         <div className="flex flex-col items-center mb-12"></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {projects.map((project, idx) => (
@@ -240,13 +316,13 @@ export default function Portfolio() {
                 {project.link && (
                   <Link
                     href={project.link.url}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm
-                      bg-blue-600 text-white shadow hover:bg-blue-700 transition-all
-                      focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="group inline-flex w-fit items-center gap-2.5 rounded-full border border-slate-200 bg-slate-950 px-2 py-1.5 pr-4 text-sm font-semibold text-white shadow-lg shadow-slate-300/40 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-950 hover:bg-blue-600 hover:shadow-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaExternalLinkAlt className="text-xs" />
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-slate-950 transition-colors duration-300 group-hover:bg-blue-100 group-hover:text-blue-700">
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={2.2} />
+                    </span>
                     {project.link.label}
                   </Link>
                 )}

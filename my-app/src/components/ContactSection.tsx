@@ -28,7 +28,15 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="relative min-h-screen flex flex-col items-center overflow-hidden bg-gradient-to-b from-[#f9fdff] via-[#eef7ff] to-[#e8f0ff]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-36 md:h-44">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(125,211,252,0.28),transparent_22%),radial-gradient(circle_at_82%_18%,rgba(147,197,253,0.22),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.95)_0%,rgba(224,242,254,0.72)_52%,rgba(255,255,255,0)_100%)]" />
+        <div className="absolute left-[8%] top-8 h-24 w-24 rounded-full bg-white/65 blur-2xl" />
+        <div className="absolute right-[12%] top-5 h-28 w-28 rounded-full bg-sky-100/70 blur-3xl" />
+        <div className="absolute inset-x-6 bottom-3 h-16 rounded-[999px] bg-white/35 blur-2xl" />
+      </div>
+      <div className="pointer-events-none absolute left-0 top-28 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-blue-300/18 blur-3xl" />
       <section className="w-full">
         
       </section>
@@ -41,11 +49,11 @@ export default function ContactSection() {
           Contact Us
         </h1>
 
-        <div className="flex flex-col md:flex-row bg-white/85 rounded-2xl shadow-lg overflow-hidden">
+        <div className="flex flex-col overflow-hidden rounded-2xl bg-white/80 shadow-[0_24px_70px_rgba(99,102,241,0.12)] backdrop-blur-sm md:flex-row">
           {/* Contact Info */}
-          <div className="md:w-1/3 bg-gradient-to-br from-blue-50 to-purple-100 p-8 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 bg-gradient-to-br from-[#f8fbff] via-[#edf6ff] to-[#fdf2f8] p-8 md:w-1/3">
             <div className="flex items-start gap-4">
-              <span className="bg-purple-500 text-white p-3 rounded-lg text-xl">
+              <span className="rounded-lg bg-rose-500 p-3 text-xl text-white shadow-sm">
                 <FaEnvelope />
               </span>
               <div>
@@ -57,7 +65,7 @@ export default function ContactSection() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="bg-blue-500 text-white p-3 rounded-lg text-xl">
+              <span className="rounded-lg bg-sky-500 p-3 text-xl text-white shadow-sm">
                 <FaPhone />
               </span>
               <div>
@@ -67,7 +75,7 @@ export default function ContactSection() {
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="bg-pink-500 text-white p-3 rounded-lg text-xl">
+              <span className="rounded-lg bg-amber-500 p-3 text-xl text-white shadow-sm">
                 <FaMapMarkerAlt />
               </span>
               <div>
@@ -83,7 +91,7 @@ export default function ContactSection() {
             </div>
 
             {/* Booking CTA - plain link opens in a new tab */}
-            <div className="mt-4 p-4 bg-white rounded-lg border shadow-sm">
+            <div className="mt-4 rounded-lg border border-white/70 bg-white/90 p-4 shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                 <FaCalendarAlt className="text-blue-600" />
                 Book a Call
@@ -98,7 +106,7 @@ export default function ContactSection() {
                   href={BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 w-full justify-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow hover:from-blue-700 hover:to-purple-700 transition"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-slate-900 via-slate-800 to-sky-700 py-3 font-semibold text-white shadow-lg shadow-slate-300 transition hover:from-slate-950 hover:via-slate-900 hover:to-sky-800"
                   aria-label="Book a free 15 minute consult (opens in new tab)"
                 >
                   <FaCalendarAlt />
@@ -114,7 +122,7 @@ export default function ContactSection() {
           </div>
 
           {/* Contact Form */}
-          <div className="md:w-2/3 p-8 bg-gradient-to-br from-blue-50 to-purple-100 p-8 flex flex-col gap-6">
+          <div className="flex flex-col gap-6 bg-gradient-to-br from-white via-[#f8fbff] to-[#f3f7ff] p-8 md:w-2/3">
             <h2 className="text-2xl text-gray-700 font-bold mb-6">Send us a Message</h2>
 
             {state.succeeded && (
@@ -217,7 +225,7 @@ export default function ContactSection() {
                 <div className="md:col-span-2">
                   <button
                     type="submit"
-                    className={`flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow hover:from-blue-700 hover:to-purple-700 transition ${loading || state.submitting ? "opacity-60 cursor-not-allowed" : ""
+                    className={`flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-slate-900 via-slate-800 to-sky-700 py-3 font-semibold text-white shadow-lg shadow-slate-300 transition hover:from-slate-950 hover:via-slate-900 hover:to-sky-800 ${loading || state.submitting ? "cursor-not-allowed opacity-60" : ""
                       }`}
                     disabled={loading || state.submitting}
                   >
@@ -230,7 +238,7 @@ export default function ContactSection() {
         </div>
 
         {/* FAQ Section */}
-        <section className="w-full bg-white/90 py-12 px-2 mt-16 rounded-2xl relative z-10">
+        <section className="relative z-10 mt-16 w-full rounded-2xl bg-white/90 px-2 py-12 shadow-[0_20px_60px_rgba(148,163,184,0.12)]">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">
               Frequently Asked Questions
