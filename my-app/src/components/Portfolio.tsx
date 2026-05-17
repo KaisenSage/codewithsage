@@ -359,14 +359,19 @@ export default function Portfolio() {
                 {project.link && (
                   <Link
                     href={project.link.url}
-                    className="group inline-flex w-fit items-center gap-2.5 rounded-full border border-slate-200 bg-slate-950 px-2 py-1.5 pr-4 text-sm font-semibold text-white shadow-lg shadow-slate-300/40 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-950 hover:bg-blue-600 hover:shadow-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="group relative inline-flex w-fit items-center overflow-hidden rounded-[1.2rem] border border-slate-200/80 bg-[linear-gradient(135deg,#0f172a_0%,#1e293b_55%,#2563eb_100%)] px-2 py-2 pr-4 text-white shadow-[0_18px_36px_rgba(15,23,42,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-[0_22px_46px_rgba(59,130,246,0.28)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-slate-950 transition-colors duration-300 group-hover:bg-blue-100 group-hover:text-blue-700">
-                      <ArrowUpRight className="h-4 w-4" strokeWidth={2.2} />
+                    <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.22),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.02)_0%,rgba(96,165,250,0.12)_48%,rgba(168,85,247,0.18)_100%)] opacity-80" />
+                    <span className="pointer-events-none absolute inset-y-0 left-[-22%] w-20 -skew-x-12 bg-white/20 opacity-0 blur-xl transition-all duration-500 group-hover:left-[112%] group-hover:opacity-100" />
+                    <span className="relative flex h-10 w-10 items-center justify-center rounded-[0.95rem] border border-white/25 bg-white/95 text-slate-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-50 group-hover:text-blue-700">
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
                     </span>
-                    {project.link.label}
+                    <span className="relative ml-3 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                        <span>{project.link.label}</span>
+                        <span className="h-px w-0 bg-white/80 transition-all duration-300 group-hover:w-5" />
+                    </span>
                   </Link>
                 )}
               </div>
