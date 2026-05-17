@@ -35,13 +35,14 @@ export default function TechMarqueeFM({
   gap = 24,
   speed = 18,
   title = {
-    eyebrow: "OUR STACKS",
+    eyebrow: "BUILT WITH",
     heading: (
       <>
-        Reliable tools for <span className={styles.headingEm}>Scalable Growth</span>
+        The tools behind <span className={styles.headingEm}>fast, scalable digital products</span>
       </>
     ),
-    subheading: "",
+    subheading:
+      "From frontend performance to backend scale, we use proven technologies to build websites and apps that launch cleanly and grow with confidence.",
   },
 }: Props) {
   const duplicated = useMemo(() => [...logos, ...logos], [logos]);
@@ -105,11 +106,10 @@ export default function TechMarqueeFM({
       <div className={styles.inner}>
         {/* Header */}
         <header className={styles.header}>
-          {/* render eyebrow as a presentational button (disabled to prevent clicks) */}
           {title.eyebrow && (
-            <button className={styles.eyebrowButton} type="button" disabled aria-disabled="true">
+            <div className={styles.eyebrowBadge} aria-hidden="true">
               {title.eyebrow}
-            </button>
+            </div>
           )}
           <h2 className={styles.heading}>{title.heading}</h2>
           {title.subheading && <p className={styles.subheading}>{title.subheading}</p>}

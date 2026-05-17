@@ -1,4 +1,4 @@
-import { Heart, Quote } from "lucide-react";
+import { Heart, Quote, Sparkles } from "lucide-react";
 
 // Fresh testimonial data, new names, companies, and quotes
 const testimonials = [
@@ -36,11 +36,11 @@ const testimonials = [
 
 function Stars() {
   return (
-    <div className="flex mb-3">
+    <div className="mb-4 flex gap-1">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className="w-6 h-6 text-yellow-400"
+          className="h-5 w-5 text-amber-400"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -53,46 +53,83 @@ function Stars() {
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-20 px-4 bg-blue-50">
-      <h2
-        className="
-        max-w-4xl mx-auto text-3xl md:text-4xl font-extrabold mb-4 text-center
-        bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text text-transparent leading-snug
-        "
-        style={{
-          // Ensure compatibility with all browsers
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        Our Client Success Stories
-      </h2>
-      <p className="max-w-3xl mx-auto text-lg text-center text-gray-600 mb-12">
-        Discover how our premium web development solutions drive measurable business growth and lasting impact.
-      </p>
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+    <section
+      id="testimonials"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef5ff_46%,#fdf7ff_100%)] px-4 py-24 sm:px-6 lg:px-8"
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-5rem] top-12 h-56 w-56 rounded-full bg-sky-200/40 blur-3xl" />
+        <div className="absolute right-[-4rem] top-28 h-64 w-64 rounded-full bg-fuchsia-200/35 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-52 w-52 rounded-full bg-violet-200/25 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/75 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600 shadow-[0_10px_30px_rgba(148,163,184,0.12)] backdrop-blur-sm">
+            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+            Testimonials
+          </div>
+          <h2
+            className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight tracking-[-0.04em] text-transparent sm:text-5xl"
+            style={{
+              backgroundImage: "linear-gradient(135deg, #0f172a 0%, #1d4ed8 52%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Real results from teams that needed their product presence to work harder.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+            Founders, product teams, and growing businesses trust Codewithsage to turn unclear digital experiences into polished, high-performing products.
+          </p>
+        </div>
+
+        <div className="mb-10 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
+            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">5.0</div>
+            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Average satisfaction</div>
+          </div>
+          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
+            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">250%</div>
+            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Engagement lift cited</div>
+          </div>
+          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
+            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">End-to-end</div>
+            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Strategy to launch support</div>
+          </div>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3">
         {testimonials.map((t, idx) => (
           <div
             key={idx}
-            className={`bg-white rounded-2xl shadow-lg px-8 py-8 flex flex-col justify-between min-h-[420px] ${t.border} border-b border-x border-white transition-transform hover:-translate-y-2`}
+            className={`group relative flex min-h-[430px] flex-col justify-between overflow-hidden rounded-[2rem] border border-white/90 bg-white/78 px-8 py-8 shadow-[0_24px_70px_rgba(148,163,184,0.14)] backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(99,102,241,0.18)] ${t.border}`}
           >
+            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
+            <div className="pointer-events-none absolute -right-10 top-6 h-28 w-28 rounded-full bg-sky-100/70 blur-3xl transition duration-300 group-hover:bg-fuchsia-100/70" />
+
             <Stars />
-            <Quote className="w-8 h-8 text-blue-400 mb-4" />
-            <div className="italic text-gray-700 text-lg leading-relaxed mb-8">{t.quote}</div>
+            <div className="mb-6 flex items-center justify-between">
+              <Quote className="h-9 w-9 text-blue-500/80" />
+              <div className="rounded-full border border-rose-100 bg-rose-50/80 p-2 text-rose-300">
+                <Heart className="h-5 w-5" strokeWidth={2} fill="none" />
+              </div>
+            </div>
+            <div className="mb-8 text-lg italic leading-8 text-slate-700">{t.quote}</div>
             <div className="flex items-center mt-auto">
               <div
-                className={`${t.color} w-14 h-14 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg mr-4`}
+                className={`${t.color} mr-4 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-bold text-white shadow-[0_16px_32px_rgba(99,102,241,0.18)]`}
               >
                 {t.initials}
               </div>
               <div>
-                <span className="block font-bold text-gray-900 text-lg">{t.name}</span>
-                <span className="block text-gray-500">{t.role}</span>
+                <span className="block text-lg font-bold text-slate-900">{t.name}</span>
+                <span className="block text-sm leading-6 text-slate-500">{t.role}</span>
               </div>
-              <Heart className="w-7 h-7 text-red-300 ml-auto" strokeWidth={2} fill="none" />
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

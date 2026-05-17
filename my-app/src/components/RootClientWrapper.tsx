@@ -5,6 +5,8 @@ import Script from "next/script";
 import { useCallback, useEffect, useState } from "react";
 import CookieConsent from "@/components/CookieConsent";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import AppearOnScroll from "@/components/AppearOnScroll";
 import Cookies from "js-cookie";
 
 export default function ClientRootWrapper({ children }: { children: React.ReactNode }) {
@@ -41,10 +43,16 @@ export default function ClientRootWrapper({ children }: { children: React.ReactN
         </Script>
       )}
 
+      {pathname !== "/" && <Navbar />}
+
       <main className="flex-1 flex flex-col">{children}</main>
 
       {/* Show footer on all pages except homepage */}
-      {pathname !== "/" && <Footer />}
+      {pathname !== "/" && (
+        <AppearOnScroll amount={0.15}>
+          <Footer />
+        </AppearOnScroll>
+      )}
 
       {/* Cookie consent banner (shown if no consent yet) */}
       <CookieConsent onAccept={handleAccept} />
