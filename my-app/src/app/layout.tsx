@@ -1,40 +1,76 @@
 import "./globals.css";
 import ClientRootWrapper from "@/components/RootClientWrapper";
+import type { Metadata, Viewport } from "next";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.codewithsage.com"),
+  applicationName: "Codewithsage",
+  title: {
+    default: "Codewithsage - Build your dream website",
+    template: "%s | Codewithsage",
+  },
+  description:
+    "Building smart, beautiful digital products for tomorrow's businesses.",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.ico", sizes: "48x48 32x32 16x16", type: "image/x-icon" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#5bbad5" },
+      { rel: "shortcut icon", url: "/favicon.ico" },
+      { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
+  openGraph: {
+    type: "website",
+    url: "https://www.codewithsage.com",
+    title: "Codewithsage - Build your dream website",
+    description:
+      "Building smart, beautiful digital products for tomorrow's businesses.",
+    siteName: "Codewithsage",
+    images: [
+      {
+        url: "/og-image.png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Codewithsage - Build your dream website",
+    description:
+      "Building smart, beautiful digital products for tomorrow's businesses.",
+    images: ["/og-image.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <title>Codewithsage — Build your dream website</title>
-
-        {/* Favicons */}
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-
-        {/* Apple / iOS */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="Codewithsage" />
-        <meta name="application-name" content="Codewithsage" />
-        <meta name="mobile-web-app-capable" content="yes" />
-
-        {/* Web app manifest */}
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="manifest" href="/manifest.json" />
-
-        {/* Android / PWA icons */}
-        <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
-
-        {/* Safari pinned tab (mask) */}
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6366f1" />
-
-        {/* Theme color */}
-        <meta name="theme-color" content="#000000" />
-      </head>
-
       <body className="min-h-screen flex flex-col">
         <ClientRootWrapper>{children}</ClientRootWrapper>
       </body>

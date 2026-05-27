@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Host: https://www.codewithsage.com
 Sitemap: https://www.codewithsage.com/sitemap.xml
