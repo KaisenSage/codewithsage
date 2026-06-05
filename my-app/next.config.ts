@@ -1,6 +1,26 @@
 import type { NextConfig } from "next";
 
+const isProduction = process.env.VERCEL_ENV === "production";
+
 const nextConfig: NextConfig = {
+  async headers() {
+    const productionHosts = ["www.codewithsage.com", "codewithsage.com"] as const;
+
+    return [
+      ...(isProduction
+        ? productionHosts.map((host) => ({
+            source: "/:path*",
+            has: [{ type: "host" as const, value: host }],
+            headers: [{ key: "X-Robots-Tag", value: "index, follow" }],
+          }))
+        : []),
+      {
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "codewithsage.vercel.app" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
