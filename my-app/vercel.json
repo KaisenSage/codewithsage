@@ -2,6 +2,18 @@
   "redirects": [
     {
       "source": "/:path+/",
+      "has": [{ "type": "host", "value": "www.codewithsage.com" }],
+      "destination": "https://www.codewithsage.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path+/",
+      "has": [{ "type": "host", "value": "codewithsage.com" }],
+      "destination": "https://www.codewithsage.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "codewithsage.com" }],
       "destination": "https://www.codewithsage.com/:path*",
       "permanent": true
