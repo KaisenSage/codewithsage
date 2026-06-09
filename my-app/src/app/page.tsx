@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -8,6 +9,13 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import TechMarqueeFM from "@/components/TechMarqueeFM";
 import AppearOnScroll from "@/components/AppearOnScroll";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">

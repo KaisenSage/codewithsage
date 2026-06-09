@@ -9,6 +9,9 @@ const REMOTE_IMAGE =
 export const metadata = {
   title: "About — Codewithsage",
   description: "Learn about Codewithsage: our mission, approach, and team.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

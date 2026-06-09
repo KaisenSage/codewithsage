@@ -11,9 +11,6 @@ export const metadata: Metadata = {
   },
   description:
     "Building smart, beautiful digital products for tomorrow's businesses.",
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,

@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import AppearOnScroll from "@/components/AppearOnScroll";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Codewithsage privacy policy — how we collect, use, and protect your data.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+};
 
 export default function PrivacyPolicy() {
   return (
