@@ -8,11 +8,18 @@ const nextConfig: NextConfig = {
 
     return [
       ...(isProduction
-        ? productionHosts.map((host) => ({
-            source: "/:path*",
-            has: [{ type: "host" as const, value: host }],
-            headers: [{ key: "X-Robots-Tag", value: "index, follow" }],
-          }))
+        ? [
+            {
+              source: "/signin",
+              has: [{ type: "host" as const, value: "www.codewithsage.com" }],
+              headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+            },
+            ...productionHosts.map((host) => ({
+              source: "/:path*",
+              has: [{ type: "host" as const, value: host }],
+              headers: [{ key: "X-Robots-Tag", value: "index, follow" }],
+            })),
+          ]
         : []),
       {
         source: "/:path*",
