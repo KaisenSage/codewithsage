@@ -52,6 +52,23 @@ const projects = [
     },
   },
   {
+    title: "Tillr Commerce Engine",
+    description:
+      "A connected commerce platform for cafés, restaurants, and retail stores. Tillr unifies menus, catalogs, orders, payments, branch rules, real-time operations, and team access in one dashboard built for fast-moving businesses.",
+    stack: [
+      "Commerce Platform",
+      "Catalog Management",
+      "Multi-branch Operations",
+      "QR Ordering",
+      "Payments",
+      "Real-time Orders",
+      "Role-based Access",
+    ],
+    image: "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/IMG_5760.PNG",
+    unoptimized: true,
+    link: null,
+  },
+  {
     title: "Cinematography — Client Portfolio",
     description:
       "A dedicated cinematography & showreel portfolio website showcasing high-resolution stills and motion previews for a professional cinematographer. Clean, immersive layout optimized for visuals and storytelling.",
@@ -298,6 +315,7 @@ export default function Portfolio() {
                   width={1200}
                   height={760}
                   priority
+                  unoptimized={featuredProject.unoptimized}
                   className="h-auto w-full object-cover"
                 />
               </div>
@@ -340,6 +358,7 @@ export default function Portfolio() {
                 alt={project.title}
                 width={600}
                 height={224}
+                unoptimized={project.unoptimized}
                 className="w-full h-56 object-cover"
               />
               <div className="p-6 flex-1 flex flex-col">
