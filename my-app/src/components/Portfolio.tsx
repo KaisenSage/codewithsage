@@ -66,6 +66,11 @@ const projects = [
     ],
     image: "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/IMG_5760.PNG",
     unoptimized: true,
+    imageWidth: 1122,
+    imageHeight: 1402,
+    imageContainerClass:
+      "relative flex h-80 sm:h-[22rem] w-full items-start justify-center overflow-hidden bg-[#0a100d] px-3 pt-3 sm:px-4 sm:pt-4",
+    imageClass: "h-full w-auto max-w-[min(100%,300px)] object-contain object-top drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]",
     link: null,
   },
   {
@@ -353,14 +358,23 @@ export default function Portfolio() {
               transition={{ duration: 0.6, delay: idx * 0.05 }}
               className="bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={600}
-                height={224}
-                unoptimized={project.unoptimized}
-                className="w-full h-56 object-cover"
-              />
+              <div
+                className={
+                  project.imageContainerClass ??
+                  "relative h-56 w-full overflow-hidden"
+                }
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={project.imageWidth ?? 600}
+                  height={project.imageHeight ?? 224}
+                  unoptimized={project.unoptimized}
+                  className={
+                    project.imageClass ?? "h-56 w-full object-cover"
+                  }
+                />
+              </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="text-xl font-bold text-gray-900 mb-2">{project.title}</div>
                 <p className="text-gray-600 mb-4 flex-1">{project.description}</p>
