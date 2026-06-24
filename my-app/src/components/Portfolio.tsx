@@ -28,7 +28,7 @@ const projects = [
       "Dark UI",
     ],
     image:
-      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20May%2012%2C%202026%20at%2007_21_42%20AM.png",
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20Jun%2024%2C%202026%2C%2008_52_37%20AM.png",
     link: null,
   },
   {
