@@ -57,10 +57,11 @@ export default function Navbar() {
                   Sign in
                 </button>
               </SignInButton>
-              <Link href="/get-started">
-                <button className="rounded-xl bg-blue-600 px-4 xl:px-6 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">
-                  Get Started
-                </button>
+              <Link
+                href="/get-started"
+                className="rounded-xl bg-blue-600 px-4 xl:px-6 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                Get Started
               </Link>
             </>
           ) : (
@@ -88,7 +89,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-slate-950/45 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-[60] bg-slate-950/45 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setMobileMenuOpen(false)}
@@ -97,7 +98,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-50 flex min-h-screen flex-col bg-[linear-gradient(180deg,rgba(7,11,31,0.96)_0%,rgba(9,17,42,0.98)_55%,rgba(10,22,52,1)_100%)] px-6 pb-10 pt-6 text-white transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-[70] flex min-h-screen flex-col bg-[linear-gradient(180deg,rgba(7,11,31,0.96)_0%,rgba(9,17,42,0.98)_55%,rgba(10,22,52,1)_100%)] px-6 pb-10 pt-6 text-white transition-all duration-300 lg:hidden ${
           mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0 pointer-events-none"
         }`}
         aria-hidden={!mobileMenuOpen}
@@ -153,10 +154,12 @@ export default function Navbar() {
                   Sign in
                 </button>
               </SignInButton>
-              <Link href="/get-started">
-                <button className="w-full rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-900/20 transition hover:brightness-105">
-                  Get Started
-                </button>
+              <Link
+                href="/get-started"
+                className="w-full rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 px-6 py-3 text-center font-semibold text-white shadow-lg shadow-blue-900/20 transition hover:brightness-105"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Get Started
               </Link>
             </>
           ) : (
