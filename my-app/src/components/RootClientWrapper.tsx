@@ -7,6 +7,7 @@ import CookieConsent from "@/components/CookieConsent";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import AppearOnScroll from "@/components/AppearOnScroll";
+import MouseTracker from "@/components/MouseTracker";
 import Cookies from "js-cookie";
 
 export default function ClientRootWrapper({ children }: { children: React.ReactNode }) {
@@ -26,6 +27,7 @@ export default function ClientRootWrapper({ children }: { children: React.ReactN
 
   return (
     <ClerkProvider>
+      <MouseTracker />
       {/* Load Tawk only AFTER consent */}
       {consent === "accepted" && (
         <Script id="tawk-to" strategy="afterInteractive">
