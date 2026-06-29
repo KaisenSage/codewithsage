@@ -222,6 +222,8 @@ function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  const isPortrait = !!project.unoptimized;
+
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -241,83 +243,133 @@ function ProjectModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.25 }}
-        className="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm"
+        transition={{ duration: 0.22 }}
+        className="fixed inset-0 z-[80] bg-black/65 backdrop-blur-[3px]"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Panel */}
+      {/* Panel
+          Mobile  : slides up from bottom, takes ≤92vh, full-width drawer
+          md      : centred card, 90vw, ≤88vh, rounded all sides
+          lg+     : wider card (max-w-5xl), explicit 88vh height so image
+                    side always has a defined size for `fill` to work      */}
       <motion.div
         key="panel"
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
-        initial={{ opacity: 0, y: 48, scale: 0.97 }}
+        initial={{ opacity: 0, y: 56, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 32, scale: 0.97 }}
-        transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-        className="fixed inset-x-3 bottom-0 z-[90] mx-auto flex max-h-[92dvh] max-w-5xl flex-col overflow-hidden rounded-t-[2rem] bg-white shadow-[0_-24px_80px_rgba(0,0,0,0.28)] sm:inset-x-4 sm:rounded-t-[2.4rem] lg:inset-0 lg:top-10 lg:bottom-10 lg:rounded-[2rem]"
+        exit={{ opacity: 0, y: 40, scale: 0.97 }}
+        transition={{ duration: 0.34, ease: [0.32, 0.72, 0, 1] }}
+        /* ── positioning ── */
+        style={{ maxWidth: "72rem" }}            /* 5xl = 64rem, bump a bit */
+        className={[
+          /* shared */
+          "fixed z-[90] w-full overflow-hidden bg-white",
+          "shadow-[0_-28px_80px_rgba(0,0,0,0.32)]",
+          /* mobile: bottom-sheet */
+          "bottom-0 inset-x-0 max-h-[92dvh]",
+          "rounded-t-[2rem]",
+          /* ≥md: floating card */
+          "md:inset-x-auto md:left-1/2 md:-translate-x-1/2",
+          "md:top-[6vh] md:bottom-[6vh]",
+          "md:w-[92vw] md:max-h-none",
+          "md:rounded-[2rem]",
+          /* ≥lg: pin height so image cell is sized */
+          "lg:top-[5vh] lg:bottom-[5vh]",
+          "lg:w-[88vw]",
+        ].join(" ")}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/10 text-slate-700 backdrop-blur-sm transition hover:bg-black/20 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:right-5 sm:top-5"
+          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/80 text-slate-600 shadow-sm backdrop-blur-sm transition hover:bg-white hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:right-5 sm:top-5 sm:h-10 sm:w-10"
           aria-label="Close preview"
         >
-          <X size={18} strokeWidth={2.5} />
+          <X size={17} strokeWidth={2.5} />
         </button>
 
-        {/* Scrollable body */}
-        <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row">
-          {/* Image side */}
+        {/* ── Layout: flex-col on mobile/tablet, flex-row on ≥lg ── */}
+        <div className="flex h-full flex-col lg:flex-row">
+
+          {/* ── IMAGE PANEL ────────────────────────────────────────── */}
+          {/*
+            Mobile/md  : fixed height so the panel doesn't collapse
+            lg+        : takes full height of the flex-row parent (which
+                         is constrained by top/bottom inset = 90vh)
+          */}
           <div
-            className={`relative w-full shrink-0 overflow-hidden bg-slate-100 lg:w-[55%] lg:rounded-l-[2rem] ${
-              project.imageContainerClass
-                ? "flex h-64 items-start justify-center sm:h-80 lg:h-full"
-                : "h-56 sm:h-72 lg:h-full"
-            }`}
-            style={
-              project.imageContainerClass
-                ? { background: "#0a100d", padding: "1rem 1rem 0" }
-                : {}
-            }
+            className={[
+              "relative shrink-0 overflow-hidden",
+              /* mobile */
+              "h-52 w-full",
+              /* sm */
+              "sm:h-72",
+              /* md */
+              "md:h-80",
+              /* lg: fills the left 55% of the card's full height */
+              "lg:h-full lg:w-[55%]",
+              /* rounding */
+              "rounded-t-[2rem] lg:rounded-l-[2rem] lg:rounded-tr-none",
+              /* bg */
+              isPortrait ? "bg-[#0a100d]" : "bg-slate-100",
+            ].join(" ")}
           >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill={!project.unoptimized}
-              width={project.unoptimized ? project.imageWidth : undefined}
-              height={project.unoptimized ? project.imageHeight : undefined}
-              unoptimized={project.unoptimized}
-              className={
-                project.unoptimized
-                  ? "h-full w-auto max-w-[min(100%,320px)] object-contain object-top drop-shadow-[0_18px_40px_rgba(0,0,0,0.4)]"
-                  : "object-cover"
-              }
-              sizes="(max-width:1024px) 100vw, 55vw"
-              priority
-            />
+            {isPortrait ? (
+              /* Portrait / mobile-screenshot images → contain + centre */
+              <div className="absolute inset-0 flex items-center justify-center px-4 py-4 sm:px-6 sm:py-6 lg:items-start lg:pt-8">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={project.imageWidth ?? 600}
+                  height={project.imageHeight ?? 800}
+                  unoptimized
+                  className="h-full w-auto max-w-full object-contain drop-shadow-[0_20px_48px_rgba(0,0,0,0.55)]"
+                  priority
+                />
+              </div>
+            ) : (
+              /* Landscape screenshots / photos → cover the entire cell */
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width:1024px) 100vw, 55vw"
+                className="object-cover object-top"
+                priority
+              />
+            )}
           </div>
 
-          {/* Details side */}
-          <div className="flex flex-1 flex-col justify-between gap-6 p-6 sm:p-8 lg:overflow-y-auto lg:p-10">
-            <div>
-              {/* Header */}
-              <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-600">
-                Project Preview
-              </span>
-              <h2 className="mt-3 text-2xl font-black tracking-tight text-[#161a2e] sm:text-3xl lg:text-4xl">
-                {project.title}
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+          {/* ── DETAILS PANEL ──────────────────────────────────────── */}
+          {/*
+            Mobile/md  : scrolls as part of the overall sheet
+            lg+        : its own scroll container so it doesn't push
+                         the image out when content is long
+          */}
+          <div className="flex flex-1 flex-col overflow-y-auto p-6 sm:p-7 lg:p-10">
+            <div className="flex flex-1 flex-col gap-5">
+              {/* Badge + title */}
+              <div>
+                <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-600">
+                  Project Preview
+                </span>
+                <h2 className="mt-3 text-2xl font-black leading-tight tracking-tight text-[#161a2e] sm:text-3xl lg:text-[2rem] xl:text-4xl">
+                  {project.title}
+                </h2>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm leading-7 text-slate-600 sm:text-[15px] sm:leading-8">
                 {project.description}
               </p>
 
               {/* Stack */}
-              <div className="mt-6">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+              <div>
+                <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
                   Tech Stack
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -333,23 +385,23 @@ function ProjectModal({
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="flex flex-col gap-3 sm:flex-row">
+            {/* CTA row — sticks to bottom inside the scrollable col */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {project.link ? (
                 <a
                   href={project.link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6] hover:shadow-[0_14px_36px_rgba(45,59,207,0.4)]"
+                  className="inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_24px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6] hover:shadow-[0_14px_32px_rgba(45,59,207,0.4)]"
                 >
-                  <ExternalLink size={15} strokeWidth={2.5} />
+                  <ExternalLink size={14} strokeWidth={2.5} />
                   {project.link.label}
                 </a>
               ) : (
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
+                  className="inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_24px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
                 >
                   Enquire About This Project
                 </Link>
@@ -362,6 +414,7 @@ function ProjectModal({
               </button>
             </div>
           </div>
+
         </div>
       </motion.div>
     </AnimatePresence>
