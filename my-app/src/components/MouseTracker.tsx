@@ -12,14 +12,14 @@ export default function MouseTracker() {
   const mx = useMotionValue(-200);
   const my = useMotionValue(-200);
 
-  /* ── ring follows with spring physics — tighter for less perceived lag */
-  const rx = useSpring(mx, { stiffness: 400, damping: 28, mass: 0.3 });
-  const ry = useSpring(my, { stiffness: 400, damping: 28, mass: 0.3 });
+  /* ── ring — near-instant follow, barely perceptible trail */
+  const rx = useSpring(mx, { stiffness: 800, damping: 40, mass: 0.15 });
+  const ry = useSpring(my, { stiffness: 800, damping: 40, mass: 0.15 });
 
   /* ── scale / opacity springs */
-  const dotScale    = useSpring(1,   { stiffness: 600, damping: 32 });
-  const ringScale   = useSpring(1,   { stiffness: 350, damping: 28 });
-  const ringOpacity = useSpring(0.7, { stiffness: 300, damping: 28 });
+  const dotScale    = useSpring(1,   { stiffness: 800, damping: 40 });
+  const ringScale   = useSpring(1,   { stiffness: 600, damping: 36 });
+  const ringOpacity = useSpring(0.7, { stiffness: 500, damping: 36 });
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
