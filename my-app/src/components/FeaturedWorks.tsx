@@ -51,7 +51,7 @@ export default function FeaturedWorks() {
 
           <Link
             href="/portfolio"
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-white/12 bg-white/6 px-5 py-2.5 text-sm font-semibold text-white/80 backdrop-blur-sm transition hover:border-white/24 hover:bg-white/10 hover:text-white"
+            className="group inline-flex self-start shrink-0 items-center gap-2 rounded-full border border-white/12 bg-white/6 px-5 py-2.5 text-sm font-semibold text-white/80 backdrop-blur-sm transition hover:border-white/24 hover:bg-white/10 hover:text-white sm:self-auto"
           >
             View all projects
             <ArrowRight
