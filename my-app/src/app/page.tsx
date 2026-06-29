@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import FeaturedWorks from "@/components/FeaturedWorks";
 import ServicesSection from "@/components/ServicesSection";
 import PricingSection from "@/components/PricingSection";
 import AudienceSection from "@/components/AudienceSection";
@@ -21,6 +22,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       <HeroSection />
+      <FeaturedWorks />
       <AppearOnScroll>
         <ServicesSection />
       </AppearOnScroll>
