@@ -6,10 +6,9 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export default function MouseTracker() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
-  const [clicking, setClicking] = useState(false);
   const hoveringRef = useRef(false);
 
-  /* ── raw mouse position (dot snaps instantly) */
+  /* ── raw mouse position — dot snaps here instantly */
   const mx = useMotionValue(-200);
   const my = useMotionValue(-200);
 
@@ -17,49 +16,32 @@ export default function MouseTracker() {
   const rx = useSpring(mx, { stiffness: 140, damping: 20, mass: 0.55 });
   const ry = useSpring(my, { stiffness: 140, damping: 20, mass: 0.55 });
 
-  /* ── scale springs for hover / click feedback */
-  const dotScale = useSpring(1, { stiffness: 500, damping: 30 });
-  const ringScale = useSpring(1, { stiffness: 200, damping: 22 });
-  const ringOpacity = useSpring(0.5, { stiffness: 200, damping: 24 });
+  /* ── scale / opacity springs */
+  const dotScale   = useSpring(1,   { stiffness: 500, damping: 30 });
+  const ringScale  = useSpring(1,   { stiffness: 200, damping: 22 });
+  const ringOpacity = useSpring(0.7, { stiffness: 200, damping: 24 });
 
   useEffect(() => {
-    /* Only activate on pointer:fine (mouse) devices */
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
-    /* Hide the default OS cursor via a class on <html> */
     document.documentElement.classList.add("custom-cursor");
 
-    /* ── mouse move */
     const onMove = (e: MouseEvent) => {
       mx.set(e.clientX);
       my.set(e.clientY);
       if (!visible) setVisible(true);
     };
 
-    /* ── mouse leave / enter window */
     const onLeaveWindow = () => setVisible(false);
     const onEnterWindow = () => setVisible(true);
 
-    /* ── mouse down / up */
     const onDown = () => {
-      setClicking(true);
-      dotScale.set(0.5);
-      ringScale.set(0.75);
+      dotScale.set(0.45);
+      ringScale.set(0.7);
     };
     const onUp = () => {
-      setClicking(false);
       dotScale.set(hoveringRef.current ? 0 : 1);
       ringScale.set(hoveringRef.current ? 2.4 : 1);
-    };
-
-    /* ── attach hover listeners to all interactive elements */
-    const attach = (root: Document | Element = document) => {
-      root.querySelectorAll<Element>(
-        "a, button, [role='button'], input, textarea, select, label, [tabindex]"
-      ).forEach((el) => {
-        el.addEventListener("mouseenter", onHoverIn);
-        el.addEventListener("mouseleave", onHoverOut);
-      });
     };
 
     const onHoverIn = () => {
@@ -67,14 +49,25 @@ export default function MouseTracker() {
       setHovering(true);
       dotScale.set(0);
       ringScale.set(2.4);
-      ringOpacity.set(0.22);
+      ringOpacity.set(0.55);
     };
     const onHoverOut = () => {
       hoveringRef.current = false;
       setHovering(false);
       dotScale.set(1);
       ringScale.set(1);
-      ringOpacity.set(0.5);
+      ringOpacity.set(0.7);
+    };
+
+    const attach = (root: Document | Element = document) => {
+      root
+        .querySelectorAll<Element>(
+          "a, button, [role='button'], input, textarea, select, label, [tabindex]"
+        )
+        .forEach((el) => {
+          el.addEventListener("mouseenter", onHoverIn);
+          el.addEventListener("mouseleave", onHoverOut);
+        });
     };
 
     window.addEventListener("mousemove", onMove);
@@ -84,7 +77,7 @@ export default function MouseTracker() {
     document.documentElement.addEventListener("mouseenter", onEnterWindow);
     attach();
 
-    /* Re-attach when new interactive elements are added (e.g. modals) */
+    /* Re-attach when new elements appear (modals, drawers, etc.) */
     const observer = new MutationObserver(() => attach());
     observer.observe(document.body, { childList: true, subtree: true });
 
@@ -102,7 +95,15 @@ export default function MouseTracker() {
 
   return (
     <>
-      {/* ── DOT — snaps to exact cursor position ── */}
+      {/*
+        mix-blend-mode: difference + white =
+          white on dark bg  → shows white
+          white on light bg → inverts to dark/black
+          white on blue bg  → shows yellow (complement)
+        Result: cursor is always visible regardless of background colour.
+      */}
+
+      {/* DOT — exact position, no lag */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9999] hidden lg:block"
@@ -116,12 +117,12 @@ export default function MouseTracker() {
           width: 10,
           height: 10,
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)",
-          boxShadow: "0 0 10px 2px rgba(99,102,241,0.45)",
+          background: "#ffffff",
+          mixBlendMode: "difference",
         }}
       />
 
-      {/* ── RING — spring-lag follow ── */}
+      {/* RING — spring-lag follow */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:block"
@@ -135,16 +136,13 @@ export default function MouseTracker() {
           width: 40,
           height: 40,
           borderRadius: "50%",
-          border: "1.5px solid rgba(99,102,241,0.85)",
-          background: hovering
-            ? "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)"
-            : "transparent",
-          backdropFilter: hovering ? "none" : "none",
-          transition: "background 0.2s",
+          border: "1.5px solid #ffffff",
+          background: "transparent",
+          mixBlendMode: "difference",
         }}
       />
 
-      {/* ── GLOW HALO — ambient ring on hover only ── */}
+      {/* GLOW HALO — soft ambient bloom on hover only (no blend mode, intentional) */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9997] hidden lg:block"
@@ -154,13 +152,13 @@ export default function MouseTracker() {
           translateX: "-50%",
           translateY: "-50%",
           scale: ringScale,
-          opacity: visible && hovering ? 0.18 : 0,
-          width: 64,
-          height: 64,
+          opacity: visible && hovering ? 0.14 : 0,
+          width: 72,
+          height: 72,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(99,102,241,0.9) 0%, transparent 70%)",
-          filter: "blur(8px)",
+            "radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 70%)",
+          filter: "blur(10px)",
           transition: "opacity 0.25s",
         }}
       />
