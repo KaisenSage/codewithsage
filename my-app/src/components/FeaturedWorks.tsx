@@ -40,9 +40,6 @@ export default function FeaturedWorks() {
             <span className="inline-flex rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-blue-400">
               Featured Work
             </span>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Work we&apos;re proud of.
-            </h2>
             <p className="mt-3 max-w-xl text-base leading-7 text-slate-400">
               A curated selection of products built for real businesses — from
               commerce platforms to mobile apps.
@@ -160,7 +157,7 @@ function FeaturedCard({
         </div>
 
         {/* Category badge */}
-        <div className="absolute left-3 top-3">
+        <div className="absolute right-3 top-3">
           <span className="rounded-full bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm">
             {label}
           </span>
