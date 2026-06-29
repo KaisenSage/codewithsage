@@ -1,22 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion"; // useSpring kept for scale/opacity
 
 export default function MouseTracker() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const hoveringRef = useRef(false);
 
-  /* ── raw mouse position — dot snaps here instantly */
+  /* ── raw mouse position — both dot and ring snap here with zero lag */
   const mx = useMotionValue(-200);
   const my = useMotionValue(-200);
 
-  /* ── ring — near-instant follow, barely perceptible trail */
-  const rx = useSpring(mx, { stiffness: 800, damping: 40, mass: 0.15 });
-  const ry = useSpring(my, { stiffness: 800, damping: 40, mass: 0.15 });
-
-  /* ── scale / opacity springs */
+  /* ── scale / opacity springs for interaction feedback only */
   const dotScale    = useSpring(1,   { stiffness: 800, damping: 40 });
   const ringScale   = useSpring(1,   { stiffness: 600, damping: 36 });
   const ringOpacity = useSpring(0.7, { stiffness: 500, damping: 36 });
@@ -122,13 +118,13 @@ export default function MouseTracker() {
         }}
       />
 
-      {/* RING — spring-lag follow */}
+      {/* RING — zero-lag follow, scale/opacity spring on hover/click */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9998] hidden lg:block"
         style={{
-          x: rx,
-          y: ry,
+          x: mx,
+          y: my,
           translateX: "-50%",
           translateY: "-50%",
           scale: ringScale,
@@ -147,8 +143,8 @@ export default function MouseTracker() {
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-[9997] hidden lg:block"
         style={{
-          x: rx,
-          y: ry,
+          x: mx,
+          y: my,
           translateX: "-50%",
           translateY: "-50%",
           scale: ringScale,
