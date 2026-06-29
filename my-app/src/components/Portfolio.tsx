@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowUpRight, X, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28, filter: "blur(8px)" },
@@ -211,6 +212,162 @@ const techAccents = [
   "from-pink-100 via-white to-violet-100",
 ];
 
+type Project = (typeof projects)[number];
+
+/* ─── Project Preview Modal ─────────────────────────────────────────── */
+function ProjectModal({
+  project,
+  onClose,
+}: {
+  project: Project;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <AnimatePresence>
+      {/* Backdrop */}
+      <motion.div
+        key="backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Panel */}
+      <motion.div
+        key="panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
+        initial={{ opacity: 0, y: 48, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 32, scale: 0.97 }}
+        transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+        className="fixed inset-x-3 bottom-0 z-[90] mx-auto flex max-h-[92dvh] max-w-5xl flex-col overflow-hidden rounded-t-[2rem] bg-white shadow-[0_-24px_80px_rgba(0,0,0,0.28)] sm:inset-x-4 sm:rounded-t-[2.4rem] lg:inset-0 lg:top-10 lg:bottom-10 lg:rounded-[2rem]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/10 text-slate-700 backdrop-blur-sm transition hover:bg-black/20 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:right-5 sm:top-5"
+          aria-label="Close preview"
+        >
+          <X size={18} strokeWidth={2.5} />
+        </button>
+
+        {/* Scrollable body */}
+        <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row">
+          {/* Image side */}
+          <div
+            className={`relative w-full shrink-0 overflow-hidden bg-slate-100 lg:w-[55%] lg:rounded-l-[2rem] ${
+              project.imageContainerClass
+                ? "flex h-64 items-start justify-center sm:h-80 lg:h-full"
+                : "h-56 sm:h-72 lg:h-full"
+            }`}
+            style={
+              project.imageContainerClass
+                ? { background: "#0a100d", padding: "1rem 1rem 0" }
+                : {}
+            }
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill={!project.unoptimized}
+              width={project.unoptimized ? project.imageWidth : undefined}
+              height={project.unoptimized ? project.imageHeight : undefined}
+              unoptimized={project.unoptimized}
+              className={
+                project.unoptimized
+                  ? "h-full w-auto max-w-[min(100%,320px)] object-contain object-top drop-shadow-[0_18px_40px_rgba(0,0,0,0.4)]"
+                  : "object-cover"
+              }
+              sizes="(max-width:1024px) 100vw, 55vw"
+              priority
+            />
+          </div>
+
+          {/* Details side */}
+          <div className="flex flex-1 flex-col justify-between gap-6 p-6 sm:p-8 lg:overflow-y-auto lg:p-10">
+            <div>
+              {/* Header */}
+              <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-600">
+                Project Preview
+              </span>
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-[#161a2e] sm:text-3xl lg:text-4xl">
+                {project.title}
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+                {project.description}
+              </p>
+
+              {/* Stack */}
+              <div className="mt-6">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+                  Tech Stack
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full bg-gradient-to-r from-blue-50 to-violet-50 px-3 py-1 text-xs font-semibold text-blue-700 ring-1 ring-blue-100"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="flex flex-col gap-3 sm:flex-row">
+              {project.link ? (
+                <a
+                  href={project.link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6] hover:shadow-[0_14px_36px_rgba(45,59,207,0.4)]"
+                >
+                  <ExternalLink size={15} strokeWidth={2.5} />
+                  {project.link.label}
+                </a>
+              ) : (
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className="inline-flex items-center justify-center gap-2 rounded-[1.1rem] bg-[#2d3bcf] px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
+                >
+                  Enquire About This Project
+                </Link>
+              )}
+              <button
+                onClick={onClose}
+                className="inline-flex items-center justify-center rounded-[1.1rem] border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 const featuredProject = projects[1];
 
 const portfolioCategories = [
@@ -222,6 +379,10 @@ const portfolioCategories = [
 ];
 
 export default function Portfolio() {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const openProject = useCallback((p: Project) => setActiveProject(p), []);
+  const closeProject = useCallback(() => setActiveProject(null), []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f7fafd] via-[#eceafd] to-[#e0d7fa]">
       {/* Navbar */}
@@ -356,13 +517,16 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: idx * 0.05 }}
-              className="bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              onClick={() => openProject(project)}
+              className="group cursor-pointer bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_28px_60px_rgba(45,59,207,0.18)]"
             >
+              {/* Image with hover overlay */}
               <div
-                className={
-                  project.imageContainerClass ??
-                  "relative h-56 w-full overflow-hidden"
-                }
+                className={`relative ${
+                  project.imageContainerClass
+                    ? "flex h-80 sm:h-[22rem] w-full items-start justify-center overflow-hidden bg-[#0a100d] px-3 pt-3 sm:px-4 sm:pt-4"
+                    : "relative h-56 w-full overflow-hidden"
+                }`}
               >
                 <Image
                   src={project.image}
@@ -371,42 +535,37 @@ export default function Portfolio() {
                   height={project.imageHeight ?? 224}
                   unoptimized={project.unoptimized}
                   className={
-                    project.imageClass ?? "h-56 w-full object-cover"
+                    project.imageClass ??
+                    "h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   }
                 />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-[#161a2e]/0 transition-all duration-300 group-hover:bg-[#161a2e]/50">
+                  <span className="flex scale-75 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#161a2e] opacity-0 shadow-xl transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                    <ArrowUpRight size={15} strokeWidth={2.5} />
+                    View Details
+                  </span>
+                </div>
               </div>
+
               <div className="p-6 flex-1 flex flex-col">
                 <div className="text-xl font-bold text-gray-900 mb-2">{project.title}</div>
-                <p className="text-gray-600 mb-4 flex-1">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.stack.map((tech) => (
+                <p className="text-gray-500 mb-4 flex-1 text-sm leading-6 line-clamp-3">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                      className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.stack.length > 4 && (
+                    <span className="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-medium">
+                      +{project.stack.length - 4} more
+                    </span>
+                  )}
                 </div>
-                {/* Show link button if available */}
-                {project.link && (
-                  <Link
-                    href={project.link.url}
-                    className="group relative inline-flex w-fit items-center overflow-hidden rounded-[1.2rem] border border-slate-200/80 bg-[linear-gradient(135deg,#0f172a_0%,#1e293b_55%,#2563eb_100%)] px-2 py-2 pr-4 text-white shadow-[0_18px_36px_rgba(15,23,42,0.22)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-[0_22px_46px_rgba(59,130,246,0.28)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.22),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.02)_0%,rgba(96,165,250,0.12)_48%,rgba(168,85,247,0.18)_100%)] opacity-80" />
-                    <span className="pointer-events-none absolute inset-y-0 left-[-22%] w-20 -skew-x-12 bg-white/20 opacity-0 blur-xl transition-all duration-500 group-hover:left-[112%] group-hover:opacity-100" />
-                    <span className="relative flex h-10 w-10 items-center justify-center rounded-[0.95rem] border border-white/25 bg-white/95 text-slate-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-50 group-hover:text-blue-700">
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
-                    </span>
-                    <span className="relative ml-3 inline-flex items-center gap-2 text-sm font-semibold text-white">
-                        <span>{project.link.label}</span>
-                        <span className="h-px w-0 bg-white/80 transition-all duration-300 group-hover:w-5" />
-                    </span>
-                  </Link>
-                )}
               </div>
             </motion.div>
           ))}
@@ -510,6 +669,11 @@ export default function Portfolio() {
           </div>
         </motion.div>
       </section>
+
+      {/* Project Preview Modal */}
+      {activeProject && (
+        <ProjectModal project={activeProject} onClose={closeProject} />
+      )}
     </div>
   );
 }
