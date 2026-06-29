@@ -303,45 +303,35 @@ function ProjectModal({
           */}
           <div
             className={[
+              /* sizing */
               "relative shrink-0 overflow-hidden",
-              /* mobile */
-              "h-52 w-full",
-              /* sm */
-              "sm:h-72",
-              /* md */
-              "md:h-80",
-              /* lg: fills the left 55% of the card's full height */
+              "h-56 w-full sm:h-72 md:h-80",
               "lg:h-full lg:w-[55%]",
               /* rounding */
               "rounded-t-[2rem] lg:rounded-l-[2rem] lg:rounded-tr-none",
-              /* bg */
-              isPortrait ? "bg-[#0a100d]" : "bg-slate-100",
+              /* bg — dark for portrait, neutral for landscape */
+              isPortrait ? "bg-[#0a100d]" : "bg-[#f1f5f9]",
             ].join(" ")}
           >
-            {isPortrait ? (
-              /* Portrait / mobile-screenshot images → contain + centre */
-              <div className="absolute inset-0 flex items-center justify-center px-4 py-4 sm:px-6 sm:py-6 lg:items-start lg:pt-8">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={project.imageWidth ?? 600}
-                  height={project.imageHeight ?? 800}
-                  unoptimized
-                  className="h-full w-auto max-w-full object-contain drop-shadow-[0_20px_48px_rgba(0,0,0,0.55)]"
-                  priority
-                />
-              </div>
-            ) : (
-              /* Landscape screenshots / photos → cover the entire cell */
+            {/* All images: contain so the full screenshot is always visible */}
+            <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 lg:p-8">
               <Image
                 src={project.image}
                 alt={project.title}
-                fill
+                fill={false}
+                width={project.imageWidth ?? 1200}
+                height={project.imageHeight ?? 800}
+                unoptimized={project.unoptimized}
                 sizes="(max-width:1024px) 100vw, 55vw"
-                className="object-cover object-top"
+                className={[
+                  "h-auto max-h-full w-auto max-w-full rounded-xl",
+                  isPortrait
+                    ? "drop-shadow-[0_20px_48px_rgba(0,0,0,0.55)]"
+                    : "shadow-[0_8px_48px_rgba(15,23,42,0.18)]",
+                ].join(" ")}
                 priority
               />
-            )}
+            </div>
           </div>
 
           {/* ── DETAILS PANEL ──────────────────────────────────────── */}
