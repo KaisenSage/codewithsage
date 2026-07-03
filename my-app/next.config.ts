@@ -4,8 +4,6 @@ const isProduction = process.env.VERCEL_ENV === "production";
 
 const nextConfig: NextConfig = {
   async headers() {
-    const productionHosts = ["www.codewithsage.com", "codewithsage.com"] as const;
-
     return [
       ...(isProduction
         ? [
@@ -14,11 +12,6 @@ const nextConfig: NextConfig = {
               has: [{ type: "host" as const, value: "www.codewithsage.com" }],
               headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
             },
-            ...productionHosts.map((host) => ({
-              source: "/:path*",
-              has: [{ type: "host" as const, value: host }],
-              headers: [{ key: "X-Robots-Tag", value: "index, follow" }],
-            })),
           ]
         : []),
       {
