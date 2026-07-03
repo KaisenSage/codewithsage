@@ -10,12 +10,15 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import TechMarqueeFM from "@/components/TechMarqueeFM";
 import AppearOnScroll from "@/components/AppearOnScroll";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Codewithsage - Build your dream website",
+  description:
+    "Building smart, beautiful digital products for tomorrow's businesses.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function Home() {
   return (

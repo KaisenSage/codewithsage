@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Portfolio",
   description:
     "Explore Codewithsage portfolio: web apps, ecommerce platforms, and digital products we've built.",
-  alternates: {
-    canonical: "/portfolio",
-  },
-};
+  path: "/portfolio",
+});
 
 export default function PortfolioLayout({
   children,

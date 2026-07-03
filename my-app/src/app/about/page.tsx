@@ -2,21 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, Instagram, Mail, Phone } from "lucide-react";
 import AppearOnScroll from "@/components/AppearOnScroll";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata, SITE_URL } from "@/lib/seo";
 
 const REMOTE_IMAGE =
   "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/carlos-muza-hpjSkU2UYSU-unsplash.jpg";
 
-export const metadata = {
-  title: "About — Codewithsage",
+export const metadata = pageMetadata({
+  title: "About",
   description: "Learn about Codewithsage: our mission, approach, and team.",
-  alternates: {
-    canonical: "/about",
+  path: "/about",
+});
+
+const aboutJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Codewithsage",
+  url: `${SITE_URL}/about`,
+  description: "Learn about Codewithsage: our mission, approach, and team.",
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Codewithsage",
+    url: SITE_URL,
   },
 };
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
+      <JsonLd data={aboutJsonLd} />
       {/* Hero with background image + overlay and text on top */}
       <header className="relative h-[56vh] md:h-[64vh] lg:h-[72vh] w-full">
         <Image

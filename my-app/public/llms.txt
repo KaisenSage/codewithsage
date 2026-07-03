@@ -1,0 +1,32 @@
+# Codewithsage
+
+> Codewithsage builds modern websites, web apps, mobile apps, and AI-powered digital products for businesses.
+
+Codewithsage is a digital development studio founded by Babalola Abdallah. We design and ship high-performing websites, ecommerce platforms, backend systems, and mobile applications with a focus on clarity, speed, and measurable business outcomes.
+
+## Public pages
+
+- [Home](https://www.codewithsage.com/): Overview of services, featured work, pricing, and testimonials.
+- [About](https://www.codewithsage.com/about): Mission, approach, and founder information.
+- [Portfolio](https://www.codewithsage.com/portfolio): Selected projects including ecommerce, mobile apps, and commerce platforms.
+- [Get Started](https://www.codewithsage.com/get-started): How to begin a project with Codewithsage.
+- [Contact](https://www.codewithsage.com/contact): Contact form and booking options.
+- [Privacy Policy](https://www.codewithsage.com/privacy-policy): Data collection and usage policy.
+
+## Services
+
+- Custom website and web app development
+- Mobile app development (iOS and Android)
+- E-commerce and commerce platform builds
+- Payment integrations
+- AI solutions and chatbot integration
+- SEO-focused landing pages
+
+## Contact
+
+- Website: https://www.codewithsage.com
+- Email: kvngbabstar@gmail.com
+
+## Crawler policy
+
+Public marketing pages are intended for indexing. Authentication and account pages should not be indexed.

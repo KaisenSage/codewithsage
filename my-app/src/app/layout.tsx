@@ -1,6 +1,35 @@
 import "./globals.css";
 import ClientRootWrapper from "@/components/RootClientWrapper";
+import JsonLd from "@/components/JsonLd";
 import type { Metadata, Viewport } from "next";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/og-image.png`,
+  email: "kvngbabstar@gmail.com",
+  sameAs: [
+    "https://github.com/KaisenSage",
+    "https://www.instagram.com/codewithsage/",
+  ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description:
+    "Building smart, beautiful digital products for tomorrow's businesses.",
+  publisher: {
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.codewithsage.com"),
@@ -69,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
+        <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
         <ClientRootWrapper>{children}</ClientRootWrapper>
       </body>
     </html>
