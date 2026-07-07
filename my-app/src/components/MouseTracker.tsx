@@ -100,7 +100,7 @@ export default function MouseTracker() {
         attached.add(el);
         el.addEventListener("mouseenter", () => setHover(true));
         el.addEventListener("mouseleave", (e) => {
-          const related = e.relatedTarget as Element | null;
+          const related = (e as MouseEvent).relatedTarget as Element | null;
           if (related?.closest(INTERACTIVE)) return;
           setHover(false);
         });
