@@ -1,134 +1,167 @@
-import { Heart, Quote, Sparkles } from "lucide-react";
+"use client";
 
-// Fresh testimonial data, new names, companies, and quotes
-const testimonials = [
-  {
-    initials: "EN",
-    color: "bg-gradient-to-br from-blue-400 to-cyan-400",
-    name: "Esther Nwosu",
-    role: "Product Manager, FinFlow",
-    border: "border-t-4 border-blue-300",
-    quote:
-      '“Working with this team was a game-changer for our digital transformation. Our new website is fast, intuitive, and has improved customer engagement by 250% in just a few weeks.”',
-    stars: 5,
-  },
-  {
-    initials: "KA",
-    color: "bg-gradient-to-br from-purple-400 to-pink-400",
-    name: "Kelechi Adeyemi",
-    role: "Operations Lead, KelMarket",
-    border: "border-t-4 border-purple-300",
-    quote:
-      '“The attention to detail and communication throughout the project was excellent. We finally have a platform that reflects our brand and supports our rapid growth.”',
-    stars: 5,
-  },
-  {
-    initials: "TD",
-    color: "bg-gradient-to-br from-green-400 to-emerald-400",
-    name: "Tomiwa Daramola",
-    role: "Founder, LearnSmart Africa",
-    border: "border-t-4 border-green-300",
-    quote:
-      '“From the initial strategy sessions to launch, everything was seamless. Our learning portal is now easy to use and has helped us reach more students than ever before.”',
-    stars: 5,
-  },
-];
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Star } from "lucide-react";
+import { portfolioTestimonials } from "@/data/testimonials";
 
-function Stars() {
+const SLIDE_MS = 4500;
+const count = portfolioTestimonials.length;
+
+function StarRow() {
   return (
-    <div className="mb-4 flex gap-1">
+    <div className="flex gap-0.5" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          className="h-5 w-5 text-amber-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <polygon points="10,1 12.59,6.93 19,7.63 14,12.1 15.18,18.44 10,15.27 4.82,18.44 6,12.1 1,7.63 7.41,6.93" />
-        </svg>
+        <Star key={i} size={13} className="h-3.5 w-3.5 fill-amber-400 text-amber-400 sm:h-[15px] sm:w-[15px]" strokeWidth={0} />
       ))}
     </div>
   );
 }
 
 export default function TestimonialsSection() {
+  const reduceMotion = useReducedMotion();
+  const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const tick = 50;
+    const step = tick / SLIDE_MS;
+
+    const timer = window.setInterval(() => {
+      setProgress((p) => {
+        if (p + step >= 1) {
+          setIndex((i) => (i + 1) % count);
+          return 0;
+        }
+        return p + step;
+      });
+    }, tick);
+
+    return () => window.clearInterval(timer);
+  }, [reduceMotion, index]);
+
+  const slide = portfolioTestimonials[index];
+  const isPortrait = !!slide.project.unoptimized;
+
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef5ff_46%,#fdf7ff_100%)] px-4 py-24 sm:px-6 lg:px-8"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef4ff_48%,#f5f0ff_100%)] px-4 py-14 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-5rem] top-12 h-56 w-56 rounded-full bg-sky-200/40 blur-3xl" />
-        <div className="absolute right-[-4rem] top-28 h-64 w-64 rounded-full bg-fuchsia-200/35 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-52 w-52 rounded-full bg-violet-200/25 blur-3xl" />
+        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-sky-200/35 blur-3xl" />
+        <div className="absolute -right-16 top-32 h-80 w-80 rounded-full bg-violet-200/30 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mx-auto mb-14 max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/75 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600 shadow-[0_10px_30px_rgba(148,163,184,0.12)] backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-            Testimonials
-          </div>
-          <h2
-            className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight tracking-[-0.04em] text-transparent sm:text-5xl"
-            style={{
-              backgroundImage: "linear-gradient(135deg, #0f172a 0%, #1d4ed8 52%, #7c3aed 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Real results from teams that needed their product presence to work harder.
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6 text-center sm:mb-10 lg:mb-12"
+        >
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-gradient-to-r from-white via-blue-50/80 to-violet-50/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700 shadow-[0_4px_20px_rgba(59,130,246,0.12)] ring-1 ring-blue-100/80 backdrop-blur-sm sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-[11px] sm:tracking-[0.24em]">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-60" />
+              <span className="relative inline-flex h-full w-full rounded-full bg-gradient-to-br from-blue-500 to-violet-500" />
+            </span>
+            Client Stories
+          </span>
+          <h2 className="mx-auto mt-4 max-w-3xl text-2xl font-black tracking-tight text-slate-900 sm:mt-5 sm:text-4xl">
+            Feedback from the products we&apos;ve shipped.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-            Founders, product teams, and growing businesses trust Codewithsage to turn unclear digital experiences into polished, high-performing products.
+          <p className="mx-auto mt-2 max-w-xl text-sm font-medium text-slate-500 sm:mt-3 sm:text-lg">
+            Real projects. Real results.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mb-10 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
-            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">5.0</div>
-            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Average satisfaction</div>
-          </div>
-          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
-            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">250%</div>
-            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Engagement lift cited</div>
-          </div>
-          <div className="rounded-[1.75rem] border border-white/80 bg-white/70 px-6 py-5 text-center shadow-[0_18px_40px_rgba(148,163,184,0.12)] backdrop-blur-sm">
-            <div className="text-3xl font-black tracking-[-0.04em] text-slate-900">End-to-end</div>
-            <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-500">Strategy to launch support</div>
-          </div>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-3">
-        {testimonials.map((t, idx) => (
-          <div
-            key={idx}
-            className={`group relative flex min-h-[430px] flex-col justify-between overflow-hidden rounded-[2rem] border border-white/90 bg-white/78 px-8 py-8 shadow-[0_24px_70px_rgba(148,163,184,0.14)] backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(99,102,241,0.18)] ${t.border}`}
-          >
-            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
-            <div className="pointer-events-none absolute -right-10 top-6 h-28 w-28 rounded-full bg-sky-100/70 blur-3xl transition duration-300 group-hover:bg-fuchsia-100/70" />
-
-            <Stars />
-            <div className="mb-6 flex items-center justify-between">
-              <Quote className="h-9 w-9 text-blue-500/80" />
-              <div className="rounded-full border border-rose-100 bg-rose-50/80 p-2 text-rose-300">
-                <Heart className="h-5 w-5" strokeWidth={2} fill="none" />
-              </div>
-            </div>
-            <div className="mb-8 text-lg italic leading-8 text-slate-700">{t.quote}</div>
-            <div className="flex items-center mt-auto">
-              <div
-                className={`${t.color} mr-4 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-bold text-white shadow-[0_16px_32px_rgba(99,102,241,0.18)]`}
+        <div
+          aria-roledescription="carousel"
+          aria-label="Portfolio testimonials"
+        >
+          <div className="overflow-hidden rounded-2xl border border-white/90 bg-white/80 shadow-[0_28px_80px_rgba(99,102,241,0.12)] backdrop-blur-sm sm:rounded-[2rem]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: reduceMotion ? 0 : 28 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: reduceMotion ? 0 : -28 }}
+                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                className="grid lg:grid-cols-[1fr_1.05fr]"
+                aria-live="polite"
               >
-                {t.initials}
-              </div>
-              <div>
-                <span className="block text-lg font-bold text-slate-900">{t.name}</span>
-                <span className="block text-sm leading-6 text-slate-500">{t.role}</span>
-              </div>
-            </div>
+                {/* Project preview */}
+                <div
+                  className={[
+                    "relative h-[132px] shrink-0 overflow-hidden sm:h-auto sm:min-h-[280px] lg:min-h-[420px]",
+                    isPortrait ? "bg-[#0a100d]" : "bg-slate-100",
+                  ].join(" ")}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-8">
+                    <Image
+                      src={slide.project.image}
+                      alt={slide.project.title}
+                      width={slide.project.imageWidth ?? 900}
+                      height={slide.project.imageHeight ?? 600}
+                      unoptimized={slide.project.unoptimized}
+                      className={
+                        isPortrait
+                          ? "h-full w-auto max-h-[118px] max-w-[96px] object-contain object-top drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:max-h-[320px] sm:max-w-[220px] lg:max-h-[380px] lg:max-w-[260px]"
+                          : "h-auto max-h-[118px] w-auto max-w-[92%] rounded-lg object-contain shadow-[0_8px_28px_rgba(15,23,42,0.12)] sm:max-h-full sm:max-w-full sm:rounded-xl sm:shadow-[0_16px_48px_rgba(15,23,42,0.14)]"
+                      }
+                      priority={index === 0}
+                    />
+                  </div>
+                </div>
+
+                {/* Quote panel */}
+                <div className="flex flex-col justify-between p-4 sm:p-8 lg:p-10">
+                  <div>
+                    <StarRow />
+
+                    <p className="mt-2.5 text-[0.9375rem] leading-6 text-slate-700 sm:mt-6 sm:text-xl sm:leading-9">
+                      {slide.quote}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 border-t border-slate-100 pt-3.5 sm:mt-8 sm:pt-6">
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="mt-0.5 h-8 w-0.5 shrink-0 rounded-full bg-gradient-to-b from-[#2d3bcf] to-violet-500 sm:mt-1 sm:h-10 sm:w-1" />
+                      <div>
+                        <p className="text-sm font-bold text-slate-900 sm:text-lg">
+                          {slide.clientName}
+                        </p>
+                        <p className="mt-0.5 text-xs text-slate-500 sm:text-sm">{slide.clientRole}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        ))}
+
+          {/* Passive progress dots — visual only, no controls */}
+          <div className="mt-4 flex items-center justify-center gap-2 sm:mt-6">
+            {portfolioTestimonials.map((t, i) => (
+              <div
+                key={t.project.title}
+                aria-hidden={i !== index}
+                className="relative h-1.5 overflow-hidden rounded-full bg-slate-200 transition-all duration-300"
+                style={{ width: i === index ? "2rem" : "0.375rem" }}
+              >
+                {i === index && (
+                  <span
+                    className="absolute inset-y-0 left-0 rounded-full bg-[#2d3bcf] transition-[width] duration-75 ease-linear"
+                    style={{ width: `${reduceMotion ? 100 : progress * 100}%` }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -2,15 +2,11 @@
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import {
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
   FaPaperPlane,
   FaCheckCircle,
   FaCalendarAlt,
-  FaInstagram,
-  FaWhatsapp,
 } from "react-icons/fa";
 
 export default function ContactSection() {
@@ -30,32 +26,26 @@ export default function ContactSection() {
 
   const contactChannels = [
     {
-      icon: FaEnvelope,
+      icon: Mail,
       title: "Email",
       value: "contact@codewithsage.com",
       href: "mailto:contact@codewithsage.com",
-      accent: "from-fuchsia-500 to-violet-500",
+      iconWrap: "bg-violet-100 text-violet-600 group-hover:bg-violet-600 group-hover:text-white",
     },
     {
-      icon: FaPhone,
+      icon: Phone,
       title: "Phone",
       value: "+234-803-4248-841",
       href: "tel:+2348034248841",
-      accent: "from-sky-500 to-cyan-400",
+      iconWrap: "bg-sky-100 text-sky-600 group-hover:bg-sky-600 group-hover:text-white",
     },
     {
-      icon: FaMapMarkerAlt,
+      icon: MapPin,
       title: "Address",
       value: "20 Olabisi Balogun, Ikosi-Ketu, Lagos, Nigeria",
       href: undefined,
-      accent: "from-amber-400 to-orange-500",
+      iconWrap: "bg-amber-100 text-amber-600",
     },
-  ];
-
-  const socialHandles = [
-    { label: "Instagram", value: "@codewithsage", href: "https://www.instagram.com/codewithsage/" },
-    { label: "WhatsApp", value: "+234 818 200 6156", href: "https://wa.me/2348182006156" },
-    { label: "Email", value: "contact@codewithsage.com", href: "mailto:contact@codewithsage.com" },
   ];
 
   const fadeUp = {
@@ -128,31 +118,53 @@ export default function ContactSection() {
                   Share your goals, scope, or timeline. If you already have a brief, send it over and we will take it from there.
                 </p>
 
-                <div className="mt-8 space-y-4">
-                  {contactChannels.map(({ icon: Icon, title, value, href, accent }) => (
-                    <div
-                      key={title}
-                      className="rounded-[1.5rem] border border-slate-100 bg-white/90 p-4 shadow-sm"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-white shadow-lg`}>
-                          <Icon className="h-5 w-5" />
+                <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-[0_12px_48px_rgba(15,23,42,0.06)] ring-1 ring-slate-100/80">
+                  {contactChannels.map(({ icon: Icon, title, value, href, iconWrap }, i) => {
+                    const inner = (
+                      <>
+                        <div
+                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition duration-300 ${iconWrap}`}
+                        >
+                          <Icon size={18} strokeWidth={2} />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                             {title}
                           </p>
-                          {href ? (
-                            <a href={href} className="mt-1 block break-words text-base font-semibold text-slate-900 transition hover:text-violet-700">
-                              {value}
-                            </a>
-                          ) : (
-                            <p className="mt-1 break-words text-base font-semibold text-slate-900">{value}</p>
-                          )}
+                          <p className="mt-1 break-words text-[0.9375rem] font-semibold leading-snug text-slate-900 sm:text-base">
+                            {value}
+                          </p>
                         </div>
+                        {href && (
+                          <ArrowUpRight
+                            size={16}
+                            className="mt-1 shrink-0 text-slate-300 transition duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-violet-600"
+                          />
+                        )}
+                      </>
+                    );
+
+                    return href ? (
+                      <a
+                        key={title}
+                        href={href}
+                        className={`group flex items-start gap-4 px-5 py-4 transition duration-300 hover:bg-gradient-to-r hover:from-violet-50/80 hover:to-sky-50/50 sm:px-6 sm:py-5 ${
+                          i > 0 ? "border-t border-slate-100" : ""
+                        }`}
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      <div
+                        key={title}
+                        className={`flex items-start gap-4 px-5 py-4 sm:px-6 sm:py-5 ${
+                          i > 0 ? "border-t border-slate-100" : ""
+                        }`}
+                      >
+                        {inner}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-8 rounded-[1.5rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.95)_0%,rgba(245,247,255,0.94)_100%)] p-5 shadow-sm">
@@ -175,26 +187,6 @@ export default function ContactSection() {
                   <p className="mt-3 text-xs uppercase tracking-[0.16em] text-slate-500">
                     Prefer email? Reply to contact@codewithsage.com with your availability.
                   </p>
-                </div>
-
-                <div className="mt-8 rounded-[1.5rem] border border-slate-100 bg-white/90 p-5 shadow-sm">
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-violet-700">
-                    Socials
-                  </p>
-                  <div className="mt-4 space-y-3">
-                    {socialHandles.map((item) => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-start gap-1 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-3 text-sm transition hover:border-violet-200 hover:bg-white sm:flex-row sm:items-center sm:justify-between"
-                      >
-                        <span className="font-medium text-slate-600">{item.label}</span>
-                        <span className="break-all font-semibold text-slate-900 sm:break-normal sm:text-right">{item.value}</span>
-                      </a>
-                    ))}
-                  </div>
                 </div>
               </div>
             </motion.aside>
