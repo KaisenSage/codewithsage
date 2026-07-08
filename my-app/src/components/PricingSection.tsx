@@ -1,4 +1,68 @@
+import type { ReactNode } from "react";
 import { Zap, Leaf, Crown, Check, Rocket } from "lucide-react";
+
+const accentStyles = {
+  blue: {
+    ring: "from-blue-500 via-indigo-500 to-blue-600",
+    check: "text-blue-600",
+    list: "border-blue-100/80",
+  },
+  purple: {
+    ring: "from-purple-500 via-violet-500 to-fuchsia-500",
+    check: "text-purple-600",
+    list: "border-purple-100/80",
+  },
+} as const;
+
+function PlanFeature({
+  children,
+  variant = "blue",
+}: {
+  children: ReactNode;
+  variant?: keyof typeof accentStyles;
+}) {
+  const accent = accentStyles[variant];
+  const shadow =
+    variant === "purple"
+      ? "shadow-[0_2px_8px_rgba(139,92,246,0.14)]"
+      : "shadow-[0_2px_8px_rgba(59,130,246,0.14)]";
+
+  return (
+    <li className="group/feature flex items-start gap-3.5">
+      <span
+        className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br p-[1.5px] ${shadow} ${accent.ring}`}
+      >
+        <span className="flex h-full w-full items-center justify-center rounded-full bg-white">
+          <Check
+            size={13}
+            strokeWidth={2.5}
+            className={accent.check}
+            aria-hidden="true"
+          />
+        </span>
+      </span>
+      <span className="pt-0.5 text-[0.9375rem] leading-6 text-slate-600 transition-colors group-hover/feature:text-slate-800">
+        {children}
+      </span>
+    </li>
+  );
+}
+
+function PlanFeatures({
+  variant = "blue",
+  children,
+}: {
+  variant?: keyof typeof accentStyles;
+  children: ReactNode;
+}) {
+  return (
+    <ul
+      className={`mb-6 w-full space-y-3.5 border-t pt-6 text-left ${accentStyles[variant].list}`}
+    >
+      {children}
+    </ul>
+  );
+}
 
 export default function PricingSection() {
   return (
@@ -12,14 +76,14 @@ export default function PricingSection() {
           <Zap className="w-12 h-12 mb-4 text-yellow-400 group-hover:animate-bounce" />
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Starter</h3>
           <div className="text-3xl mb-4 text-blue-600 font-bold"></div>
-          <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Responsive Website Design</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Up to 5 Pages</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Basic SEO Setup</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Contact Form Integration</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Mobile Optimization</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />1 Month Support</li>
-          </ul>
+          <PlanFeatures>
+            <PlanFeature>Responsive Website Design</PlanFeature>
+            <PlanFeature>Up to 5 Pages</PlanFeature>
+            <PlanFeature>Basic SEO Setup</PlanFeature>
+            <PlanFeature>Contact Form Integration</PlanFeature>
+            <PlanFeature>Mobile Optimization</PlanFeature>
+            <PlanFeature>1 Month Support</PlanFeature>
+          </PlanFeatures>
           <a href="contact" className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
             Get Started
           </a>
@@ -31,15 +95,15 @@ export default function PricingSection() {
           <span className="absolute top-4 right-4 bg-purple-200 text-purple-800 text-xs px-3 py-1 rounded-full font-bold">Most Popular</span>
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Professional</h3>
           <div className="text-3xl mb-4 text-purple-600 font-bold"></div>
-          <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Everything in Starter</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Up to 15 Pages</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />E-commerce Integration</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Advanced SEO</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Analytics Setup</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />Social Media Integration</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-purple-600" />3 Months Support</li>
-          </ul>
+          <PlanFeatures variant="purple">
+            <PlanFeature variant="purple">Everything in Starter</PlanFeature>
+            <PlanFeature variant="purple">Up to 15 Pages</PlanFeature>
+            <PlanFeature variant="purple">E-commerce Integration</PlanFeature>
+            <PlanFeature variant="purple">Advanced SEO</PlanFeature>
+            <PlanFeature variant="purple">Analytics Setup</PlanFeature>
+            <PlanFeature variant="purple">Social Media Integration</PlanFeature>
+            <PlanFeature variant="purple">3 Months Support</PlanFeature>
+          </PlanFeatures>
           <a href="contact" className="w-full bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition text-center">
             Get Started
           </a>
@@ -50,17 +114,17 @@ export default function PricingSection() {
           <Crown className="w-12 h-12 mb-4 text-yellow-600 group-hover:animate-bounce" />
           <h3 className="font-semibold text-2xl mb-2 text-gray-800">Enterprise</h3>
           <div className="text-3xl mb-4 text-blue-600 font-bold"></div>
-          <ul className="mb-6 text-gray-700 text-left text-base space-y-2">
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Everything in Professional</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Unlimited Pages</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Custom Functionality</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Advanced Security</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Performance Optimization</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Third-party Integrations</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />6 Months Support</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Training &amp; Documentation</li>
-            <li className="flex items-center gap-2"><Check className="w-5 h-5 text-blue-600" />Priority Support</li>
-          </ul>
+          <PlanFeatures>
+            <PlanFeature>Everything in Professional</PlanFeature>
+            <PlanFeature>Unlimited Pages</PlanFeature>
+            <PlanFeature>Custom Functionality</PlanFeature>
+            <PlanFeature>Advanced Security</PlanFeature>
+            <PlanFeature>Performance Optimization</PlanFeature>
+            <PlanFeature>Third-party Integrations</PlanFeature>
+            <PlanFeature>6 Months Support</PlanFeature>
+            <PlanFeature>Training &amp; Documentation</PlanFeature>
+            <PlanFeature>Priority Support</PlanFeature>
+          </PlanFeatures>
           <a href="contact" className="w-full bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
             Contact Us
           </a>
