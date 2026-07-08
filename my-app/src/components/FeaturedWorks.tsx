@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Award } from "lucide-react";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
 import { ProjectModal } from "@/components/ProjectModal";
@@ -37,8 +37,10 @@ export default function FeaturedWorks() {
           className="mb-12 flex flex-col gap-4 sm:mb-14 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
-            <span className="inline-flex rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-blue-400">
-              Featured Work
+            <span className="group/badge relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-blue-400/25 bg-gradient-to-r from-blue-500/15 via-indigo-500/10 to-violet-500/15 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-blue-200 shadow-[0_4px_24px_rgba(59,130,246,0.18)] ring-1 ring-inset ring-white/10 backdrop-blur-sm">
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent [animation:featured-shimmer_3.5s_ease-in-out_infinite]" />
+              <Award size={13} strokeWidth={2.5} className="relative text-blue-300" />
+              <span className="relative">Featured Work</span>
             </span>
             <p className="mt-3 max-w-xl text-base leading-7 text-slate-400">
               A curated selection of products built for real businesses — from

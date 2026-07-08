@@ -32,3 +32,14 @@ body {
     cursor: none !important;
   }
 }
+
+/* Shimmer sweep for the Featured Work badge */
+@keyframes featured-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(200%);
+  }
+}
