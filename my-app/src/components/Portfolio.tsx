@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useCallback } from "react";
 import { projects } from "@/data/projects";
@@ -84,8 +84,10 @@ export default function Portfolio() {
         >
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
-              <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
-                Featured Builds
+              <span className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-blue-300/45 bg-gradient-to-r from-blue-50 via-indigo-50 to-violet-50 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-blue-700 shadow-[0_4px_20px_rgba(59,130,246,0.14)] ring-1 ring-inset ring-white/70">
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent [animation:featured-shimmer_3.5s_ease-in-out_infinite]" />
+                <Award size={13} strokeWidth={2.5} className="relative text-blue-600" />
+                <span className="relative">Featured Builds</span>
               </span>
               <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight text-[#161a2e] sm:text-5xl lg:text-6xl">
                 Digital products designed to look sharp, move fast, and drive results.

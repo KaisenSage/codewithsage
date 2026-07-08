@@ -49,14 +49,8 @@ export const projects = [
       "Real-time Orders",
       "Role-based Access",
     ],
-    image: "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/IMG_5760.PNG",
-    unoptimized: true,
-    imageWidth: 1122,
-    imageHeight: 1402,
-    imageContainerClass:
-      "relative flex h-80 sm:h-[22rem] w-full items-start justify-center overflow-hidden bg-[#0a100d] px-3 pt-3 sm:px-4 sm:pt-4",
-    imageClass:
-      "h-full w-auto max-w-[min(100%,300px)] object-contain object-top drop-shadow-[0_18px_40px_rgba(0,0,0,0.35)]",
+    image:
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/ChatGPT%20Image%20Jul%208%2C%202026%2C%2009_27_00%20AM.png",
     link: null,
   },
   {
