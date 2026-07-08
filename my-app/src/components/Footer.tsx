@@ -21,10 +21,10 @@ export default function Footer() {
               Start a conversation
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-slate-900 sm:text-4xl">
-              Let&apos;s shape your next website, product, or growth-focused digital experience.
+              Ready to build something great?
             </h2>
             <p className="mx-0 mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base md:mx-auto">
-              Reach out directly if you are planning a new build, refining an existing product, or looking for a reliable design and development partner.
+              New product, redesign, or website — tell us what you&apos;re planning.
             </p>
             <div className="mt-7 flex max-w-2xl flex-col items-stretch gap-3 md:mx-auto md:flex-row md:items-center md:justify-center">
               <a
@@ -56,8 +56,8 @@ export default function Footer() {
                   style={{ objectFit: "contain" }}
                 />
               </div>
-              <p className="max-w-xl text-base leading-8 text-slate-600 md:text-lg">
-                Building smart, beautiful digital products for tomorrow&apos;s businesses. Let&apos;s connect and create something amazing together.
+              <p className="max-w-xl text-base font-semibold leading-7 text-slate-700 md:text-lg">
+                Built for brands ready to grow.
               </p>
               <div className="mt-8 flex items-center justify-start gap-5">
                 <a
