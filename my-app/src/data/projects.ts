@@ -1,4 +1,17 @@
-export const projects = [
+export type Project = {
+  title: string;
+  description: string;
+  stack: string[];
+  image: string;
+  link: { url: string; label: string } | null;
+  unoptimized?: boolean;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageContainerClass?: string;
+  imageClass?: string;
+};
+
+export const projects: Project[] = [
   {
     title: "Triple A African Foods - Food Delivery App",
     description:
@@ -159,5 +172,3 @@ export const projects = [
     link: null,
   },
 ];
-
-export type Project = (typeof projects)[number];
