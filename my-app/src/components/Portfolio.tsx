@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Award } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useCallback } from "react";
 import { projects } from "@/data/projects";
@@ -46,16 +46,6 @@ const techAccents = [
   "from-pink-100 via-white to-violet-100",
 ];
 
-const featuredProject = projects[1];
-
-const portfolioCategories = [
-  "E-commerce",
-  "Mobile Apps",
-  "Web Apps",
-  "Landing Pages",
-  "Brand Sites",
-];
-
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const openProject = useCallback((p: Project) => setActiveProject(p), []);
@@ -73,105 +63,8 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* HeroSection */}
-      <section className="relative px-4 pb-8 pt-6 sm:px-6 sm:pb-10 lg:px-8">
-        <motion.div
-          initial={fadeUp.initial}
-          whileInView={fadeUp.whileInView}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={fadeUp.transition}
-          className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/70 p-6 shadow-[0_24px_80px_rgba(117,87,250,0.12)] backdrop-blur-md sm:p-8 lg:p-10"
-        >
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
-              <span className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-blue-300/45 bg-gradient-to-r from-blue-50 via-indigo-50 to-violet-50 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-blue-700 shadow-[0_4px_20px_rgba(59,130,246,0.14)] ring-1 ring-inset ring-white/70">
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent [animation:featured-shimmer_3.5s_ease-in-out_infinite]" />
-                <Award size={13} strokeWidth={2.5} className="relative text-blue-600" />
-                <span className="relative">Featured Builds</span>
-              </span>
-              <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-tight text-[#161a2e] sm:text-5xl lg:text-6xl">
-                Digital products designed to look sharp, move fast, and drive results.
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                From e-commerce platforms to mobile apps and conversion-focused websites, this work reflects a balance of product thinking, clean execution, and performance-first engineering.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                {portfolioCategories.map((category) => (
-                  <span
-                    key={category}
-                    className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm"
-                  >
-                    {category}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                {featuredProject.link && (
-                  <Link
-                    href={featuredProject.link.url}
-                    className="inline-flex items-center justify-center rounded-full bg-[#2d3bcf] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Visit Featured Project
-                  </Link>
-                )}
-                <a
-                  href="#portfolio-grid"
-                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300"
-                >
-                  Browse All Projects
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 shadow-[0_18px_60px_rgba(15,23,42,0.08)] sm:p-5">
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
-                    Featured Project
-                  </p>
-                  <h2 className="mt-2 text-2xl font-bold text-[#161a2e] sm:text-3xl">
-                    {featuredProject.title}
-                  </h2>
-                </div>
-              </div>
-
-              <p className="text-sm leading-7 text-slate-600 sm:text-base">
-                {featuredProject.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {featuredProject.stack.slice(0, 5).map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="relative mt-6 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm">
-                <Image
-                  src={featuredProject.image}
-                  alt={featuredProject.title}
-                  width={1200}
-                  height={760}
-                  priority
-                  unoptimized={featuredProject.unoptimized}
-                  className="h-auto w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
       {/* Projects Grid */}
-      <section id="portfolio-grid" className="max-w-6xl mx-auto px-4 py-10">
+      <section id="portfolio-grid" className="max-w-6xl mx-auto px-4 py-10 pt-6 sm:pt-8">
         <motion.div
           initial={fadeUp.initial}
           whileInView={fadeUp.whileInView}
@@ -179,10 +72,7 @@ export default function Portfolio() {
           transition={fadeUp.transition}
           className="flex flex-col items-center mb-12"
         >
-          <span className="inline-flex rounded-full border border-blue-200 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blue-700 shadow-sm">
-            Selected Projects
-          </span>
-          <h2 className="mt-5 text-center text-4xl font-black tracking-tight text-[#161a2e] sm:text-5xl">
+          <h2 className="text-center text-4xl font-black tracking-tight text-[#161a2e] sm:text-5xl">
             Work built to perform beyond the mockup.
           </h2>
           <p className="mt-4 max-w-2xl text-center text-base leading-7 text-slate-600 sm:text-lg">
