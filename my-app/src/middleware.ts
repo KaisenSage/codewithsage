@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -13,7 +13,11 @@ const isPublicRoute = createRouteMatcher([
   "/sitemap.xml",
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+const clerkAuthMiddleware = clerkMiddleware(async (auth) => {
+  await auth.protect();
+});
+
+export default function middleware(request: NextRequest, event: NextFetchEvent) {
   const { pathname, hostname, protocol } = request.nextUrl;
   const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
   const isCanonicalHost = hostname === "www.codewithsage.com";
@@ -34,10 +38,12 @@ export default clerkMiddleware(async (auth, request) => {
     return NextResponse.redirect(url, 308);
   }
 
-  if (!isPublicRoute(request)) {
-    await auth.protect();
+  if (isPublicRoute(request)) {
+    return NextResponse.next();
   }
-});
+
+  return clerkAuthMiddleware(request, event);
+}
 
 export const config = {
   matcher: [
