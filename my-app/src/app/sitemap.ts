@@ -1,11 +1,19 @@
 import type { MetadataRoute } from "next";
-import staticRoutes from "@/data/staticRoutes.json";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return staticRoutes.map((route) => ({
-    url: `https://www.codewithsage.com${route.path === "/" ? "" : route.path}`,
+  const routes = [
+    "",
+    "/about",
+    "/contact",
+    "/get-started",
+    "/portfolio",
+    "/privacy-policy",
+  ];
+
+  return routes.map((route) => ({
+    url: `https://www.codewithsage.com${route}`,
     lastModified: new Date(),
-    changeFrequency: route.changeFrequency as MetadataRoute.Sitemap[number]["changeFrequency"],
-    priority: route.priority,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : 0.7,
   }));
 }

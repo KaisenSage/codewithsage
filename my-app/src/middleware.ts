@@ -14,10 +14,23 @@ const isPublicRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
-  const { pathname } = request.nextUrl;
-  if (pathname.length > 1 && pathname.endsWith("/")) {
+  const { pathname, hostname, protocol } = request.nextUrl;
+  const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
+  const isCanonicalHost = hostname === "www.codewithsage.com";
+  const shouldRedirectToCanonicalHost =
+    hostname === "codewithsage.com" ||
+    (isCanonicalHost && protocol !== "https:");
+
+  if (
+    shouldRedirectToCanonicalHost ||
+    pathname !== normalizedPathname
+  ) {
     const url = request.nextUrl.clone();
-    url.pathname = pathname.slice(0, -1);
+    if (hostname === "codewithsage.com" || isCanonicalHost) {
+      url.hostname = "www.codewithsage.com";
+      url.protocol = "https:";
+    }
+    url.pathname = normalizedPathname;
     return NextResponse.redirect(url, 308);
   }
 

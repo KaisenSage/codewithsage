@@ -1,20 +1,61 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.codewithsage.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; style-src 'self' 'unsafe-inline' https: data:; img-src 'self' data: https: blob:; font-src 'self' data: https:; connect-src 'self' https: wss:; form-action 'self' https:; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.codewithsage.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
-      "source": "/:path+/",
-      "has": [{ "type": "host", "value": "www.codewithsage.com" }],
-      "destination": "https://www.codewithsage.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path+/",
-      "has": [{ "type": "host", "value": "codewithsage.com" }],
-      "destination": "https://www.codewithsage.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "codewithsage.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "codewithsage.com"
+        }
+      ],
       "destination": "https://www.codewithsage.com/:path*",
       "permanent": true
     }
