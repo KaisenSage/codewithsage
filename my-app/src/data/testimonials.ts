@@ -36,10 +36,10 @@ export const portfolioTestimonials: PortfolioTestimonial[] = [
     quote:
       "The site had to feel cinematic before anyone pressed play. Codewithsage built a portfolio that puts the visuals first — clean, immersive, and worthy of the work it showcases.",
     clientName: "Ay Faisal",
-    clientRole: "Cinematographer",
+    clientRole: "Affadot Studios",
   },
   {
-    project: projects[6],
+    project: projects[7],
     quote:
       "Our brand needed a store with real personality — not a generic template. Codewithsage built a sharp, responsive e-commerce experience that looks like Nexus and performs like it too.",
     clientName: "Daniel Eze",
