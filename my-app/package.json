@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src next.config.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.0",

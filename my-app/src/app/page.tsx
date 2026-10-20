@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import FeaturedWorks from "@/components/FeaturedWorks";
-import ServicesSection from "@/components/ServicesSection";
-import PricingSection from "@/components/PricingSection";
-import AudienceSection from "@/components/AudienceSection";
+import FeaturedWorks, { MoreSelectedWorks } from "@/components/FeaturedWorks";
+import WhyCodewithsage from "@/components/WhyCodewithsage";
+import HowWeWork from "@/components/HowWeWork";
+import FounderStory from "@/components/FounderStory";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import HomeFaq from "@/components/HomeFaq";
 import Footer from "@/components/Footer";
-import CookieConsent from "@/components/CookieConsent";
 import TechMarqueeFM from "@/components/TechMarqueeFM";
-import AppearOnScroll from "@/components/AppearOnScroll";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Codewithsage - Build your dream website",
   description:
-    "Building smart, beautiful digital products for tomorrow's businesses.",
+    "Codewithsage designs and builds thoughtful websites, web apps, and digital products around real business needs.",
   path: "/",
   absoluteTitle: true,
 });
@@ -26,26 +25,14 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturedWorks />
-      <AppearOnScroll>
-        <ServicesSection />
-      </AppearOnScroll>
-      <AppearOnScroll delay={0.04}>
-        <PricingSection />
-      </AppearOnScroll>
-      <AppearOnScroll delay={0.06}>
-        <AudienceSection />
-      </AppearOnScroll>
-      <AppearOnScroll delay={0.08}>
-        <TestimonialsSection />
-      </AppearOnScroll>
-      <AppearOnScroll delay={0.1}>
-        <TechMarqueeFM/>
-      </AppearOnScroll>
-      <AppearOnScroll delay={0.06}>
-        <Footer />
-      </AppearOnScroll>
-      <CookieConsent />
-      
+      <WhyCodewithsage />
+      <HowWeWork />
+      <MoreSelectedWorks />
+      <FounderStory />
+      <TestimonialsSection />
+      <TechMarqueeFM />
+      <HomeFaq />
+      <Footer />
     </div>
   );
 }

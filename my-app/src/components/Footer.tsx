@@ -1,4 +1,5 @@
 import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -44,7 +45,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid gap-12 rounded-[2.25rem] border border-white/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.8)_0%,rgba(248,250,252,0.76)_100%)] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md md:grid-cols-[1.2fr_0.8fr] md:p-10 lg:gap-16 lg:p-12">
+          <div className="overflow-hidden rounded-[2.25rem] border border-slate-800 bg-[#080e20] shadow-[0_24px_70px_rgba(15,23,42,0.18)]">
+          <div className="grid gap-12 p-8 text-white md:grid-cols-[1.2fr_0.8fr] md:p-10 lg:gap-16 lg:p-12">
             <div className="text-left">
               <div className="mb-5 flex items-center justify-start gap-3">
                 <Image
@@ -56,7 +58,7 @@ export default function Footer() {
                   style={{ objectFit: "contain" }}
                 />
               </div>
-              <p className="max-w-xl text-base font-semibold leading-7 text-slate-700 md:text-lg">
+              <p className="max-w-xl text-base font-semibold leading-7 text-slate-200 md:text-lg">
                 Built for brands ready to grow.
               </p>
               <div className="mt-8 flex items-center justify-start gap-5">
@@ -65,7 +67,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="text-slate-500 transition hover:text-slate-900"
+                  className="text-slate-400 transition hover:text-white"
                 >
                   <FaInstagram className="h-5 w-5" />
                 </a>
@@ -74,14 +76,23 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="text-slate-500 transition hover:text-slate-900"
+                  className="text-slate-400 transition hover:text-white"
                 >
                   <FaWhatsapp className="h-5 w-5" />
                 </a>
                 <a
+                  href="https://www.tiktok.com/@codewithsage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="text-slate-400 transition hover:text-white"
+                >
+                  <FaTiktok className="h-5 w-5" />
+                </a>
+                <a
                   href="mailto:contact@codewithsage.com"
                   aria-label="Email"
-                  className="text-slate-500 transition hover:text-slate-900"
+                  className="text-slate-400 transition hover:text-white"
                 >
                   <FaEnvelope className="h-5 w-5" />
                 </a>
@@ -90,32 +101,39 @@ export default function Footer() {
 
             <div className="md:justify-self-end">
               <div className="w-full max-w-[220px]">
-                <div className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">Quick Links</div>
-                <ul className="space-y-3 text-slate-700">
+                <div className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">Quick Links</div>
+                <ul className="space-y-3 text-slate-300">
                   <li>
-                    <Link href="/#services" className="transition hover:text-slate-900">Services</Link>
+                    <Link href="/#approach" className="transition hover:text-white">Approach</Link>
                   </li>
                   <li>
-                    <Link href="/#pricing" className="transition hover:text-slate-900">Pricing</Link>
+                    <Link href="/#process" className="transition hover:text-white">How We Work</Link>
                   </li>
                   <li>
-                    <Link href="/#testimonials" className="transition hover:text-slate-900">Testimonials</Link>
+                    <Link href="/#testimonials" className="transition hover:text-white">Testimonials</Link>
                   </li>
                   <li>
-                    <Link href="/about" className="transition hover:text-slate-900">About</Link>
+                    <Link href="/portfolio" className="transition hover:text-white">Portfolio</Link>
                   </li>
                   <li>
-                    <Link href="/contact" className="transition hover:text-slate-900">Contact</Link>
+                    <Link href="/get-started" className="transition hover:text-white">Get Started</Link>
+                  </li>
+                  <li>
+                    <Link href="/about" className="transition hover:text-white">About</Link>
+                  </li>
+                  <li>
+                    <Link href="/contact" className="transition hover:text-white">Contact</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 text-left text-sm text-slate-500 md:text-center">
-            <div className="mx-auto max-w-4xl border-t border-slate-200 pt-7">
+          <div className="text-left text-sm text-slate-400 md:text-center">
+            <div className="mx-auto max-w-4xl border-t border-slate-800 px-8 py-7">
               &copy; {new Date().getFullYear()} Codewithsage. All rights reserved.
             </div>
+          </div>
           </div>
         </div>
       </div>

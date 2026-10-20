@@ -88,8 +88,21 @@ export default function Portfolio() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: idx * 0.05 }}
               onClick={() => openProject(project)}
-              className="group cursor-pointer bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_28px_60px_rgba(45,59,207,0.18)]"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  openProject(project);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${project.shortTitle} project details`}
+              className="project-card-light group relative cursor-pointer border border-slate-200/80 bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-[0_28px_60px_rgba(45,59,207,0.18)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300/60 active:scale-[0.99] motion-reduce:transform-none motion-reduce:transition-none"
             >
+              <span aria-hidden="true" className="pointer-events-none absolute left-3 top-3 z-20 h-5 w-5 -translate-x-1 -translate-y-1 rounded-tl-md border-l-2 border-t-2 border-blue-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none" />
+              <span aria-hidden="true" className="pointer-events-none absolute right-3 top-3 z-20 h-5 w-5 translate-x-1 -translate-y-1 rounded-tr-md border-r-2 border-t-2 border-violet-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none" />
+              <span aria-hidden="true" className="pointer-events-none absolute bottom-3 left-3 z-20 h-5 w-5 -translate-x-1 translate-y-1 rounded-bl-md border-b-2 border-l-2 border-violet-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none" />
+              <span aria-hidden="true" className="pointer-events-none absolute bottom-3 right-3 z-20 h-5 w-5 translate-x-1 translate-y-1 rounded-br-md border-b-2 border-r-2 border-blue-500 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none" />
               {/* Image with hover overlay */}
               <div
                 className={`relative ${
@@ -119,23 +132,14 @@ export default function Portfolio() {
               </div>
 
               <div className="p-6 flex-1 flex flex-col">
-                <div className="text-xl font-bold text-gray-900 mb-2">{project.title}</div>
-                <p className="text-gray-500 mb-4 flex-1 text-sm leading-6 line-clamp-3">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.stack.length > 4 && (
-                    <span className="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-medium">
-                      +{project.stack.length - 4} more
-                    </span>
-                  )}
-                </div>
+                {project.category && (
+                  <span className="mb-3 w-fit rounded-full border border-blue-100 bg-blue-50 px-3.5 py-1.5 text-xs font-semibold text-blue-700">
+                    {project.category}
+                  </span>
+                )}
+                <h3 className="text-xl font-bold text-gray-900">
+                  {project.shortTitle}
+                </h3>
               </div>
             </motion.div>
           ))}
@@ -224,10 +228,10 @@ export default function Portfolio() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
-                href="/#pricing"
+                href="/get-started"
                 className="inline-flex min-w-[210px] items-center justify-center rounded-full bg-white px-7 py-3.5 text-base font-bold text-[#4b43d2] shadow-[0_18px_40px_rgba(18,24,65,0.2)] transition hover:-translate-y-0.5 hover:bg-slate-50"
               >
-                View Pricing Plans
+                Start a Project
               </Link>
               <Link
                 href="/contact"

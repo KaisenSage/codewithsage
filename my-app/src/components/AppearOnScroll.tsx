@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type AppearOnScrollProps = {
@@ -16,13 +16,15 @@ export default function AppearOnScroll({
   delay = 0,
   amount = 0.25,
 }: AppearOnScrollProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ duration: 0.65, delay }}
+      transition={reduceMotion ? undefined : { duration: 0.65, delay }}
     >
       {children}
     </motion.div>

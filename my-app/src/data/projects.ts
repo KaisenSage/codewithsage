@@ -1,4 +1,6 @@
 export type Project = {
+  shortTitle: string;
+  category?: string;
   title: string;
   description: string;
   stack: string[];
@@ -13,6 +15,8 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    shortTitle: "Triple A App",
+    category: "Mobile app",
     title: "Triple A African Foods - Food Delivery App",
     description:
       "A modern food delivery app concept focused on authentic Nigerian cuisine, designed with a clean dark UI and intuitive user experience. The app streamlines meal discovery, ordering, and real-time tracking through a visually engaging mobile flow.",
@@ -30,6 +34,8 @@ export const projects: Project[] = [
     link: null,
   },
   {
+    shortTitle: "Toréa Fashion",
+    category: "Ecommerce website",
     title: "toréa Fashion Commerce Platform",
     description:
       "A modern Nigeria-first fashion commerce platform built with Next.js, Clerk, Prisma, and Paystack. Seamless shopping, beautiful UI, and robust backend for a premium digital retail experience.",
@@ -50,6 +56,8 @@ export const projects: Project[] = [
     },
   },
   {
+    shortTitle: "Tillr",
+    category: "Ecommerce website",
     title: "Tillr Commerce Engine",
     description:
       "A connected commerce platform for cafés, restaurants, and retail stores. Tillr unifies menus, catalogs, orders, payments, branch rules, real-time operations, and team access in one dashboard built for fast-moving businesses.",
@@ -67,9 +75,11 @@ export const projects: Project[] = [
     link: null,
   },
   {
-    title: "Cinematography — Client Portfolio",
+    shortTitle: "Affadot Studios",
+    category: "Portfolio website",
+    title: "Affadot Studios — Creative Portfolio",
     description:
-      "A dedicated cinematography & showreel portfolio website showcasing high-resolution stills and motion previews for a professional cinematographer. Clean, immersive layout optimized for visuals and storytelling.",
+      "A dedicated creative portfolio website for Affadot Studios, showcasing high-resolution stills and motion previews through a clean, immersive layout built for visual storytelling.",
     stack: [
       "Next.js",
       "React",
@@ -87,6 +97,27 @@ export const projects: Project[] = [
     },
   },
   {
+    shortTitle: "Tandem Finance",
+    category: "Finance app",
+    title: "Tandem Finance Workspace - Multi-Currency Fintech & Payout Platform",
+    description:
+      "An enterprise-grade, full-stack finance platform for businesses to manage multi-currency balances, handle exchange rates, track transactions, and request cross-border payouts. It supports payout approval workflows, role-based permissions, audit logs, idempotent payment operations, webhook processing, and time-zone-aware transaction reporting, with a focus on financial correctness and backend reliability.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "Docker",
+    ],
+    image:
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Tandem%20Finance%20Workspace%20Hero.png",
+    link: null,
+  },
+  {
+    shortTitle: "MealPlan",
+    category: "AI web app",
     title: "AI Powered MealPlan App",
     description:
       "Built a full-stack AI-powered web application that generates personalized weekly meal plans based on user preferences and dietary goals.",
@@ -104,18 +135,19 @@ export const projects: Project[] = [
     link: { url: "https://mealplan-zeta.vercel.app/", label: "View Project" },
   },
   {
+    shortTitle: "VirtualR",
+    category: "VR development app",
     title: "VirtualR - VR App Development Tools",
     description:
       "Built scalable backend services with Node.js to support project saving, loading, and collaboration.",
     stack: ["React", "TypeScript", "Node.js", "Three.js"],
     image:
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/appshunter-io-gh3ZYeUZyYU-unsplash.jpg",
-    link: {
-      url: "https://virtual-r-seven.vercel.app/",
-      label: "View Project",
-    },
+    link: null,
   },
   {
+    shortTitle: "Nexus",
+    category: "Ecommerce website",
     title: "Nexus Clothing Brand",
     description:
       "Modern E-commerce platform for Nexus clothing brand featuring sleek product showcases, seamless shopping experience, and responsive design optimized for fashion retail.",
@@ -131,6 +163,8 @@ export const projects: Project[] = [
     link: null,
   },
   {
+    shortTitle: "E-Commerce",
+    category: "Ecommerce web app",
     title: "E-Commerce Web App",
     description:
       "Full-stack e-commerce with modern UI, secure payment integration, and customizable product inventory.",
@@ -140,6 +174,8 @@ export const projects: Project[] = [
     link: null,
   },
   {
+    shortTitle: "AirBnB",
+    category: "Rental booking app",
     title: "AirBnB App",
     description:
       "Full-stack AirBnB platform to practice scalable web development using the MVC architecture.",
@@ -156,6 +192,8 @@ export const projects: Project[] = [
     link: null,
   },
   {
+    shortTitle: "Landing Pages",
+    category: "Landing page",
     title: "Landing Pages",
     description:
       "High-converting, fast-loading landing pages built with Next.js and TypeScript. Optimized for SEO and Core Web Vitals, styled with Tailwind CSS, and enhanced with lightweight animations and serverless lead-capture endpoints.",

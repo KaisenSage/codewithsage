@@ -8,8 +8,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +24,53 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+@property --project-card-light-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.project-card-light {
+  isolation: isolate;
+}
+
+.project-card-light::before {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--project-card-light-angle),
+    transparent 0deg,
+    transparent 265deg,
+    rgb(96 165 250 / 0.15) 295deg,
+    rgb(96 165 250 / 0.95) 320deg,
+    rgb(167 139 250 / 0.85) 338deg,
+    transparent 360deg
+  );
+  content: "";
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: project-card-light-orbit 6s linear infinite;
+}
+
+@keyframes project-card-light-orbit {
+  to {
+    --project-card-light-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-light::before {
+    animation: none;
+    opacity: 0.35;
+  }
 }
 
 /* Applied by MouseTracker on pointer:fine (mouse) devices only */
@@ -30,16 +78,5 @@ body {
   html.custom-cursor,
   html.custom-cursor * {
     cursor: none !important;
-  }
-}
-
-/* Shimmer sweep for the Featured Work badge */
-@keyframes featured-shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  60%,
-  100% {
-    transform: translateX(200%);
   }
 }

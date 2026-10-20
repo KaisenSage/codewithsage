@@ -27,6 +27,7 @@ const DEFAULT_LOGOS: Logo[] = [
   { src: "/logos/nodejs.svg", alt: "Node.js" },
   { src: "/logos/vercel.svg", alt: "Vercel" },
   { src: "/logos/aws.svg", alt: "AWS" },
+  { src: "/logos/google.svg", alt: "Google" },
 ];
 
 export default function TechMarqueeFM({
