@@ -132,7 +132,7 @@ export default function AboutPage() {
                 <p className="text-sm text-gray-600">Production apps</p>
               </div>
               <div>
-                <p className="text-3xl font-extrabold text-gray-900">4 yrs</p>
+                <p className="text-3xl font-extrabold text-gray-900">5 yrs</p>
                 <p className="text-sm text-gray-600">JavaScript & React Native</p>
               </div>
               <div>
