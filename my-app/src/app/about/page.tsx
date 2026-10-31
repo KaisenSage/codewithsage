@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Github, Instagram, Mail, Phone } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import AppearOnScroll from "@/components/AppearOnScroll";
 import JsonLd from "@/components/JsonLd";
 import { pageMetadata, SITE_URL } from "@/lib/seo";
@@ -155,7 +157,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               <a
                 href="https://github.com/KaisenSage"
                 target="_blank"
@@ -180,6 +182,32 @@ export default function AboutPage() {
                 </div>
                 <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Instagram</p>
                 <p className="mt-2 text-base font-semibold text-slate-900 group-hover:text-pink-600">@codewithsage</p>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/abdallah-babalola-536643342/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-[1.25rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0a66c2] text-white">
+                  <FaLinkedin className="h-5 w-5" />
+                </div>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">LinkedIn</p>
+                <p className="mt-2 text-base font-semibold text-slate-900 group-hover:text-blue-600">Abdallah Babalola</p>
+              </a>
+
+              <a
+                href="https://x.com/BabalolAbdallah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-[1.25rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-white">
+                  <FaXTwitter className="h-5 w-5" />
+                </div>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">X</p>
+                <p className="mt-2 text-base font-semibold text-slate-900 group-hover:text-blue-600">@BabalolAbdallah</p>
               </a>
 
               <a

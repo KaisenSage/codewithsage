@@ -1,5 +1,6 @@
 import { FaInstagram, FaWhatsapp, FaEnvelope } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { FaTiktok, FaXTwitter } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -88,6 +89,24 @@ export default function Footer() {
                   className="text-slate-400 transition hover:text-white"
                 >
                   <FaTiktok className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/abdallah-babalola-536643342/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-slate-400 transition hover:text-white"
+                >
+                  <FaLinkedin className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://x.com/BabalolAbdallah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                  className="text-slate-400 transition hover:text-white"
+                >
+                  <FaXTwitter className="h-5 w-5" />
                 </a>
                 <a
                   href="mailto:contact@codewithsage.com"

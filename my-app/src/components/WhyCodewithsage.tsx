@@ -99,18 +99,7 @@ export default function WhyCodewithsage() {
               />
               <div className="relative overflow-hidden rounded-[1.75rem] border border-white bg-white p-4 shadow-[0_32px_90px_rgba(30,41,80,0.16)] sm:p-6">
                 <div className="rounded-2xl bg-[#101a32] p-5 text-white sm:p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="mt-2 max-w-xs text-xl font-semibold leading-snug sm:text-2xl">
-                        From first impression to next step.
-                      </p>
-                    </div>
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/10 text-blue-200">
-                      <TrendingUp className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                  </div>
-
-                  <div className="mt-5 rounded-xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
                     <svg
                       viewBox="0 0 480 116"
                       fill="none"
