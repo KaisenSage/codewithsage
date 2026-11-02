@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAYBOXX — Development Proposal and Agreement</title>
+    <style>
+      :root {
+        --navy: #0b1729;
+        --deep: #0f1d34;
+        --muted: #59657a;
+        --line: #e7edf3;
+        --panel: #f7faff;
+        --blue: #2a6df5;
+        --blue-soft: #eaf2ff;
+        --violet: #6d5ef9;
+        --green: #18a977;
+        --green-soft: #eafaf5;
+        --light: #f5f8fb;
+        --white: #ffffff;
+        --shadow: 0 20px 45px rgba(19, 35, 58, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: #edf2f7;
+        color: var(--navy);
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.65;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .header-band {
+        background: linear-gradient(135deg, #0d1a2b 0%, #1b2d4b 100%);
+        color: #fff;
+        padding: 26px 58px 18px;
+      }
+
+      .brand-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        font-size: 13px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #48b6ff, #6d5ef9);
+        font-weight: 900;
+        font-size: 20px;
+      }
+
+      .brand small {
+        display: block;
+        opacity: 0.8;
+        font-size: 11px;
+        letter-spacing: 0.13em;
+      }
+
+      .tag {
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 12px;
+        color: #dfeafc;
+      }
+
+      .cover {
+        background: linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+        padding: 54px 58px 36px;
+      }
+
+      .cover-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 28px;
+        align-items: end;
+      }
+
+      .eyebrow {
+        color: var(--blue);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 14px 0 10px;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.04;
+        letter-spacing: -0.05em;
+        color: var(--navy);
+      }
+
+      .subtitle {
+        font-size: 21px;
+        margin: 0 0 16px;
+        color: var(--deep);
+      }
+
+      .meta {
+        margin: 8px 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .amount-card {
+        background: linear-gradient(135deg, #edf5ff, #eef2ff);
+        border: 1px solid #dfe9ff;
+        border-radius: 22px;
+        padding: 24px 20px;
+        box-shadow: 0 14px 32px rgba(32, 71, 170, 0.08);
+      }
+
+      .amount-card .label {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .amount {
+        font-size: 34px;
+        letter-spacing: -0.05em;
+        font-weight: 900;
+        color: var(--navy);
+      }
+
+      .section {
+        padding: 34px 58px 24px;
+      }
+
+      .section + .section {
+        border-top: 1px solid var(--line);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 16px;
+        color: var(--navy);
+        font-size: 17px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .section-title span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #dfe9ff, #ece7ff);
+        color: var(--blue);
+        font-size: 12px;
+      }
+
+      .section-body {
+        color: var(--deep);
+        font-size: 16px;
+      }
+
+      p { margin: 0 0 12px; }
+      ul, ol { margin: 10px 0 18px 22px; padding-left: 18px; }
+      li { margin-bottom: 8px; }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, #fff, #f6f9ff);
+        padding: 18px 18px 14px;
+      }
+
+      .card h4 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        color: var(--navy);
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .kpi {
+        border: 1px solid #dfe9ff;
+        background: linear-gradient(135deg, #f3f8ff, #eef2ff);
+        border-radius: 16px;
+        padding: 18px 18px 12px;
+      }
+
+      .kpi .small {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .kpi .big {
+        display: block;
+        margin-top: 8px;
+        font-size: 29px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0;
+        border: 1px solid var(--line);
+      }
+
+      th, td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        background: #f7f9fc;
+        color: var(--navy);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      tr:last-child td { border-bottom: none; }
+
+      .highlight {
+        background: linear-gradient(135deg, rgba(42,109,245,0.06), rgba(123,94,251,0.08));
+        border-left: 4px solid var(--blue);
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin: 18px 0;
+      }
+
+      .status-box {
+        border: 1px solid rgba(24,169,119,0.25);
+        background: linear-gradient(135deg, rgba(24,169,119,0.07), rgba(42,109,245,0.06));
+        border-radius: 12px;
+        padding: 14px 16px;
+      }
+
+      .page-break { page-break-before: always; }
+
+      .signature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .signature-box {
+        border: 1px solid var(--line);
+        background: #fafcff;
+        border-radius: 16px;
+        padding: 16px 18px 10px;
+      }
+
+      .signature-box .label {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .line {
+        border-top: 2px solid var(--navy);
+        margin-top: 30px;
+        height: 10px;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0d1727;
+        color: #e5edf6;
+        padding: 18px 58px;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      @media (max-width: 860px) {
+        .cover-grid, .two-col, .kpis, .signature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header-band, .cover, .section, .footer {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header-band">
+        <div class="brand-row">
+          <div class="brand">
+            <div class="brand-mark">C</div>
+            <div>
+              CodeWithSage
+              <small>Technologies</small>
+            </div>
+          </div>
+          <div class="tag">Proposal Date: 2 November 2026</div>
+        </div>
+      </header>
+
+      <section class="cover">
+        <div class="cover-grid">
+          <div>
+            <div class="eyebrow">Custom Software Development</div>
+            <h1>PAYBOXX</h1>
+            <p class="subtitle">Logistics E-Wallet Application and Website Development Proposal</p>
+            <p class="meta">Prepared by CodeWithSage Technologies</p>
+            <p class="meta">Prepared for: [CLIENT / COMPANY NAME]</p>
+            <p class="meta">Project Investment: ₦750,000</p>
+          </div>
+          <div class="amount-card">
+            <span class="label">Project Investment</span>
+            <div class="amount">₦750,000</div>
+            <p style="margin-top: 14px; color: var(--muted);">A digital wallet and payment platform for logistics customers and operational oversight.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>A</span> Cover Page</h2>
+        <div class="section-body">
+          <p><strong>Project Name:</strong> PAYBOXX — Logistics E-Wallet Payment Application and Website.</p>
+          <p><strong>Issued by:</strong> CODEWITHSAGE TECHNOLOGIES</p>
+          <p><strong>Website:</strong> https://www.codewithsage.com</p>
+          <p><strong>Service:</strong> Custom software, web and mobile application development.</p>
+          <p><strong>Prepared for:</strong> [CLIENT / COMPANY NAME]</p>
+          <p><strong>Proposal date:</strong> 2 November 2026</p>
+          <p><strong>Project investment:</strong> ₦750,000 NGN</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>B</span> Executive Summary</h2>
+        <div class="section-body">
+          <p>PAYBOXX is designed to provide a secure and modern digital wallet experience for logistics customers and operators. The product allows customers to fund a wallet, use approved wallet balances for logistics-related payments, and track transaction visibility in real time.</p>
+          <p>The platform addresses the operational challenge of manual payment collection, delayed reconciliation, and poor payment visibility. It reduces friction in digital transactions and helps both customers and administrators monitor payment activity more confidently.</p>
+          <p>The mobile application delivers the customer-facing wallet experience, while the website provides a responsive digital presence for the logistics business. Together, the platform strengthens payment convenience, customer confidence, and transaction transparency.</p>
+          <div class="highlight">
+            <strong>Business value:</strong> improved payment convenience, reduced manual reconciliation effort, better payment transparency, streamlined customer experience, and stronger digital engagement for the logistics brand.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>C</span> Project Objectives</h2>
+        <div class="section-body">
+          <ul>
+            <li>Provide customers with a convenient digital payment experience.</li>
+            <li>Allow customers to fund and use a wallet for approved logistics payments.</li>
+            <li>Display wallet balances and transaction histories.</li>
+            <li>Improve payment tracking and transaction transparency.</li>
+            <li>Reduce manual payment reconciliation.</li>
+            <li>Give administrators appropriate visibility and control.</li>
+            <li>Provide a secure, scalable digital platform.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>D</span> Project Scope and Features</h2>
+        <div class="section-body">
+          <h3>1. Mobile Application</h3>
+          <p>The supplied design confirms a mobile wallet and logistics payment app. Based on the visible screens, the mobile app includes authentication, wallet overview, quick actions, transaction history, wallet funding entry points, and payment flow sequences.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <h4>Confirmed from the visual design</h4>
+              <ul>
+                <li>PAYBOXX branding and splash experience</li>
+                <li>Login screen with phone number and password fields</li>
+                <li>Password visibility toggle</li>
+                <li>Remember me and forgot password</li>
+                <li>Biometric login option</li>
+                <li>Wallet dashboard with balance summary</li>
+                <li>Available balance display</li>
+                <li>Add funds action</li>
+                <li>Send money flow</li>
+                <li>Quick action menu for transfers, airtime, bills, data, QR pay, and scan to pay</li>
+                <li>Recent transactions list</li>
+                <li>Bottom navigation bar</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Inferred from the design</h4>
+              <ul>
+                <li>User sign-up flow</li>
+                <li>Wallet funding workflow</li>
+                <li>Transaction details and digital receipts</li>
+                <li>Notification center</li>
+                <li>Profile and settings management</li>
+                <li>Customer support and help center</li>
+                <li>Payment confirmation/success states</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Important scope boundary:</strong> the design confirms the wallet and payment experience, but it does not visually prove every advanced financial feature. Functions beyond the confirmed screens are treated as proposed or optional requirements, not as existing design deliverables unless separately approved.
+          </div>
+
+          <h3>2. Website</h3>
+          <p>A responsive website is required for the logistics business and public-facing digital presence. The provided design pack appears to focus on the mobile app and does not include exportable website screens. Accordingly, the website is included as a practical business requirement but should be treated as an agreed scope item with limited design confirmation at this stage unless additional website screens are supplied.</p>
+
+          <h3>3. Administrative Dashboard</h3>
+          <p>The supplied design set does not include a visible administrative interface; therefore, admin functionality is treated as a required operational layer rather than a confirmed visual screen set. The project includes a practical administrative dashboard focused on operations, transaction visibility, and basic control functions within the agreed project scope.</p>
+          <ul>
+            <li>Administrator authentication</li>
+            <li>Overview dashboard</li>
+            <li>Customer management</li>
+            <li>Wallet and transaction monitoring</li>
+            <li>Payment records and verification</li>
+            <li>Search and filter capabilities</li>
+            <li>Reports and basic analytics</li>
+            <li>Support and account management</li>
+          </ul>
+          <p><strong>Included in initial scope:</strong> essential operational visibility and basic controls aligned to the agreed project. Expanded dashboard functionality, custom analytics, or advanced admin modules are treated as separate approved work if required.</p>
+
+          <h3>4. Backend and API Development</h3>
+          <p>PAYBOXX requires a reliable backend foundation for user management, wallet processing, transaction ledger records, and API-based integrations. The architecture will be modular, secure, and suitable for ongoing growth.</p>
+          <ul>
+            <li>Backend architecture and modular services</li>
+            <li>Database design</li>
+            <li>Authentication and authorization</li>
+            <li>User and profile management</li>
+            <li>Wallet and transaction services</li>
+            <li>Payment gateway integration</li>
+            <li>Payment verification</li>
+            <li>Financial transaction records and ledger logic</li>
+            <li>API validation and error handling</li>
+            <li>Administrative permissions</li>
+            <li>Notification services where included</li>
+          </ul>
+
+          <h3>5. Wallet and Payment Functionality</h3>
+          <p>The financial model will use a ledger-based transaction design. Wallet balances will not be updated without a corresponding financial transaction record. This ensures traceability, reconciliation, and robust audit capabilities.</p>
+          <ul>
+            <li>Wallet funding</li>
+            <li>Approved logistics payments</li>
+            <li>Transaction references and metadata</li>
+            <li>Transaction status tracking</li>
+            <li>Payment verification</li>
+            <li>Transaction history and ledger visibility</li>
+            <li>Duplicate payment protection</li>
+            <li>Reconciliation records</li>
+          </ul>
+          <p><strong>Exclusions:</strong> bank transfers, withdrawals, peer-to-peer transfers, virtual accounts, cash-out, escrow, and similar regulated financial services are excluded unless explicitly specified and approved.</p>
+          <p><strong>Payment provider integrations:</strong> any provider connection must use the approved provider API and valid credentials under the client’s or provider’s authorized access.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>E</span> Technical Implementation</h2>
+        <div class="section-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Technology</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mobile App</td>
+                <td>React Native + Expo</td>
+                <td>Cross-platform app for Android and iOS</td>
+              </tr>
+              <tr>
+                <td>Website</td>
+                <td>Next.js + TypeScript</td>
+                <td>Responsive public-facing website experience</td>
+              </tr>
+              <tr>
+                <td>Backend</td>
+                <td>Node.js</td>
+                <td>Business logic, APIs, and integrations</td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>PostgreSQL</td>
+                <td>Primary data store for users, wallets, and transactions</td>
+              </tr>
+              <tr>
+                <td>ORM</td>
+                <td>Prisma</td>
+                <td>Schema modeling and data access layer</td>
+              </tr>
+              <tr>
+                <td>Authentication</td>
+                <td>Secure session/JWT</td>
+                <td>Access control for users and administrators</td>
+              </tr>
+              <tr>
+                <td>Payments</td>
+                <td>Paystack or approved provider</td>
+                <td>Wallet funding and payment verification</td>
+              </tr>
+              <tr>
+                <td>Hosting</td>
+                <td>Vercel / suitable cloud hosting</td>
+                <td>Deployment environment for app and website</td>
+              </tr>
+              <tr>
+                <td>Storage</td>
+                <td>Approved cloud storage</td>
+                <td>Document and asset storage where applicable</td>
+              </tr>
+              <tr>
+                <td>Notifications</td>
+                <td>Email / push services</td>
+                <td>Transaction and account notifications where included</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This stack is practical, maintainable, and appropriate for a modern mobile wallet and logistics payment product. Final technical selection remains subject to the final agreed scope and provider approvals.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>F</span> Security and Data Protection</h2>
+        <div class="section-body">
+          <ul>
+            <li>Secure authentication and role-based access control</li>
+            <li>Password hashing and secure secret handling</li>
+            <li>Server-side payment verification</li>
+            <li>Secure API communication over HTTPS</li>
+            <li>Input validation and request sanitization</li>
+            <li>Rate limiting and abuse prevention</li>
+            <li>Transaction audit trails</li>
+            <li>Idempotent processing for repeat requests</li>
+            <li>Secret management in secure environments</li>
+            <li>Backup and recovery planning</li>
+            <li>Privacy-aware handling of personal data</li>
+          </ul>
+          <p>Data protection and personal information handling are important for this platform. The Nigeria Data Protection Act 2023 is relevant where personal data is collected, stored, processed, or transmitted. The project will be designed with privacy-conscious practices and strong access controls.</p>
+          <div class="status-box">
+            <strong>Important:</strong> regulatory licensing, financial institution approval, legal compliance assessments, and third-party financial service fees are not included in the software development fee.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>G</span> Deliverables</h2>
+        <div class="section-body">
+          <ul>
+            <li>PAYBOXX mobile application source code</li>
+            <li>Agreed responsive website</li>
+            <li>Agreed administrative dashboard</li>
+            <li>Backend and API implementation</li>
+            <li>Database implementation</li>
+            <li>Payment gateway integration within the agreed scope</li>
+            <li>Tested application</li>
+            <li>Deployment to agreed hosting environments</li>
+            <li>Source code handover after full payment</li>
+            <li>Basic technical handover documentation</li>
+            <li>Basic administrator usage guidance</li>
+          </ul>
+          <p>App delivery will be prepared for Android and iOS release workflows, subject to the client’s developer accounts, app store compliance requirements, and provider access. There is no guarantee of app store approval or publication success.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>H</span> Project Cost Breakdown</h2>
+        <div class="section-body">
+          <div class="kpis">
+            <div class="kpi">
+              <span class="small">Mobile app</span>
+              <span class="big">₦600,000</span>
+            </div>
+            <div class="kpi">
+              <span class="small">Website</span>
+              <span class="big">₦150,000</span>
+            </div>
+            <div class="kpi">
+              <span class="small">Total</span>
+              <span class="big">₦750,000</span>
+            </div>
+          </div>
+          <p style="margin-top: 18px;">This is a proposed allocation of the total fee and not a separate charge for each feature. Any change in scope requires written approval and may require a revised quote, timeline, or milestone plan.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>I</span> Payment Terms</h2>
+        <div class="section-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Milestone</th>
+                <th>Percentage</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Initial deposit / kickoff</td>
+                <td>70%</td>
+                <td>₦525,000</td>
+              </tr>
+              <tr>
+                <td>Mid-project milestone</td>
+                <td>15%</td>
+                <td>₦112,500</td>
+              </tr>
+              <tr>
+                <td>Final production handover</td>
+                <td>15%</td>
+                <td>₦112,500</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>100%</strong></td>
+                <td><strong>₦750,000</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Initial deposit is payable before project commencement. Remaining amounts are subject to milestone approval and project progression.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>J</span> Project Timeline</h2>
+        <div class="section-body">
+          <ol>
+            <li><strong>Phase 1:</strong> Requirements confirmation and technical planning.</li>
+            <li><strong>Phase 2:</strong> Application and website implementation.</li>
+            <li><strong>Phase 3:</strong> Backend, database and authentication.</li>
+            <li><strong>Phase 4:</strong> Wallet and payment integration.</li>
+            <li><strong>Phase 5:</strong> Administrative dashboard and notifications.</li>
+            <li><strong>Phase 6:</strong> Testing, revisions, deployment and handover.</li>
+          </ol>
+          <p>Estimated delivery is 4–7 weeks, subject to final scope, design availability, provider access, and timely client feedback.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>K</span> Testing and Quality Assurance</h2>
+        <div class="section-body">
+          <ul>
+            <li>Functional testing</li>
+            <li>Responsive testing</li>
+            <li>Authentication testing</li>
+            <li>Payment integration testing</li>
+            <li>Transaction consistency testing</li>
+            <li>Error handling checks</li>
+            <li>Security validation</li>
+            <li>User acceptance testing</li>
+            <li>Production deployment checks</li>
+          </ul>
+          <p>Testing will be performed in line with the agreed scope and approved deliverables. No unperformed tests are represented as completed.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>L</span> Support and Maintenance</h2>
+        <div class="section-body">
+          <ul>
+            <li>30 days of post-handover bug-fixing support for defects in agreed deliverables.</li>
+            <li>Bug fixes do not include new features, redesign changes, or third-party provider issues.</li>
+            <li>Ongoing maintenance, hosting management, upgrades, and additional functionality require a separate agreement.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span>M</span> Exclusions and Client Responsibilities</h2>
+        <div class="section-body">
+          <div class="two-col">
+            <div class="card">
+              <h4>Exclusions</h4>
+              <ul>
+                <li>Domain and hosting subscription charges</li>
+                <li>SMS and email provider charges</li>
+                <li>Payment gateway transaction fees</li>
+                <li>Apple and Google developer account fees</li>
+                <li>Third-party API subscriptions</li>
+                <li>Financial institution licensing or regulatory approval</li>
+                <li>Legal and compliance consultancy</li>
+                <li>Hardware procurement</li>
+                <li>Features not explicitly listed in the approved scope</li>
+                <li>Ongoing maintenance after the included support period</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Client Responsibilities</h4>
+              <ul>
+                <li>Provide company information and branding</li>
+                <li>Provide approved design assets</li>
+                <li>Supply payment gateway credentials and provider documentation</li>
+                <li>Provide content and required assets</li>
+                <li>Review milestone submissions and provide prompt feedback</li>
+                <li>Ensure appropriate business, financial and regulatory approvals</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2 class="section-title"><span>N</span> Software Development Agreement / Contract</h2>
+        <div class="section-body">
+          <p><strong>Draft for legal review only.</strong> This draft is not a substitute for advice from a qualified Nigerian lawyer and is intended to support discussion and formal legal review before execution.</p>
+
+          <ol>
+            <li><strong>Agreement date and parties.</strong> This agreement is made on [DATE] between [CLIENT LEGAL NAME], [COMPANY NAME], [REGISTERED ADDRESS], [EMAIL], [PHONE] (“Client”), and CODEWITHSAGE TECHNOLOGIES, [DEVELOPER LEGAL NAME], [BUSINESS ADDRESS], [EMAIL], [PHONE], https://www.codewithsage.com (“Developer”).</li>
+            <li><strong>Project description.</strong> The project is for development of PAYBOXX — Logistics E-Wallet Payment Application and Website.</li>
+            <li><strong>Scope of services.</strong> Developer will provide software design, development, integration, testing, and deployment services for the agreed mobile app, website, backend, and operational functionality described in the proposal.</li>
+            <li><strong>Deliverables.</strong> Deliverables include source code, deployment where agreed, basic documentation, and project handover within the approved scope.</li>
+            <li><strong>Project timeline.</strong> The project period is approximately 4–7 weeks, subject to scope, feedback cycles, access to third-party services, and final approvals.</li>
+            <li><strong>Contract price.</strong> The total contract price is ₦750,000 (Seven Hundred and Fifty Thousand Naira Only).</li>
+            <li><strong>Payment milestones.</strong> Initial deposit of ₦525,000, mid-project milestone of ₦112,500, and final production handover milestone of ₦112,500, subject to agreed milestones and acceptance.</li>
+            <li><strong>Client obligations.</strong> Client shall provide business requirements, company information, branding, content, design approvals, provider data, and timely review of deliverables.</li>
+            <li><strong>Developer obligations.</strong> Developer shall provide work in accordance with the agreed scope, reasonable engineering standards, and milestone approval process.</li>
+            <li><strong>Change request and additional work.</strong> Any change in scope, functionality, systems integration, provider requirements, or timeline requires a written change request and may require revised pricing and schedule.</li>
+            <li><strong>Project acceptance and review.</strong> Client shall review submitted work and provide feedback within a reasonable period to enable timely progress.</li>
+            <li><strong>Revision limits.</strong> Revisions are limited to the agreed scope of work and are managed via milestone review and written change requests.</li>
+            <li><strong>Intellectual property ownership.</strong> Subject to third-party licenses and open-source tools, custom work specifically created for the project shall transfer to the Client after full payment, except for Developer’s pre-existing tools, templates, generic know-how, and reusable components not unique to the project.</li>
+            <li><strong>Source code handover.</strong> Source code and project files will be handed over after full payment and subject to any third-party or open-source license restrictions.</li>
+            <li><strong>Confidentiality.</strong> Each party shall safeguard confidential information and use it solely for the purposes of this project.</li>
+            <li><strong>Data protection and personal information.</strong> Each party will handle personal and sensitive data in accordance with relevant legal obligations, including the Nigeria Data Protection Act 2023 where applicable.</li>
+            <li><strong>Third-party services and payment providers.</strong> Developer is not a payment service provider or financial institution and does not guarantee approval or operation of any third-party service or provider relationship.</li>
+            <li><strong>Financial transaction responsibilities.</strong> Developer is responsible for implementing the agreed software and transaction logic, but is not operating the Client’s business and is not acting as a regulated financial institution.</li>
+            <li><strong>Testing and acceptance.</strong> Reasonable testing will be completed during development; final acceptance is subject to client review and milestone sign-off.</li>
+            <li><strong>Warranty and post-launch support.</strong> Developer provides limited post-handover support for agreed defects. This period does not cover new features, redesigns, or provider-side issues beyond the agreed scope.</li>
+            <li><strong>Maintenance and ongoing support.</strong> Ongoing maintenance, changes, and upgrades beyond the included support period require a separate agreement.</li>
+            <li><strong>Suspension and termination.</strong> Either party may suspend or terminate this agreement for material breach or non-payment after appropriate written notice and opportunity to cure where required.</li>
+            <li><strong>Refund and outstanding payment treatment.</strong> If the project is suspended or terminated, the Client remains liable for services performed and accepted. Any refund or compensation treatment must be agreed in writing.</li>
+            <li><strong>Limitation of liability.</strong> Subject to applicable law, Developer’s liability is limited to the fees paid or payable under the project, except for fraud, gross negligence, or legal exceptions that cannot be excluded.</li>
+            <li><strong>Indemnity and third-party claims.</strong> Developer will indemnify the Client for direct losses caused by Developer’s negligence or misconduct in implementing the agreed software, subject to the terms and limits of this agreement.</li>
+            <li><strong>Force majeure.</strong> Neither party will be liable for delay or failure caused by events beyond reasonable control, including public disruptions, labor issues, regulatory action, and similar circumstances.</li>
+            <li><strong>Dispute resolution.</strong> Disputes should first be handled through good-faith discussions. If unresolved, they may be referred to mediation or legal proceedings in the courts of the Federal Republic of Nigeria.</li>
+            <li><strong>Governing law.</strong> This agreement is governed by the laws of the Federal Republic of Nigeria.</li>
+            <li><strong>Entire agreement and amendments.</strong> This agreement and the proposal together form the understanding between the parties, and amendments must be in writing and signed by both parties.</li>
+            <li><strong>Signature and acceptance.</strong> This agreement becomes effective when signed by authorized representatives of both parties.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2 class="section-title"><span>O</span> Acceptance and Signature Page</h2>
+        <div class="section-body">
+          <div class="signature-grid">
+            <div class="signature-box">
+              <span class="label">For the Client</span>
+              <p><strong>Full Name:</strong> ______________________________</p>
+              <p><strong>Company:</strong> ______________________________</p>
+              <p><strong>Position:</strong> ______________________________</p>
+              <div class="line"></div>
+              <p><strong>Signature:</strong> ______________________________</p>
+              <p><strong>Date:</strong> ______________________________</p>
+            </div>
+            <div class="signature-box">
+              <span class="label">For CodeWithSage Technologies</span>
+              <p><strong>Authorized Representative:</strong> ______________________________</p>
+              <p><strong>Position:</strong> ______________________________</p>
+              <div class="line"></div>
+              <p><strong>Signature:</strong> ______________________________</p>
+              <p><strong>Date:</strong> ______________________________</p>
+            </div>
+          </div>
+
+          <div class="signature-grid" style="margin-top: 26px;">
+            <div class="signature-box">
+              <span class="label">Witness 1</span>
+              <p><strong>Name:</strong> ______________________________</p>
+              <div class="line"></div>
+              <p><strong>Signature:</strong> ______________________________</p>
+              <p><strong>Date:</strong> ______________________________</p>
+            </div>
+            <div class="signature-box">
+              <span class="label">Witness 2</span>
+              <p><strong>Name:</strong> ______________________________</p>
+              <div class="line"></div>
+              <p><strong>Signature:</strong> ______________________________</p>
+              <p><strong>Date:</strong> ______________________________</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2 class="section-title"><span>P</span> Next Steps</h2>
+        <div class="section-body">
+          <ol>
+            <li>Client reviews proposal and agreement.</li>
+            <li>Both parties agree to final scope.</li>
+            <li>Both parties sign the agreement.</li>
+            <li>Client pays the initial 70–80% deposit.</li>
+            <li>Project kickoff and requirements confirmation.</li>
+            <li>Development begins.</li>
+          </ol>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>CodeWithSage Technologies</div>
+        <div>PAYBOXX</div>
+      </footer>
+    </div>
+  </body>
+</html>
