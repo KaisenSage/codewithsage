@@ -151,7 +151,7 @@ function FeaturedCard({
           "relative w-full shrink-0 overflow-hidden",
           isPortrait
             ? "flex h-64 items-start justify-center bg-[#0a100d] px-6 pt-5"
-            : "h-52",
+            : `h-52 ${project.imageFit === "contain" ? "bg-[#f1f5f9]" : ""}`,
         ].join(" ")}
       >
         {isPortrait ? (
@@ -169,7 +169,11 @@ function FeaturedCard({
             alt={project.title}
             fill
             sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+            className={
+              project.imageFit === "contain"
+                ? "object-contain object-center"
+                : "object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+            }
           />
         )}
 

@@ -119,7 +119,9 @@ export default function Portfolio() {
                   unoptimized={project.unoptimized}
                   className={
                     project.imageClass ??
-                    "h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    (project.imageFit === "contain"
+                      ? "h-56 w-full bg-[#f1f5f9] object-contain"
+                      : "h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]")
                   }
                 />
                 {/* Hover overlay */}

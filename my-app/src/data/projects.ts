@@ -9,6 +9,7 @@ export type Project = {
   unoptimized?: boolean;
   imageWidth?: number;
   imageHeight?: number;
+  imageFit?: "contain" | "cover";
   imageContainerClass?: string;
   imageClass?: string;
 };
@@ -131,7 +132,7 @@ export const projects: Project[] = [
       "TailwindCSS",
     ],
     image:
-      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Screenshot%202025-07-07%20at%2020.07.18.png",
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/Screenshot%202026-11-09%20at%2008.47.52.png",
     link: { url: "https://mealplan-zeta.vercel.app/", label: "View Project" },
   },
   {
@@ -159,7 +160,8 @@ export const projects: Project[] = [
       "E-commerce Integration",
     ],
     image:
-      "https://pub-b672d044d71842aeb4efd6d464298367.r2.dev/Screenshot%202026-01-01%20at%2019.10.06.png",
+      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/NEXUS%20Timeless%20Elegance%20Hero.png",
+    imageFit: "contain",
     link: null,
   },
   {
@@ -171,24 +173,6 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "PostgreSQL"],
     image:
       "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/roberto-cortese-ejhjSZKTeeg-unsplash.jpg",
-    link: null,
-  },
-  {
-    shortTitle: "AirBnB",
-    category: "Rental booking app",
-    title: "AirBnB App",
-    description:
-      "Full-stack AirBnB platform to practice scalable web development using the MVC architecture.",
-    stack: [
-      "Python",
-      "Flask",
-      "MySQL",
-      "HTML/CSS",
-      "JavaScript",
-      "jQuery",
-    ],
-    image:
-      "https://pub-323e019863a3440ba6f23aaf494422d3.r2.dev/oberon-copeland-veryinformed-com-zq0K6AVDtu8-unsplash.jpg",
     link: null,
   },
   {
