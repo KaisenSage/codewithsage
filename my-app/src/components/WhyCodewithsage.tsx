@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   CloudUpload,
@@ -49,7 +53,48 @@ const services = [
   },
 ];
 
+const journeyStages = [
+  {
+    label: "Discover",
+    title: "Make the value clear.",
+    description:
+      "Help the right people recognize what you do and why it matters from their first visit.",
+  },
+  {
+    label: "Understand",
+    title: "Make the next step obvious.",
+    description:
+      "Bring your offer, content, and navigation together so people can find what they need.",
+  },
+  {
+    label: "Trust",
+    title: "Give people a reason to believe.",
+    description:
+      "Create a consistent, thoughtful experience that reflects the quality of your business.",
+  },
+  {
+    label: "Take action",
+    title: "Turn intent into action.",
+    description:
+      "Make it easy to get in touch, book, or buy with a clear and considered call to action.",
+  },
+];
+
 export default function WhyCodewithsage() {
+  const [activeStage, setActiveStage] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (isPaused || prefersReducedMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      setActiveStage((current) => (current + 1) % journeyStages.length);
+    }, 2000);
+
+    return () => window.clearInterval(intervalId);
+  }, [isPaused, prefersReducedMotion]);
+
   return (
     <section
       id="approach"
@@ -97,52 +142,123 @@ export default function WhyCodewithsage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-blue-300/30 via-violet-200/20 to-transparent blur-2xl"
               />
-              <div className="relative overflow-hidden rounded-[1.75rem] border border-white bg-white p-4 shadow-[0_32px_90px_rgba(30,41,80,0.16)] sm:p-6">
-                <div className="rounded-2xl bg-[#101a32] p-5 text-white sm:p-6">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+              <div
+                className="relative overflow-hidden rounded-[1.75rem] border border-white bg-white p-4 shadow-[0_32px_90px_rgba(30,41,80,0.16)] sm:p-6"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onFocusCapture={() => setIsPaused(true)}
+                onBlurCapture={(event) => {
+                  if (
+                    !event.currentTarget.contains(
+                      event.relatedTarget as Node | null,
+                    )
+                  ) {
+                    setIsPaused(false);
+                  }
+                }}
+              >
+                <div className="rounded-2xl bg-[#101a32] p-4 text-white sm:p-6">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4 sm:p-5">
+                    <div className="flex min-h-[8.5rem] items-center sm:min-h-[9rem]">
+                      <AnimatePresence mode="wait" initial={false}>
+                        <motion.div
+                          key={activeStage}
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : { opacity: 0, y: 8 }
+                          }
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{
+                            duration: prefersReducedMotion ? 0 : 0.22,
+                          }}
+                        >
+                          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-[1.75rem]">
+                            {journeyStages[activeStage].title}
+                          </h3>
+                          <p className="mt-2 max-w-sm text-xs leading-5 text-slate-300 sm:text-sm sm:leading-6">
+                            {journeyStages[activeStage].description}
+                          </p>
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
+
                     <svg
-                      viewBox="0 0 480 116"
+                      viewBox="0 0 480 104"
                       fill="none"
-                      role="img"
-                      aria-label="Illustration of a customer journey moving toward a clear call to action"
-                      className="h-auto w-full"
+                      aria-hidden="true"
+                      className="mt-2 h-auto w-full overflow-visible"
                     >
                       <defs>
                         <linearGradient id="journey-line" x1="16" y1="94" x2="464" y2="20" gradientUnits="userSpaceOnUse">
                           <stop stopColor="#60A5FA" />
                           <stop offset="1" stopColor="#C4B5FD" />
                         </linearGradient>
-                        <linearGradient id="journey-fill" x1="240" y1="14" x2="240" y2="108" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#818CF8" stopOpacity=".28" />
-                          <stop offset="1" stopColor="#818CF8" stopOpacity="0" />
-                        </linearGradient>
                       </defs>
-                      <path d="M8 84C66 82 76 68 125 72C179 77 183 43 239 52C296 61 322 34 365 39C408 44 423 20 472 15V108H8V84Z" fill="url(#journey-fill)" />
-                      <path d="M8 84C66 82 76 68 125 72C179 77 183 43 239 52C296 61 322 34 365 39C408 44 423 20 472 15" stroke="url(#journey-line)" strokeWidth="3" strokeLinecap="round" />
-                      <circle cx="125" cy="72" r="5" fill="#BFDBFE" />
-                      <circle cx="239" cy="52" r="5" fill="#A5B4FC" />
-                      <circle cx="365" cy="39" r="5" fill="#C4B5FD" />
-                      <circle cx="472" cy="15" r="6" fill="#E0E7FF" />
-                      <path d="M8 104H472" stroke="white" strokeOpacity=".12" strokeDasharray="3 7" />
+                      <path d="M8 75C66 73 76 59 125 63C179 68 183 34 239 43C296 52 322 25 365 30C408 35 423 11 472 6" stroke="url(#journey-line)" strokeOpacity=".4" strokeWidth="2" strokeLinecap="round" />
+                      <motion.path
+                        d="M8 75C66 73 76 59 125 63C179 68 183 34 239 43C296 52 322 25 365 30C408 35 423 11 472 6"
+                        stroke="url(#journey-line)"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        initial={
+                          prefersReducedMotion
+                            ? { pathLength: 1 }
+                            : { pathLength: 0 }
+                        }
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: prefersReducedMotion ? 0 : 1.2,
+                          ease: "easeOut",
+                        }}
+                      />
+                      {[40, 168, 314, 462].map((cx, index) => (
+                        <g key={cx}>
+                          <circle
+                            cx={cx}
+                            cy={[74, 56, 36, 10][index]}
+                            r={activeStage === index ? 10 : 7}
+                            fill="#101a32"
+                            stroke={activeStage === index ? "#BFDBFE" : "#64748B"}
+                            strokeWidth={activeStage === index ? 2 : 1.5}
+                          />
+                          {activeStage === index && (
+                            <motion.circle
+                              cx={cx}
+                              cy={[74, 56, 36, 10][index]}
+                              r="4"
+                              fill="#BFDBFE"
+                              layoutId="journey-active-dot"
+                            />
+                          )}
+                        </g>
+                      ))}
                     </svg>
-                    <div className="mt-1 flex justify-between text-[9px] font-medium uppercase tracking-[0.12em] text-slate-400 sm:text-[10px]">
-                      <span>Discover</span>
-                      <span>Understand</span>
-                      <span>Trust</span>
-                      <span>Take action</span>
-                    </div>
                   </div>
 
-                  <div className="mt-4 grid grid-cols-3 gap-2">
-                    {["Design", "Build", "Launch"].map((phase) => (
-                      <div
-                        key={phase}
-                        className="rounded-xl border border-white/10 bg-white/[0.06] p-3"
+                  <div
+                    className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4"
+                    role="group"
+                    aria-label="Explore project steps"
+                  >
+                    {journeyStages.map((stage, index) => (
+                      <button
+                        key={stage.label}
+                        type="button"
+                        aria-pressed={activeStage === index}
+                        onClick={() => setActiveStage(index)}
+                        className={`group rounded-xl border px-3 py-3 text-left transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300 ${
+                          activeStage === index
+                            ? "border-blue-300/50 bg-blue-400/15"
+                            : "border-white/10 bg-white/[0.04] hover:border-white/25 hover:bg-white/[0.08]"
+                        }`}
                       >
-                        <p className="text-xs font-semibold text-white sm:text-sm">
-                          {phase}
-                        </p>
-                      </div>
+                        <span className="text-[11px] font-semibold text-white sm:text-xs">
+                          {stage.label}
+                        </span>
+                      </button>
                     ))}
                   </div>
                 </div>

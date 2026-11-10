@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { X, ExternalLink } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import type { Project } from "@/data/projects";
@@ -29,140 +29,111 @@ export function ProjectModal({
 
   return (
     <AnimatePresence>
-      {/* Backdrop */}
       <motion.div
         key="backdrop"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.22 }}
-        className="fixed inset-0 z-[80] bg-black/65 backdrop-blur-[3px]"
+        className="fixed inset-0 z-[80] bg-[#030611]/80 backdrop-blur-md"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Panel */}
       <motion.div
         key="panel"
         role="dialog"
         aria-modal="true"
-        aria-label={project.title}
-        initial={{ opacity: 0, y: 56, scale: 0.96 }}
+        aria-label={`${project.shortTitle} project overview`}
+        initial={{ opacity: 0, y: 40, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 40, scale: 0.97 }}
+        exit={{ opacity: 0, y: 28, scale: 0.98 }}
         transition={{ duration: 0.34, ease: [0.32, 0.72, 0, 1] }}
-        style={{ maxWidth: "72rem" }}
-        className={[
-          "fixed z-[90] w-full bg-white",
-          "shadow-[0_-28px_80px_rgba(0,0,0,0.32)]",
-          "inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto",
-          "rounded-t-[2rem]",
-          "md:inset-x-auto md:left-1/2 md:-translate-x-1/2",
-          "md:top-[6vh] md:bottom-[6vh] md:max-h-none",
-          "md:w-[92vw] md:overflow-hidden md:rounded-[2rem]",
-          "lg:top-[5vh] lg:bottom-[5vh] lg:w-[88vw]",
-        ].join(" ")}
+        style={{ maxWidth: "78rem" }}
+        className="fixed inset-x-0 bottom-0 z-[90] max-h-[92dvh] w-full overflow-y-auto rounded-t-[1.75rem] border border-white/10 bg-[#080e20] text-white shadow-[0_-28px_90px_rgba(0,0,0,0.5)] md:inset-x-auto md:left-1/2 md:top-1/2 md:bottom-auto md:h-[min(78dvh,48rem)] md:max-h-[88dvh] md:w-[92vw] md:-translate-x-1/2 md:-translate-y-1/2 md:overflow-hidden md:rounded-[1.75rem]"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-600 shadow-sm backdrop-blur-sm transition hover:bg-white hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:right-5 sm:top-5"
-          aria-label="Close preview"
+          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#080e20]/70 text-white/80 backdrop-blur-md transition hover:border-white/30 hover:bg-[#111a31] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 sm:right-5 sm:top-5"
+          aria-label="Close project overview"
         >
-          <X size={17} strokeWidth={2.5} />
+          <X size={18} strokeWidth={2} />
         </button>
 
-        <div className="flex flex-col lg:flex-row lg:h-full">
-          {/* Image panel */}
+        <div className="flex flex-col md:h-full md:flex-row">
           <div
             className={[
-              "relative shrink-0 overflow-hidden",
-              "h-44 w-full",
-              "sm:h-52",
-              "md:h-64",
-              "lg:h-full lg:w-[52%]",
-              "rounded-t-[2rem] lg:rounded-l-[2rem] lg:rounded-tr-none",
-              isPortrait ? "bg-[#0a100d]" : "bg-[#f1f5f9]",
+              "relative isolate h-[34dvh] min-h-56 max-h-[25rem] shrink-0 overflow-hidden md:h-auto md:max-h-none md:min-h-0 md:w-[61%]",
+              isPortrait
+                ? "bg-[#0a100d]"
+                : project.imageFit === "contain"
+                  ? "bg-[#f1f5f9]"
+                  : "bg-[#0c1428]",
             ].join(" ")}
           >
-            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4 lg:p-7">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill={false}
-                width={project.imageWidth ?? 1200}
-                height={project.imageHeight ?? 800}
-                unoptimized={project.unoptimized}
-                sizes="(max-width:1024px) 100vw, 52vw"
-                className={[
-                  "h-auto max-h-full w-auto max-w-full rounded-lg",
-                  isPortrait
-                    ? "drop-shadow-[0_16px_40px_rgba(0,0,0,0.55)]"
-                    : "shadow-[0_6px_36px_rgba(15,23,42,0.16)]",
-                ].join(" ")}
-                priority
-              />
+            <div className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-blue-500/15 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-28 -right-12 h-72 w-72 rounded-full bg-violet-500/15 blur-[100px]" />
+            <Image
+              src={project.image}
+              alt={`${project.shortTitle} project preview`}
+              fill
+              unoptimized={project.unoptimized}
+              sizes="(max-width: 768px) 100vw, 61vw"
+              className={[
+                "relative z-[1]",
+                project.imageFit === "cover"
+                  ? "object-cover"
+                  : "object-contain p-3 sm:p-6 md:p-8",
+                isPortrait ? "object-top" : "object-center",
+              ].join(" ")}
+              priority
+            />
+            <div className="absolute inset-x-0 bottom-0 z-[2] h-24 bg-gradient-to-t from-[#080e20]/35 to-transparent md:hidden" />
+            <div className="absolute bottom-4 left-4 z-[3] inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#080e20]/70 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/90 backdrop-blur-md sm:bottom-5 sm:left-5">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.9)]" />
+              {project.category ?? "Project"}
             </div>
           </div>
 
-          {/* Details panel */}
-          <div className="flex flex-1 flex-col lg:overflow-y-auto">
-            <div className="flex flex-col gap-4 p-5 sm:p-6 lg:flex-1 lg:p-8">
-              <div>
-                <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600">
-                  Project Preview
-                </span>
-                <h2 className="mt-2.5 text-xl font-black leading-snug tracking-tight text-[#161a2e] sm:text-2xl lg:text-3xl">
-                  {project.title}
-                </h2>
-              </div>
-
-              <p className="text-sm leading-7 text-slate-600">
+          <div className="relative flex min-h-0 flex-1 flex-col md:w-[39%] md:overflow-y-auto">
+            <div className="flex-1 px-6 pb-7 pt-7 sm:px-8 sm:pt-9 md:px-9 md:pb-8 md:pt-12 lg:px-11">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-blue-300">
+                Project overview
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-4xl lg:text-[2.65rem]">
+                {project.shortTitle}
+              </h2>
+              <div className="mt-5 h-px w-12 bg-gradient-to-r from-blue-400 to-violet-400" />
+              <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-[15px] sm:leading-7">
                 {project.description}
               </p>
-
-              <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  Tech Stack
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full bg-gradient-to-r from-blue-50 to-violet-50 px-2.5 py-1 text-xs font-semibold text-blue-700 ring-1 ring-blue-100"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            {/* CTA */}
-            <div className="sticky bottom-0 flex flex-col gap-2.5 border-t border-slate-100 bg-white p-4 sm:flex-row sm:p-5 lg:border-0 lg:px-8 lg:pb-8 lg:pt-2">
+            <div className="sticky bottom-0 border-t border-white/10 bg-[#080e20]/95 p-5 backdrop-blur-xl sm:flex sm:items-center sm:gap-3 sm:px-8 md:static md:px-9 md:pb-9 lg:px-11">
               {project.link ? (
                 <a
                   href={project.link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-[1rem] bg-[#2d3bcf] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_20px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-bold text-[#10182c] transition hover:-translate-y-0.5 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-[#080e20] sm:flex-1"
                 >
-                  <ExternalLink size={14} strokeWidth={2.5} />
                   {project.link.label}
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
                 </a>
               ) : (
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-[1rem] bg-[#2d3bcf] px-5 py-3 text-sm font-bold text-white shadow-[0_6px_20px_rgba(45,59,207,0.3)] transition hover:-translate-y-0.5 hover:bg-[#2330b6]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-bold text-[#10182c] transition hover:-translate-y-0.5 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-[#080e20] sm:flex-1"
                 >
-                  Enquire About This Project
+                  Discuss a similar project
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
                 </Link>
               )}
               <button
                 onClick={onClose}
-                className="inline-flex items-center justify-center rounded-[1rem] border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 sm:flex-none"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-400 transition hover:bg-white/5 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/30 sm:mt-0 sm:w-auto"
               >
                 Close
               </button>
