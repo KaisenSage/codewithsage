@@ -10,7 +10,8 @@ import {
   Rocket,
   Wrench,
 } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import AppearOnScroll from "@/components/AppearOnScroll";
 
 const steps = [
@@ -45,10 +46,26 @@ const steps = [
 ];
 
 export default function HowWeWork() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [activeStep, setActiveStep] = useState(0);
   const reduceMotion = useReducedMotion();
+  const isInView = useInView(sectionRef, { amount: 0.1 });
+
+  useEffect(() => {
+    if (!isInView || reduceMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      if (!document.hidden) {
+        setActiveStep((current) => (current + 1) % steps.length);
+      }
+    }, 2800);
+
+    return () => window.clearInterval(intervalId);
+  }, [isInView, reduceMotion]);
 
   return (
     <section
+      ref={sectionRef}
       id="process"
       className="relative isolate overflow-hidden bg-[#0b1224] px-5 py-20 text-white sm:px-8 sm:py-24 lg:px-12 lg:py-28"
     >
@@ -72,35 +89,74 @@ export default function HowWeWork() {
         </AppearOnScroll>
 
         <div className="relative mt-12 sm:mt-16">
-          <div
+          <motion.div
             aria-hidden="true"
+            initial={reduceMotion ? false : { scaleX: 0 }}
+            whileInView={reduceMotion ? undefined : { scaleX: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: reduceMotion ? 0 : 1.1, ease: "easeOut" }}
+            style={{ originX: 0 }}
             className="pointer-events-none absolute left-[8%] right-[8%] top-7 hidden h-px bg-gradient-to-r from-blue-500/10 via-blue-300/70 to-violet-300/30 lg:block"
           />
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {steps.map(({ icon: Icon, ...step }, index) => (
               <motion.li
                 key={step.title}
+                animate={{
+                  borderColor:
+                    activeStep === index
+                      ? "rgba(147, 197, 253, 0.55)"
+                      : "rgba(255, 255, 255, 0.1)",
+                  boxShadow:
+                    activeStep === index
+                      ? "0 24px 60px rgba(37, 99, 235, 0.15)"
+                      : "0 18px 50px rgba(0, 0, 0, 0.14)",
+                }}
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
                 transition={{
-                  duration: 0.55,
+                  duration: reduceMotion ? 0 : 0.55,
                   delay: reduceMotion ? 0 : index * 0.09,
                 }}
-                className="group relative flex h-full flex-col rounded-2xl border border-white/10 bg-[#101a32]/90 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] transition duration-300 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-[#14203b] sm:p-6"
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        y: -7,
+                        rotateX: 2,
+                        transition: { duration: 0.2 },
+                      }
+                }
+                style={{ transformPerspective: 900 }}
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#101a32]/90 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] transition-[border-color,background-color,box-shadow] duration-300 hover:border-blue-300/40 hover:bg-[#14203b] hover:shadow-[0_24px_60px_rgba(37,99,235,0.15)] sm:p-6"
               >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-blue-500/0 blur-3xl transition-colors duration-500 group-hover:bg-blue-500/15"
+                />
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-300/25 bg-[#111d37] text-blue-200 shadow-[0_0_0_6px_rgba(11,18,36,0.9)] transition duration-300 group-hover:border-blue-300/60 group-hover:bg-blue-600 group-hover:text-white">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-300/25 bg-[#111d37] text-blue-200 shadow-[0_0_0_6px_rgba(11,18,36,0.9)] transition duration-300 group-hover:rotate-[-6deg] group-hover:border-blue-300/60 group-hover:bg-blue-600 group-hover:text-white">
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </span>
+                  <motion.span
+                    aria-hidden="true"
+                    animate={
+                      activeStep === index && !reduceMotion
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0.35, scale: 0.8 }
+                    }
+                    transition={{ duration: 0.45 }}
+                    className="h-2 w-2 rounded-full bg-blue-300"
+                  />
                 </div>
-                <h3 className="mt-7 text-xl font-semibold tracking-tight text-white">
+                <h3 className="relative z-10 mt-7 text-xl font-semibold tracking-tight text-white">
                   {step.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-6 text-slate-300">
+                <p className="relative z-10 mt-3 flex-1 text-sm leading-6 text-slate-300">
                   {step.description}
                 </p>
-                <div className="mt-6 flex items-start gap-2.5 border-t border-white/10 pt-4">
+                <div className="relative z-10 mt-6 flex items-start gap-2.5 border-t border-white/10 pt-4">
                   <Check
                     className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300"
                     aria-hidden="true"

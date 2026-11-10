@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import {
   ArrowRight,
   CloudUpload,
@@ -81,22 +86,40 @@ const journeyStages = [
 ];
 
 export default function WhyCodewithsage() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeStage, setActiveStage] = useState(0);
+  const [activeService, setActiveService] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const isInView = useInView(sectionRef, { amount: 0.1 });
 
   useEffect(() => {
-    if (isPaused || prefersReducedMotion) return;
+    if (!isInView || prefersReducedMotion) return;
 
     const intervalId = window.setInterval(() => {
-      setActiveStage((current) => (current + 1) % journeyStages.length);
+      if (!document.hidden) {
+        setActiveService((current) => (current + 1) % services.length);
+      }
+    }, 2800);
+
+    return () => window.clearInterval(intervalId);
+  }, [isInView, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!isInView || isPaused || prefersReducedMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      if (!document.hidden) {
+        setActiveStage((current) => (current + 1) % journeyStages.length);
+      }
     }, 2000);
 
     return () => window.clearInterval(intervalId);
-  }, [isPaused, prefersReducedMotion]);
+  }, [isInView, isPaused, prefersReducedMotion]);
 
   return (
     <section
+      ref={sectionRef}
       id="approach"
       className="relative isolate overflow-hidden bg-[#f5f7fc] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28"
     >
@@ -277,17 +300,75 @@ export default function WhyCodewithsage() {
                 amount={0.15}
                 className="h-full"
               >
-                <article className="group h-full rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-[0_6px_24px_rgba(15,23,42,0.035)] transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_18px_42px_rgba(37,99,235,0.10)] sm:p-6">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-700 transition duration-300 group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h4 className="mt-5 text-base font-semibold tracking-tight text-slate-950">
+                <motion.article
+                  animate={{
+                    borderColor:
+                      activeService === index
+                        ? "rgba(96, 165, 250, 0.65)"
+                        : "rgba(226, 232, 240, 0.8)",
+                    boxShadow:
+                      activeService === index
+                        ? "0 18px 42px rgba(37, 99, 235, 0.13)"
+                        : "0 6px 24px rgba(15, 23, 42, 0.035)",
+                  }}
+                  initial={
+                    prefersReducedMotion
+                      ? false
+                      : { opacity: 0, y: 28, rotateX: 7 }
+                  }
+                  whileInView={
+                    prefersReducedMotion
+                      ? undefined
+                      : { opacity: 1, y: 0, rotateX: 0 }
+                  }
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: prefersReducedMotion ? 0 : 0.65,
+                    delay: prefersReducedMotion ? 0 : index * 0.07,
+                    ease: "easeOut",
+                  }}
+                  onMouseEnter={() => setActiveService(index)}
+                  onFocus={() => setActiveService(index)}
+                  whileHover={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          y: -7,
+                          rotateX: 2,
+                          rotateY: -1,
+                          transition: { duration: 0.2 },
+                        }
+                  }
+                  style={{ transformPerspective: 900 }}
+                  className="group relative h-full overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-[0_6px_24px_rgba(15,23,42,0.035)] transition-[border-color,box-shadow] duration-300 hover:border-blue-200 hover:shadow-[0_22px_48px_rgba(37,99,235,0.13)] sm:p-6"
+                >
+                  <motion.div
+                    aria-hidden="true"
+                    animate={{
+                      opacity:
+                        activeService === index && !prefersReducedMotion
+                          ? 1
+                          : 0,
+                      scale:
+                        activeService === index && !prefersReducedMotion
+                          ? 1
+                          : 0.75,
+                    }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="pointer-events-none absolute -right-12 -top-14 h-32 w-32 rounded-full bg-blue-200/70 blur-2xl"
+                  />
+                  <div className="relative flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-700 transition duration-300 group-hover:rotate-[-6deg] group-hover:border-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                  </div>
+                  <h4 className="relative mt-5 text-base font-semibold tracking-tight text-slate-950">
                     {title}
                   </h4>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                  <p className="relative mt-2 text-sm leading-6 text-slate-600">
                     {description}
                   </p>
-                </article>
+                </motion.article>
               </AppearOnScroll>
             ))}
           </div>
