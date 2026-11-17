@@ -10,6 +10,7 @@ const isPublicRoute = createRouteMatcher([
   "/privacy-policy(.*)",
   "/signin(.*)",
   "/BingSiteAuth.xml",
+  "/5898467eb31947da861a17cd7b3a4f75.txt",
   "/robots.txt",
   "/sitemap.xml",
 ]);
